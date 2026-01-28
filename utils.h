@@ -4,73 +4,69 @@
  * Date: Jan 27, 2026
  *
  * utils.h: Utility Function Declarations
- * * Provides helper functions for system logging (hostname, time)
- * and simulation mechanics (random delays, data generation).
+ * * Helper functions for system identification, random number generation,
+ * * and execution timing.
  */
 
 #ifndef UTILS_H
 #define UTILS_H
 
-#include <stddef.h> 
+#include <stddef.h> /* For size_t */
 
-/* --- System Information ---
- * These functions retrieve environment details required for the 
- * "run summary" specified in the assignment text.
- */
+/* --- System Information --- */
 
 /*
- * Retrieves the username of the effective user ID.
- * Returns: Pointer to a static string (do not free).
- * Warning: Not thread-safe if called concurrently with environment changes.
+ * Retrieves the current user's login name.
+ * Note: Returns a pointer to internal static memory; do not free.
  */
 const char* get_username(void);
 
 /*
- * Writes the machine's hostname into the provided buffer.
- * Params:
- * buffer - Destination array for the hostname string.
- * size   - Size of the buffer (should be at least 256 bytes).
- * Returns: 0 on success, -1 on error.
+ * Retrieves the machine's hostname.
+ * Populates 'buffer' with up to 'size' characters.
+ * Returns 0 on success, -1 on failure.
  */
 int get_hostname(char *buffer, size_t size);
 
 /*
  * Formats the current system time as "Day Mon DD HH:MM:SS YYYY".
- * Params:
- * buffer - Destination array for the timestamp.
- * size   - Size of the buffer.
- * Returns: Pointer to the buffer on success, NULL on failure.
+ * Used for logging run start/end times.
+ * Returns pointer to buffer on success, NULL on error.
  */
 char* get_timestamp(char *buffer, size_t size);
 
-
-/* --- Simulation & Randomness ---
- * Wrappers for random number generation used to emulate 
- * unpredictable workload and processing times.
- */
+/* --- Randomization (Simulation) --- */
 
 /*
- * Seeds the random number generator using the current time.
- * Logic: Must be called exactly once in main() before threads are spawned.
+ * Seeds the random number generator.
+ * Must be called exactly once at program startup.
  */
 void random_init(void);
 
 /*
- * Generates a pseudo-random integer within the specified bounds.
- * Params:
- * min - Lower bound (inclusive).
- * max - Upper bound (inclusive).
- * Returns: Integer in range [min, max].
+ * Generates a pseudo-random integer between min and max (inclusive).
+ * Used for data generation and priority assignment.
  */
 int random_range(int min, int max);
 
 /*
- * Blocks the calling thread for a random duration.
- * Logic: Simulates the "work" done by Producers (generating data) 
- * and Consumers (processing data).
- * Params:
- * max_seconds - The upper limit for the sleep interval.
+ * Suspends execution for a random duration [0..max_seconds].
+ * Used to simulate variable processing work.
  */
 void sleep_random(int max_seconds);
+
+/* --- Time Tracking --- */
+
+/*
+ * Records the application start time.
+ * Used as the epoch for relative log timestamps.
+ */
+void time_start(void);
+
+/*
+ * Returns the number of seconds elapsed since time_start() was called.
+ * Used for timestamping log entries (e.g., [05.23]).
+ */
+double time_elapsed(void);
 
 #endif /* UTILS_H */

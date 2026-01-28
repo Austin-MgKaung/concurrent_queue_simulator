@@ -4,11 +4,11 @@
  * Date: Jan 27, 2026
  *
  * main.c: Entry Point & System Integration
- * * Completed System: Milestones 1-7.
  * * Orchestrates the full simulation lifecycle: Init -> Spawn -> Run -> Shutdown -> Report.
+ * * Implements robust signal handling for graceful termination.
  */
 
-#define _POSIX_C_SOURCE 200809L // For sleep
+#define _POSIX_C_SOURCE 200809L // For sleep & sigaction
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -37,22 +37,25 @@ typedef struct {
 // Central Communication Buffer
 static Queue shared_queue;
 
-// Global Control Flag (1=Run, 0=Stop)
-// volatile ensures threads read the updated value immediately
-static volatile int running = 1;
+// Global Control Flags
+static volatile int running = 1;              // 1=Run, 0=Stop
+static volatile int shutdown_in_progress = 0; // Prevents double-shutdowns
 
-// Thread Management Arrays
+// Thread Management
 static pthread_t producer_threads[MAX_PRODUCERS];
 static ProducerArgs producer_args[MAX_PRODUCERS];
+static int num_producers_created = 0;
 
 static pthread_t consumer_threads[MAX_CONSUMERS];
 static ConsumerArgs consumer_args[MAX_CONSUMERS];
+static int num_consumers_created = 0;
 
-// Stored for summary reporting
 static RuntimeParams runtime_params;
+static int queue_initialized = 0;
 
 /* --- Function Prototypes --- */
 
+// Setup & Validation
 static void print_usage(const char *program_name);
 static int parse_arguments(int argc, char *argv[], RuntimeParams *params);
 static int validate_parameters(const RuntimeParams *params);
@@ -60,21 +63,30 @@ static void print_startup_info(const RuntimeParams *params);
 static void print_compiled_defaults(void);
 static void print_separator(void);
 
-// Thread Orchestration
+// Thread Lifecycle
 static int create_producers(int num_producers);
 static int create_consumers(int num_consumers);
 static void wait_for_producers(int num_producers);
 static void wait_for_consumers(int num_consumers);
 static void print_summary(int num_producers, int num_consumers);
 
+// Signal Handling
+static void setup_signal_handlers(void);
+static void signal_handler(int signum);
+static void initiate_shutdown(const char *reason);
+static void cleanup_resources(void);
+
 /* --- Main Execution --- */
 
 int main(int argc, char *argv[])
 {
     int result;
+    int elapsed;
+    int remaining;
     
     // 1. Initialization Phase
     random_init();
+    time_start(); // Start the high-precision clock
     
     result = parse_arguments(argc, argv, &runtime_params);
     if (result != 0) {
@@ -87,6 +99,9 @@ int main(int argc, char *argv[])
         print_usage(argv[0]);
         return EXIT_FAILURE;
     }
+    
+    // Install Signal Traps (Ctrl+C protection)
+    setup_signal_handlers();
     
     // 2. Logging Phase
     print_startup_info(&runtime_params);
@@ -102,8 +117,11 @@ int main(int argc, char *argv[])
         fprintf(stderr, "Error: Queue init failed\n");
         return EXIT_FAILURE;
     }
+    queue_initialized = 1;
+    
     printf("  Queue initialized (capacity: %d)\n", runtime_params.queue_size);
     printf("  Sync primitives: Mutex + 2 Semaphores\n");
+    printf("  Signal handlers: SIGINT (Ctrl+C), SIGTERM\n");
     
     // 4. Thread Spawning Phase
     print_separator();
@@ -113,92 +131,156 @@ int main(int argc, char *argv[])
     printf("\n  Creating %d Producer(s) and %d Consumer(s)...\n",
            runtime_params.num_producers, runtime_params.num_consumers);
     
-    running = 1; // Enable workload loops
+    running = 1;
     
-    // Start Producers
+    // Launch Producers
     if (create_producers(runtime_params.num_producers) != 0) {
         fprintf(stderr, "Error: Failed to create producers\n");
-        queue_destroy(&shared_queue);
+        cleanup_resources();
         return EXIT_FAILURE;
     }
     
-    // Start Consumers
+    // Launch Consumers
     if (create_consumers(runtime_params.num_consumers) != 0) {
         fprintf(stderr, "Error: Failed to create consumers\n");
-        // Emergency cleanup
-        running = 0;
-        queue_shutdown(&shared_queue);
-        wait_for_producers(runtime_params.num_producers);
-        queue_destroy(&shared_queue);
+        initiate_shutdown("Startup Failure");
+        wait_for_producers(num_producers_created);
+        cleanup_resources();
         return EXIT_FAILURE;
     }
     
-    printf("  All threads active.\n");
+    printf("  All threads active.\n\n");
+    printf("  Press Ctrl+C to stop early, or wait for timeout.\n");
     
-    // 5. Runtime Phase
-    // The main thread simply waits while worker threads do the heavy lifting
-    printf("\n  Running simulation for %d seconds...\n\n", runtime_params.timeout_seconds);
-    
+    // 5. Runtime Phase (Monitoring Loop)
+    printf("\n");
     print_separator();
-    printf("EXECUTION LOG\n");
+    printf("EXECUTION (running for %d seconds)\n", runtime_params.timeout_seconds);
     print_separator();
+    printf("\n");
     
-    sleep(runtime_params.timeout_seconds);
+    elapsed = 0;
+    while (elapsed < runtime_params.timeout_seconds && running) {
+        sleep(1);
+        elapsed++;
+        
+        // Periodic Status Update (every 10s)
+        if (elapsed % 10 == 0 && running) {
+            remaining = runtime_params.timeout_seconds - elapsed;
+            if (remaining > 0) {
+                printf("[%06.2f] --- %d seconds remaining ---\n", 
+                       time_elapsed(), remaining);
+            }
+        }
+    }
     
     // 6. Shutdown Phase
+    printf("\n");
     print_separator();
     printf("SHUTDOWN\n");
     print_separator();
     
-    printf("  Timeout reached. Stopping system...\n");
+    if (!shutdown_in_progress) {
+        printf("  Timeout reached (%ds). Initiating shutdown...\n", 
+               runtime_params.timeout_seconds);
+        initiate_shutdown("Timeout");
+    } else {
+        printf("  Shutdown triggered by signal.\n");
+    }
     
-    // A: Signal Stop
-    running = 0;
-    
-    // B: Wake sleepers
-    queue_shutdown(&shared_queue);
-    
-    // C: Join threads
-    wait_for_producers(runtime_params.num_producers);
-    wait_for_consumers(runtime_params.num_consumers);
+    printf("  Waiting for threads to finish (grace period: %ds)...\n", 
+           SHUTDOWN_GRACE_PERIOD);
+           
+    wait_for_producers(num_producers_created);
+    wait_for_consumers(num_consumers_created);
     
     printf("  All threads joined.\n");
     
     // 7. Audit & Reporting
+    printf("\n");
     print_separator();
     printf("SUMMARY\n");
     print_separator();
     
-    print_summary(runtime_params.num_producers, runtime_params.num_consumers);
+    print_summary(num_producers_created, num_consumers_created);
     
     // 8. Cleanup
-    print_separator();
-    printf("CLEANUP\n");
-    print_separator();
+    cleanup_resources();
     
-    result = queue_destroy(&shared_queue);
-    printf("  Queue destroyed: %s\n", result == 0 ? "OK" : "FAILED");
-    printf("  Resources released.\n");
-    
-    // Final Status Check
     printf("\n");
     print_separator();
-    printf("MILESTONE STATUS\n");
+    printf("EXECUTION COMPLETE\n");
     print_separator();
-    printf("  [x] Milestone 1: Config & Parsing\n");
-    printf("  [x] Milestone 2: Utilities\n");
-    printf("  [x] Milestone 3: Queue Structure\n");
-    printf("  [x] Milestone 4: Synchronization\n");
-    printf("  [x] Milestone 5: Producers\n");
-    printf("  [x] Milestone 6: Consumers\n");
-    printf("  [x] Milestone 7: Timeout & Cleanup\n");
-    printf("  [x] Milestone 8: Analytics (Balance Check)\n");
-    printf("\n");
+    printf("  Total Runtime: %.2f seconds\n", time_elapsed());
+    printf("  Exit Status:   SUCCESS\n\n");
     
     return EXIT_SUCCESS;
 }
 
-/* --- Helpers --- */
+/* --- Signal Handling --- */
+
+static void setup_signal_handlers(void)
+{
+    struct sigaction sa;
+    memset(&sa, 0, sizeof(sa));
+    
+    sa.sa_handler = signal_handler;
+    sigemptyset(&sa.sa_mask);
+    sa.sa_flags = 0;
+    
+    if (sigaction(SIGINT, &sa, NULL) == -1) perror("Warning: Failed to set SIGINT handler");
+    if (sigaction(SIGTERM, &sa, NULL) == -1) perror("Warning: Failed to set SIGTERM handler");
+}
+
+static void signal_handler(int signum)
+{
+    const char *signal_name = (signum == SIGINT) ? "SIGINT (Ctrl+C)" : 
+                              (signum == SIGTERM) ? "SIGTERM" : "Unknown Signal";
+                              
+    if (shutdown_in_progress) {
+        printf("\n[%06.2f] Shutdown already in progress...\n", time_elapsed());
+        return;
+    }
+    
+    printf("\n[%06.2f] Received %s. Initiating shutdown...\n", 
+           time_elapsed(), signal_name);
+           
+    initiate_shutdown(signal_name);
+}
+
+static void initiate_shutdown(const char *reason)
+{
+    shutdown_in_progress = 1;
+    running = 0;
+    
+    // Critical: Wake up any blocked threads so they see 'running=0'
+    if (queue_initialized) {
+        queue_shutdown(&shared_queue);
+    }
+    
+    if (DEBUG_MODE) {
+        printf("[DEBUG] Shutdown Reason: %s\n", reason);
+    }
+}
+
+static void cleanup_resources(void)
+{
+    int result;
+    
+    print_separator();
+    printf("CLEANUP\n");
+    print_separator();
+    
+    if (queue_initialized) {
+        result = queue_destroy(&shared_queue);
+        printf("  Queue destroyed: %s\n", result == 0 ? "OK" : "FAILED");
+        queue_initialized = 0;
+    }
+    
+    printf("  Resources released.\n");
+}
+
+/* --- Helper Implementations --- */
 
 static void print_separator(void)
 {
@@ -216,6 +298,7 @@ static void print_usage(const char *program_name)
     printf("  queue_size  - Maximum queue capacity      [%d to %d]\n", MIN_QUEUE_SIZE, MAX_QUEUE_SIZE);
     printf("  timeout     - Runtime in seconds          [minimum %d]\n", MIN_TIMEOUT);
     printf("\nExample:\n  %s 5 3 10 60\n", program_name);
+    printf("\nSignals:\n  Ctrl+C (SIGINT)  - Graceful shutdown\n  SIGTERM          - Graceful shutdown\n");
 }
 
 static int parse_arguments(int argc, char *argv[], RuntimeParams *params)
@@ -224,7 +307,6 @@ static int parse_arguments(int argc, char *argv[], RuntimeParams *params)
         fprintf(stderr, "Error: Expected 4 arguments, received %d\n", argc - 1);
         return -1;
     }
-    
     params->num_producers = atoi(argv[1]);
     params->num_consumers = atoi(argv[2]);
     params->queue_size = atoi(argv[3]);
@@ -239,8 +321,6 @@ static int validate_parameters(const RuntimeParams *params)
     if (params->num_consumers < MIN_CONSUMERS || params->num_consumers > MAX_RUNTIME_CONSUMERS) is_valid = 0;
     if (params->queue_size < MIN_QUEUE_SIZE || params->queue_size > MAX_QUEUE_SIZE) is_valid = 0;
     if (params->timeout_seconds < MIN_TIMEOUT) is_valid = 0;
-    
-    if (!is_valid) fprintf(stderr, "Error: Invalid parameters provided.\n");
     return is_valid ? 0 : -1;
 }
 
@@ -294,6 +374,8 @@ static int create_producers(int num_producers)
         
         res = pthread_create(&producer_threads[i], NULL, producer_thread, &producer_args[i]);
         if (res != 0) return -1;
+        
+        num_producers_created++;
     }
     return 0;
 }
@@ -307,6 +389,8 @@ static int create_consumers(int num_consumers)
         
         res = pthread_create(&consumer_threads[i], NULL, consumer_thread, &consumer_args[i]);
         if (res != 0) return -1;
+        
+        num_consumers_created++;
     }
     return 0;
 }
@@ -334,7 +418,8 @@ static void print_summary(int num_producers, int num_consumers)
     int blocked_p = 0, blocked_c = 0;
     int items_in_queue = queue_get_count(&shared_queue);
     
-    printf("\n  Queue State: %d/%d items\n\n", items_in_queue, queue_get_capacity(&shared_queue));
+    printf("\n  Execution Time: %.2f seconds\n", time_elapsed());
+    printf("\n  Queue Final State: %d/%d items\n\n", items_in_queue, queue_get_capacity(&shared_queue));
     
     printf("  Producer Stats:\n");
     for (i = 0; i < num_producers; i++) {
@@ -352,7 +437,6 @@ static void print_summary(int num_producers, int num_consumers)
     }
     printf("    -> Total Consumed: %d | Total Blocked: %d\n\n", total_consumed, blocked_c);
     
-    // Correctness Proof
     printf("  Balance Check:\n");
     printf("    Produced (%d) == Consumed (%d) + Queue (%d)\n", 
            total_produced, total_consumed, items_in_queue);
@@ -360,7 +444,7 @@ static void print_summary(int num_producers, int num_consumers)
     if (total_produced == total_consumed + items_in_queue) {
         printf("    Result: PASS\n");
     } else {
-        printf("    Result: FAIL (Data Lost/Created?)\n");
+        printf("    Result: FAIL (Data Discrepancy)\n");
     }
     printf("\n");
 }

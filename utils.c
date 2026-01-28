@@ -4,11 +4,11 @@
  * Date: Jan 27, 2026
  *
  * utils.c: Utility Function Implementations
- * * Implements the system logging and random simulation helpers
- * defined in utils.h.
+ * * Implements system logging, random number generation, and high-precision timing.
+ * * Uses CLOCK_MONOTONIC for reliable elapsed time tracking.
  */
 
-#define _POSIX_C_SOURCE 200809L // Required for gethostname and struct passwd
+#define _POSIX_C_SOURCE 200809L // Required for gethostname, struct passwd, clock_gettime
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -20,12 +20,16 @@
 
 #include "utils.h"
 
+/* --- Static State (Internal) --- */
+
+static struct timespec program_start_time;
+static int time_initialized = 0;
+
 /* --- System Information Functions --- */
 
 /*
  * Wrapper for getpwuid to retrieve the current username.
  * Note: Returns a pointer to static memory managed by the OS library.
- * We do not free this pointer.
  */
 const char* get_username(void)
 {
@@ -83,7 +87,6 @@ char* get_timestamp(char *buffer, size_t size)
         return buffer;
     }
     
-    // strftime provides safer formatting than standard ctime
     if (strftime(buffer, size, "%a %b %d %H:%M:%S %Y", timeinfo) == 0) {
         strncpy(buffer, "unknown", size - 1);
         buffer[size - 1] = '\0';
@@ -126,11 +129,47 @@ int random_range(int min, int max)
 void sleep_random(int max_seconds)
 {
     int sleep_time;
-    /* Don't sleep if max is 0 or negative */
+    
     if (max_seconds <= 0) {
         return;
     }
-    /* Generate random sleep duration and sleep */
+    
     sleep_time = random_range(0, max_seconds);
     sleep(sleep_time);
+}
+
+/* --- Time Tracking Functions --- */
+
+/*
+ * Records the 'Epoch' for this run.
+ * Uses CLOCK_MONOTONIC to ensure timing is immune to system clock changes.
+ */
+void time_start(void)
+{
+    clock_gettime(CLOCK_MONOTONIC, &program_start_time);
+    time_initialized = 1;
+}
+
+/*
+ * Calculates seconds elapsed since time_start().
+ * Returns: double precision float (e.g., 5.002 seconds).
+ */
+double time_elapsed(void)
+{
+    struct timespec current_time;
+    double elapsed;
+    
+    // Auto-init safety check
+    if (!time_initialized) {
+        time_start();
+        return 0.0;
+    }
+    
+    clock_gettime(CLOCK_MONOTONIC, &current_time);
+    
+    // Calculate difference (Seconds + Nanoseconds)
+    elapsed = (current_time.tv_sec - program_start_time.tv_sec);
+    elapsed += (current_time.tv_nsec - program_start_time.tv_nsec) / 1000000000.0;
+    
+    return elapsed;
 }
