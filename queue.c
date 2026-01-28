@@ -3,24 +3,26 @@
  * Student: Kaung
  * Date: Jan 27, 2026
  *
- * queue.c: FIFO Queue Data Structure Implementation
- * * Implements the circular buffer logic defined in queue.h.
- * * Handles priority-based retrieval and buffer memory management.
+ * queue.c: Thread-Safe FIFO Queue Implementation
+ * * Implements blocking Enqueue/Dequeue operations using Semaphores.
+ * * Manages Mutex locking to prevent race conditions on the buffer.
  */
 
 #define _POSIX_C_SOURCE 200809L // Required for clock_gettime
 
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 #include <time.h>
+#include <errno.h>
 
 #include "queue.h"
 #include "config.h"
 
-/* --- Internal Helpers --- */
+/* --- Internal Helpers (Private) --- */
 
 /*
- * returns current system time in milliseconds.
+ * Returns current system time in milliseconds.
  * Used to timestamp messages for latency analysis.
  */
 static long get_current_time_ms(void)
@@ -28,47 +30,40 @@ static long get_current_time_ms(void)
     struct timespec ts;
     
     if (clock_gettime(CLOCK_REALTIME, &ts) != 0) {
-        return 0; // Fallback on error
+        return 0;
     }
     
     return (ts.tv_sec * 1000) + (ts.tv_nsec / 1000000);
 }
 
 /*
- * Scans the buffer to find the highest priority item.
- * Arbitration Rule:
- * 1. Highest 'priority' value wins.
- * 2. Tie-break: Smallest 'timestamp' (Oldest) wins (FIFO).
+ * Priority Arbitration Logic.
+ * Scans the buffer for the highest priority item.
+ * NOTE: Caller must hold the mutex!
  */
 static int find_highest_priority_index(const Queue *q)
 {
     int highest_priority;
     int highest_index;
     long oldest_timestamp;
-    int i;
-    int current_index;
+    int i, current_index;
     
-    if (q == NULL || q->count == 0) {
-        return -1;
-    }
+    if (q == NULL || q->count == 0) return -1;
     
-    // Initialize search with the head of the queue
     highest_index = q->front;
     highest_priority = q->buffer[q->front].priority;
     oldest_timestamp = q->buffer[q->front].timestamp;
     
-    // Linear scan of active items
     for (i = 0; i < q->count; i++) {
         current_index = (q->front + i) % q->capacity;
         
         if (q->buffer[current_index].priority > highest_priority) {
-            // Found a strictly higher priority item
             highest_priority = q->buffer[current_index].priority;
             highest_index = current_index;
             oldest_timestamp = q->buffer[current_index].timestamp;
         }
         else if (q->buffer[current_index].priority == highest_priority) {
-            // Priority tie: Enforce FIFO by checking timestamps
+            // FIFO fallback for equal priorities
             if (q->buffer[current_index].timestamp < oldest_timestamp) {
                 highest_index = current_index;
                 oldest_timestamp = q->buffer[current_index].timestamp;
@@ -79,145 +74,46 @@ static int find_highest_priority_index(const Queue *q)
     return highest_index;
 }
 
-/* --- Public API Implementation --- */
-
-int queue_init(Queue *q, int capacity)
-{
-    if (q == NULL) {
-        fprintf(stderr, "Error: queue_init - NULL pointer\n");
-        return -1;
-    }
-    
-    // Bounds check against spec limits
-    if (capacity < MIN_QUEUE_SIZE || capacity > MAX_QUEUE_SIZE) {
-        fprintf(stderr, "Error: queue_init - capacity %d invalid\n", capacity);
-        return -1;
-    }
-    
-    q->front = 0;
-    q->rear = 0;
-    q->count = 0;
-    q->capacity = capacity;
-    
-    // Zero out memory to prevent stale data leaks
-    memset(q->buffer, 0, sizeof(q->buffer));
-    
-    if (DEBUG_MODE) {
-        printf("[DEBUG] Queue initialized. Capacity: %d\n", capacity);
-    }
-    
-    return 0;
-}
-
-int queue_is_full(const Queue *q)
-{
-    if (q == NULL) return 0;
-    return (q->count >= q->capacity);
-}
-
-int queue_is_empty(const Queue *q)
-{
-    if (q == NULL) return 1;
-    return (q->count == 0);
-}
-
-int queue_get_count(const Queue *q)
-{
-    if (q == NULL) return 0;
-    return q->count;
-}
-
-int queue_get_capacity(const Queue *q)
-{
-    if (q == NULL) return 0;
-    return q->capacity;
-}
-
 /*
- * Standard FIFO Enqueue.
- * Adds item to q->rear and advances the pointer.
+ * Low-level write to buffer.
+ * NOTE: Caller must hold the mutex!
  */
-int queue_enqueue(Queue *q, Message msg)
+static int internal_enqueue(Queue *q, Message msg)
 {
-    if (q == NULL) return -1;
+    if (q->count >= q->capacity) return -1;
     
-    if (queue_is_full(q)) {
-        if (DEBUG_MODE) {
-            printf("[DEBUG] Enqueue failed: Full (%d/%d)\n", q->count, q->capacity);
-        }
-        return -1;
-    }
-    
-    // Write data
     q->buffer[q->rear] = msg;
-    
-    // Circular increment
     q->rear = (q->rear + 1) % q->capacity;
     q->count++;
     
-    if (DEBUG_MODE) {
-        printf("[DEBUG] Enqueued (P%d Pri=%d Data=%d)\n", 
-               msg.producer_id, msg.priority, msg.data);
-    }
-    
     return 0;
 }
 
 /*
- * Priority Dequeue.
- * Removes the most important item.
- * NOTE: Requires memory shifting to maintain contiguous buffer state.
+ * Low-level read from buffer with shift.
+ * NOTE: Caller must hold the mutex!
  */
-int queue_dequeue(Queue *q, Message *msg)
+static int internal_dequeue(Queue *q, Message *msg)
 {
-    int highest_index;
-    int current_index;
-    int next_index;
+    int highest_index, current_index, next_index;
     
-    if (q == NULL || msg == NULL) return -1;
+    if (q->count == 0) return -1;
     
-    if (queue_is_empty(q)) {
-        return -1;
-    }
-    
-    // Step 1: Identify target item
     highest_index = find_highest_priority_index(q);
+    if (highest_index < 0) return -1;
     
-    if (highest_index < 0) {
-        return -1; // Should not happen given !empty check
-    }
-    
-    // Step 2: Extract data
     *msg = q->buffer[highest_index];
     
-    if (DEBUG_MODE) {
-        printf("[DEBUG] Dequeued index %d (P%d Pri=%d)\n", 
-               highest_index, msg->producer_id, msg->priority);
-    }
-    
-    // Step 3: Remove item and Close Gap
-    // Strategy: Shift elements from Front towards the removed index.
-    
+    // Shift elements to fill gap
     if (highest_index == q->front) {
-        // Optimization: If removing head, just advance pointer
         q->front = (q->front + 1) % q->capacity;
-    }
-    else {
-        // Complex case: Middle removal
-        // Shift predecessors forward one slot to fill the gap
+    } else {
         current_index = highest_index;
-        
         while (current_index != q->front) {
-            // Calculate index of the item strictly before current
             next_index = (current_index - 1 + q->capacity) % q->capacity;
-            
-            // Move it into the current slot
             q->buffer[current_index] = q->buffer[next_index];
-            
             current_index = next_index;
         }
-        
-        // Adjust front pointer to reflect the shift
         q->front = (q->front + 1) % q->capacity;
     }
     
@@ -225,61 +121,193 @@ int queue_dequeue(Queue *q, Message *msg)
     return 0;
 }
 
-/*
- * Non-destructive read of highest priority item.
- */
-int queue_peek(const Queue *q, Message *msg)
+/* --- Public API: Lifecycle --- */
+
+int queue_init(Queue *q, int capacity)
 {
-    int highest_index;
+    int result;
     
-    if (q == NULL || msg == NULL) return -1;
-    if (queue_is_empty(q)) return -1;
+    if (q == NULL) return -1;
+    if (capacity < MIN_QUEUE_SIZE || capacity > MAX_QUEUE_SIZE) return -1;
     
-    highest_index = find_highest_priority_index(q);
+    // Data setup
+    q->front = 0;
+    q->rear = 0;
+    q->count = 0;
+    q->capacity = capacity;
+    q->shutdown = 0;
+    memset(q->buffer, 0, sizeof(q->buffer));
     
-    if (highest_index < 0) return -1;
+    // 1. Initialize Mutex
+    if (pthread_mutex_init(&q->mutex, NULL) != 0) {
+        return -1;
+    }
     
-    *msg = q->buffer[highest_index];
+    // 2. Init 'Slots' Semaphore (Full capacity initially)
+    if (sem_init(&q->slots_available, 0, capacity) != 0) {
+        pthread_mutex_destroy(&q->mutex);
+        return -1;
+    }
+    
+    // 3. Init 'Items' Semaphore (0 initially)
+    if (sem_init(&q->items_available, 0, 0) != 0) {
+        pthread_mutex_destroy(&q->mutex);
+        sem_destroy(&q->slots_available);
+        return -1;
+    }
+    
     return 0;
+}
+
+int queue_destroy(Queue *q)
+{
+    if (q == NULL) return -1;
+    
+    pthread_mutex_destroy(&q->mutex);
+    sem_destroy(&q->slots_available);
+    sem_destroy(&q->items_available);
+    
+    return 0;
+}
+
+/* --- Public API: Unsafe Diagnostics --- */
+
+int queue_is_full(const Queue *q) {
+    if (!q) return 0;
+    return (q->count >= q->capacity);
+}
+
+int queue_is_empty(const Queue *q) {
+    if (!q) return 1;
+    return (q->count == 0);
+}
+
+int queue_get_count(const Queue *q) {
+    if (!q) return 0;
+    return q->count;
+}
+
+int queue_get_capacity(const Queue *q) {
+    if (!q) return 0;
+    return q->capacity;
 }
 
 void queue_display(const Queue *q)
 {
     int i, index;
+    if (!q) return;
     
-    if (q == NULL) {
-        printf("Queue: NULL\n");
-        return;
-    }
+    printf("Queue Status: %d/%d items (Shutdown=%d)\n", 
+           q->count, q->capacity, q->shutdown);
     
-    printf("Queue Status: %d/%d items (F:%d R:%d)\n", 
-           q->count, q->capacity, q->front, q->rear);
-           
-    if (q->count == 0) {
-        printf("  [Empty]\n");
-        return;
-    }
-    
-    // Dump contents for debugging
     for (i = 0; i < q->count; i++) {
         index = (q->front + i) % q->capacity;
-        printf("    [%d] Prod:%d Pri:%d Data:%d Time:%ld\n",
-               index,
-               q->buffer[index].producer_id,
-               q->buffer[index].priority,
-               q->buffer[index].data,
-               q->buffer[index].timestamp);
+        printf("    [%d] Prod:%d Pri:%d Data:%d\n",
+               index, q->buffer[index].producer_id, 
+               q->buffer[index].priority, q->buffer[index].data);
+    }
+}
+
+/* --- Public API: Thread-Safe Operations --- */
+
+/*
+ * Blocking Enqueue.
+ * Uses Semaphore to wait for space, Mutex for data safety.
+ */
+int queue_enqueue_safe(Queue *q, Message msg)
+{
+    int result;
+    
+    if (q == NULL) return -1;
+    if (q->shutdown) return -1;
+    
+    // 1. Wait for Space (Blocks if full)
+    result = sem_wait(&q->slots_available);
+    
+    // Handle signal interruptions (common in threaded apps)
+    if (result != 0 && errno == EINTR) {
+        if (q->shutdown) return -1;
+    }
+    
+    if (q->shutdown) {
+        sem_post(&q->slots_available); // Return the token
+        return -1;
+    }
+    
+    // 2. Critical Section
+    pthread_mutex_lock(&q->mutex);
+    
+    internal_enqueue(q, msg);
+    
+    pthread_mutex_unlock(&q->mutex);
+    
+    // 3. Signal Consumers
+    sem_post(&q->items_available);
+    
+    return 0;
+}
+
+/*
+ * Blocking Dequeue.
+ * Uses Semaphore to wait for data, Mutex for data safety.
+ */
+int queue_dequeue_safe(Queue *q, Message *msg)
+{
+    int result;
+    
+    if (q == NULL || msg == NULL) return -1;
+    if (q->shutdown) return -1;
+    
+    // 1. Wait for Data (Blocks if empty)
+    result = sem_wait(&q->items_available);
+    
+    if (result != 0 && errno == EINTR) {
+        if (q->shutdown) return -1;
+    }
+    
+    if (q->shutdown) {
+        sem_post(&q->items_available); // Return the token
+        return -1;
+    }
+    
+    // 2. Critical Section
+    pthread_mutex_lock(&q->mutex);
+    
+    internal_dequeue(q, msg);
+    
+    pthread_mutex_unlock(&q->mutex);
+    
+    // 3. Signal Producers
+    sem_post(&q->slots_available);
+    
+    return 0;
+}
+
+/*
+ * Initiates Shutdown.
+ * Sets flag and spams semaphores to wake any sleeping threads.
+ */
+void queue_shutdown(Queue *q)
+{
+    int i;
+    if (q == NULL) return;
+    
+    q->shutdown = 1;
+    
+    // Wake up everyone so they can see the shutdown flag and exit
+    // We post enough times to cover worst-case all threads waiting
+    for (i = 0; i < MAX_PRODUCERS + MAX_CONSUMERS; i++) {
+        sem_post(&q->slots_available);
+        sem_post(&q->items_available);
     }
 }
 
 Message message_create(int data, int priority, int producer_id)
 {
     Message msg;
-    
     msg.data = data;
     msg.priority = priority;
     msg.producer_id = producer_id;
     msg.timestamp = get_current_time_ms();
-    
     return msg;
 }

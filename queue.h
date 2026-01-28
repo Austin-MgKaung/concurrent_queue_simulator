@@ -3,105 +3,120 @@
  * Student: Kaung
  * Date: Jan 27, 2026
  *
- * queue.h: FIFO Queue Data Structure Declarations
- * * Implements a circular buffer with priority-aware dequeue logic.
- * * Used to store messages passing between Producer and Consumer threads.
+ * queue.h: Thread-Safe FIFO Queue Declarations
+ * * Updated for Milestone 4: Synchronization
+ * * Defines the blocking interface using Mutex (exclusion) and Semaphores (signaling).
  */
 
 #ifndef QUEUE_H
 #define QUEUE_H
+
+#include <pthread.h>
+#include <semaphore.h>
 
 #include "config.h"
 
 /* --- Data Structures --- */
 
 /*
- * Represents a single work item in the system.
- * Contains the payload, priority, and metadata for tracking/analysis.
+ * Represents a single work item passed between threads.
+ * Includes metadata (producer_id, timestamp) for the required analysis report.
  */
 typedef struct {
-    int data;           // The actual data value (0-9 as per spec)
-    int priority;       // Priority level (0-9, higher = more important)
-    int producer_id;    // ID of the producer that created this message
-    long timestamp;     // Creation time (used for performance analytics)
+    int data;           // The payload value
+    int priority;       // 0-9 (Higher values retrieved first)
+    int producer_id;    // Traceability for logs
+    long timestamp;     // Creation time (used to calculate latency)
 } Message;
 
 /*
- * The Circular Buffer implementation.
- * Stores messages and tracks current occupancy.
+ * The Thread-Safe Circular Buffer.
+ * combines the storage array with the synchronization primitives 
+ * required to prevent race conditions and handle thread blocking.
  */
 typedef struct {
-    Message buffer[MAX_QUEUE_SIZE];  // Static storage array
-    int front;                       // Index of the first item (Head)
-    int rear;                        // Index of the next empty slot (Tail)
-    int count;                       // Current number of items
-    int capacity;                    // Max capacity (set at runtime)
+    /* Queue Data */
+    Message buffer[MAX_QUEUE_SIZE];  
+    int front;                       // Read Index
+    int rear;                        // Write Index
+    int count;                       // Current occupancy
+    int capacity;                    // Max size (runtime)
+    
+    /* Synchronization Primitives */
+    pthread_mutex_t mutex;           // Critical Section Lock (Protects buffer/indices)
+    sem_t slots_available;           // Counting Sem: How many empty spots left? (Producers wait)
+    sem_t items_available;           // Counting Sem: How many items ready? (Consumers wait)
+    
+    /* Control Flags */
+    int shutdown;                    // Set to 1 to signal all threads to exit
 } Queue;
 
-/* --- Initialization & Status --- */
+/* --- Lifecycle & Management --- */
 
 /*
- * Initializes the queue pointers and capacity.
- * Returns: 0 on success, -1 on error.
+ * Initialises the queue and OS synchronization resources.
+ * Returns: 0 on success, -1 if mutex/sem init fails.
  */
 int queue_init(Queue *q, int capacity);
 
 /*
- * Checks if the queue has reached its capacity.
- * Returns: 1 if full, 0 if space is available.
+ * Destroys the queue and cleans up OS resources.
+ * Must be called on exit to prevent resource leaks.
  */
+int queue_destroy(Queue *q);
+
+/* --- Unsafe Operations (Internal/Debug) ---
+ * WARNING: These do not lock the mutex. 
+ * Use only for debugging/logging or inside safe wrappers.
+ */
+
 int queue_is_full(const Queue *q);
-
-/*
- * Checks if the queue contains no items.
- * Returns: 1 if empty, 0 if items exist.
- */
 int queue_is_empty(const Queue *q);
-
-/* --- Getters --- */
-
-/*
- * Returns the current number of items in the queue.
- */
 int queue_get_count(const Queue *q);
-
-/*
- * Returns the maximum capacity of the queue.
- */
 int queue_get_capacity(const Queue *q);
 
-/* --- Core Operations --- */
+/*
+ * Prints current state to stdout.
+ * Not thread-safe; use for snapshots.
+ */
+void queue_display(const Queue *q);
+
+/* --- Thread-Safe Operations (Blocking) --- */
 
 /*
- * Adds a message to the rear of the queue.
- * Returns: 0 on success, -1 if queue is full.
+ * Blocking Enqueue.
+ * Logic:
+ * 1. Decrement 'slots_available' (Blocks if queue is full).
+ * 2. Acquire 'mutex'.
+ * 3. Add item.
+ * 4. Release 'mutex'.
+ * 5. Increment 'items_available' (Signals a consumer).
+ * Returns: 0 on success, -1 if shutdown.
  */
-int queue_enqueue(Queue *q, Message msg);
+int queue_enqueue_safe(Queue *q, Message msg);
 
 /*
- * Removes the highest priority message.
- * Logic: Scans buffer for highest priority; if tied, returns oldest (FIFO).
- * Returns: 0 on success, -1 if queue is empty.
+ * Blocking Dequeue (Priority Aware).
+ * Logic:
+ * 1. Decrement 'items_available' (Blocks if queue is empty).
+ * 2. Acquire 'mutex'.
+ * 3. Remove highest priority item.
+ * 4. Release 'mutex'.
+ * 5. Increment 'slots_available' (Signals a producer).
+ * Returns: 0 on success, -1 if shutdown.
  */
-int queue_dequeue(Queue *q, Message *msg);
+int queue_dequeue_safe(Queue *q, Message *msg);
 
 /*
- * Returns the highest priority message without removing it.
- * Useful for debugging or state inspection.
+ * Signal for Shutdown.
+ * Sets the shutdown flag and posts to all semaphores to wake sleeping threads.
  */
-int queue_peek(const Queue *q, Message *msg);
+void queue_shutdown(Queue *q);
 
 /* --- Helpers --- */
 
 /*
- * Prints current queue contents to stdout.
- * Used for debugging/instrumentation.
- */
-void queue_display(const Queue *q);
-
-/*
- * Helper to create a fully populated Message struct.
- * Automatically captures the current timestamp.
+ * Factory to create a message with the current timestamp.
  */
 Message message_create(int data, int priority, int producer_id);
 
