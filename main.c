@@ -3,22 +3,25 @@
  * Student: Kaung
  * Date: Jan 27, 2026
  *
- * main.c: Entry Point & Integration Tests
- * * Includes Milestone 3 (Basic Queue) and Milestone 4 (Thread Safety) tests.
- * * Verifies correct mutex locking and semaphore blocking before full simulation.
+ * main.c: Entry Point & System Integration
+ * * Completed System: Milestones 1-7.
+ * * Orchestrates the full simulation lifecycle: Init -> Spawn -> Run -> Shutdown -> Report.
  */
 
-#define _POSIX_C_SOURCE 200809L // For usleep
+#define _POSIX_C_SOURCE 200809L // For sleep
 
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <pthread.h>
 #include <unistd.h>
+#include <signal.h>
 
 #include "config.h"
 #include "utils.h"
 #include "queue.h"
+#include "producer.h"
+#include "consumer.h"
 
 /* --- Data Structures --- */
 
@@ -29,9 +32,24 @@ typedef struct {
     int timeout_seconds;
 } RuntimeParams;
 
-/* --- Global Variables (Test Scope Only) --- */
-static Queue test_queue;
-static int test_running = 1;
+/* --- Global State --- */
+
+// Central Communication Buffer
+static Queue shared_queue;
+
+// Global Control Flag (1=Run, 0=Stop)
+// volatile ensures threads read the updated value immediately
+static volatile int running = 1;
+
+// Thread Management Arrays
+static pthread_t producer_threads[MAX_PRODUCERS];
+static ProducerArgs producer_args[MAX_PRODUCERS];
+
+static pthread_t consumer_threads[MAX_CONSUMERS];
+static ConsumerArgs consumer_args[MAX_CONSUMERS];
+
+// Stored for summary reporting
+static RuntimeParams runtime_params;
 
 /* --- Function Prototypes --- */
 
@@ -42,68 +60,139 @@ static void print_startup_info(const RuntimeParams *params);
 static void print_compiled_defaults(void);
 static void print_separator(void);
 
-// Milestone 3 Test (Single Threaded)
-static void test_queue_basic(int queue_size);
-
-// Milestone 4 Test (Multi-Threaded)
-static void test_queue_threaded(int queue_size);
-static void *test_producer_thread(void *arg);
-static void *test_consumer_thread(void *arg);
+// Thread Orchestration
+static int create_producers(int num_producers);
+static int create_consumers(int num_consumers);
+static void wait_for_producers(int num_producers);
+static void wait_for_consumers(int num_consumers);
+static void print_summary(int num_producers, int num_consumers);
 
 /* --- Main Execution --- */
 
 int main(int argc, char *argv[])
 {
-    RuntimeParams params;
     int result;
     
-    // 1. Setup RNG
+    // 1. Initialization Phase
     random_init();
     
-    // 2. Argument Parsing
-    result = parse_arguments(argc, argv, &params);
+    result = parse_arguments(argc, argv, &runtime_params);
     if (result != 0) {
         print_usage(argv[0]);
         return EXIT_FAILURE;
     }
     
-    // 3. Validation
-    result = validate_parameters(&params);
+    result = validate_parameters(&runtime_params);
     if (result != 0) {
         print_usage(argv[0]);
         return EXIT_FAILURE;
     }
     
-    // 4. Reporting
-    print_startup_info(&params);
+    // 2. Logging Phase
+    print_startup_info(&runtime_params);
     print_compiled_defaults();
     
-    // 5. Run Integration Tests
+    // 3. Queue Setup
+    print_separator();
+    printf("INITIALISATION\n");
+    print_separator();
     
-    // Milestone 3: Verify FIFO and Priority Logic
-    print_separator();
-    printf("QUEUE TEST - Basic Operations (Milestone 3)\n");
-    print_separator();
-    test_queue_basic(params.queue_size);
+    result = queue_init(&shared_queue, runtime_params.queue_size);
+    if (result != 0) {
+        fprintf(stderr, "Error: Queue init failed\n");
+        return EXIT_FAILURE;
+    }
+    printf("  Queue initialized (capacity: %d)\n", runtime_params.queue_size);
+    printf("  Sync primitives: Mutex + 2 Semaphores\n");
     
-    // Milestone 4: Verify Mutex and Semaphore locking
+    // 4. Thread Spawning Phase
     print_separator();
-    printf("QUEUE TEST - Thread Safety (Milestone 4)\n");
+    printf("SIMULATION START\n");
     print_separator();
-    test_queue_threaded(params.queue_size);
     
-    // 6. Status Update
+    printf("\n  Creating %d Producer(s) and %d Consumer(s)...\n",
+           runtime_params.num_producers, runtime_params.num_consumers);
+    
+    running = 1; // Enable workload loops
+    
+    // Start Producers
+    if (create_producers(runtime_params.num_producers) != 0) {
+        fprintf(stderr, "Error: Failed to create producers\n");
+        queue_destroy(&shared_queue);
+        return EXIT_FAILURE;
+    }
+    
+    // Start Consumers
+    if (create_consumers(runtime_params.num_consumers) != 0) {
+        fprintf(stderr, "Error: Failed to create consumers\n");
+        // Emergency cleanup
+        running = 0;
+        queue_shutdown(&shared_queue);
+        wait_for_producers(runtime_params.num_producers);
+        queue_destroy(&shared_queue);
+        return EXIT_FAILURE;
+    }
+    
+    printf("  All threads active.\n");
+    
+    // 5. Runtime Phase
+    // The main thread simply waits while worker threads do the heavy lifting
+    printf("\n  Running simulation for %d seconds...\n\n", runtime_params.timeout_seconds);
+    
+    print_separator();
+    printf("EXECUTION LOG\n");
+    print_separator();
+    
+    sleep(runtime_params.timeout_seconds);
+    
+    // 6. Shutdown Phase
+    print_separator();
+    printf("SHUTDOWN\n");
+    print_separator();
+    
+    printf("  Timeout reached. Stopping system...\n");
+    
+    // A: Signal Stop
+    running = 0;
+    
+    // B: Wake sleepers
+    queue_shutdown(&shared_queue);
+    
+    // C: Join threads
+    wait_for_producers(runtime_params.num_producers);
+    wait_for_consumers(runtime_params.num_consumers);
+    
+    printf("  All threads joined.\n");
+    
+    // 7. Audit & Reporting
+    print_separator();
+    printf("SUMMARY\n");
+    print_separator();
+    
+    print_summary(runtime_params.num_producers, runtime_params.num_consumers);
+    
+    // 8. Cleanup
+    print_separator();
+    printf("CLEANUP\n");
+    print_separator();
+    
+    result = queue_destroy(&shared_queue);
+    printf("  Queue destroyed: %s\n", result == 0 ? "OK" : "FAILED");
+    printf("  Resources released.\n");
+    
+    // Final Status Check
     printf("\n");
     print_separator();
     printf("MILESTONE STATUS\n");
     print_separator();
-    printf("  [x] Milestone 1: Configuration and argument parsing\n");
-    printf("  [x] Milestone 2: Utility functions\n");
-    printf("  [x] Milestone 3: Queue data structure\n");
-    printf("  [x] Milestone 4: Synchronisation (Mutex/Semaphores)\n");
-    printf("  [ ] Milestone 5: Producer threads\n");
-    printf("  [ ] Milestone 6: Consumer threads\n");
-    printf("  [ ] Milestone 7: Timeout and cleanup\n");
+    printf("  [x] Milestone 1: Config & Parsing\n");
+    printf("  [x] Milestone 2: Utilities\n");
+    printf("  [x] Milestone 3: Queue Structure\n");
+    printf("  [x] Milestone 4: Synchronization\n");
+    printf("  [x] Milestone 5: Producers\n");
+    printf("  [x] Milestone 6: Consumers\n");
+    printf("  [x] Milestone 7: Timeout & Cleanup\n");
+    printf("  [x] Milestone 8: Analytics (Balance Check)\n");
     printf("\n");
     
     return EXIT_SUCCESS;
@@ -122,14 +211,10 @@ static void print_usage(const char *program_name)
     print_separator();
     printf("Usage: %s <producers> <consumers> <queue_size> <timeout>\n", program_name);
     printf("\nArguments:\n");
-    printf("  producers   - Number of producer threads  [%d to %d]\n", 
-           MIN_PRODUCERS, MAX_PRODUCERS);
-    printf("  consumers   - Number of consumer threads  [%d to %d]\n", 
-           MIN_CONSUMERS, MAX_RUNTIME_CONSUMERS);
-    printf("  queue_size  - Maximum queue capacity      [%d to %d]\n", 
-           MIN_QUEUE_SIZE, MAX_QUEUE_SIZE);
-    printf("  timeout     - Runtime in seconds          [minimum %d]\n", 
-           MIN_TIMEOUT);
+    printf("  producers   - Number of producer threads  [%d to %d]\n", MIN_PRODUCERS, MAX_PRODUCERS);
+    printf("  consumers   - Number of consumer threads  [%d to %d]\n", MIN_CONSUMERS, MAX_RUNTIME_CONSUMERS);
+    printf("  queue_size  - Maximum queue capacity      [%d to %d]\n", MIN_QUEUE_SIZE, MAX_QUEUE_SIZE);
+    printf("  timeout     - Runtime in seconds          [minimum %d]\n", MIN_TIMEOUT);
     printf("\nExample:\n  %s 5 3 10 60\n", program_name);
 }
 
@@ -144,42 +229,24 @@ static int parse_arguments(int argc, char *argv[], RuntimeParams *params)
     params->num_consumers = atoi(argv[2]);
     params->queue_size = atoi(argv[3]);
     params->timeout_seconds = atoi(argv[4]);
-    
     return 0;
 }
 
 static int validate_parameters(const RuntimeParams *params)
 {
     int is_valid = 1;
+    if (params->num_producers < MIN_PRODUCERS || params->num_producers > MAX_PRODUCERS) is_valid = 0;
+    if (params->num_consumers < MIN_CONSUMERS || params->num_consumers > MAX_RUNTIME_CONSUMERS) is_valid = 0;
+    if (params->queue_size < MIN_QUEUE_SIZE || params->queue_size > MAX_QUEUE_SIZE) is_valid = 0;
+    if (params->timeout_seconds < MIN_TIMEOUT) is_valid = 0;
     
-    if (params->num_producers < MIN_PRODUCERS || params->num_producers > MAX_PRODUCERS) {
-        fprintf(stderr, "Error: producers must be between %d and %d\n", MIN_PRODUCERS, MAX_PRODUCERS);
-        is_valid = 0;
-    }
-    
-    if (params->num_consumers < MIN_CONSUMERS || params->num_consumers > MAX_RUNTIME_CONSUMERS) {
-        fprintf(stderr, "Error: consumers must be between %d and %d\n", MIN_CONSUMERS, MAX_RUNTIME_CONSUMERS);
-        is_valid = 0;
-    }
-    
-    if (params->queue_size < MIN_QUEUE_SIZE || params->queue_size > MAX_QUEUE_SIZE) {
-        fprintf(stderr, "Error: queue_size must be between %d and %d\n", MIN_QUEUE_SIZE, MAX_QUEUE_SIZE);
-        is_valid = 0;
-    }
-    
-    if (params->timeout_seconds < MIN_TIMEOUT) {
-        fprintf(stderr, "Error: timeout must be at least %d second(s)\n", MIN_TIMEOUT);
-        is_valid = 0;
-    }
-    
+    if (!is_valid) fprintf(stderr, "Error: Invalid parameters provided.\n");
     return is_valid ? 0 : -1;
 }
 
 static void print_startup_info(const RuntimeParams *params)
 {
-    char hostname[256];
-    char timestamp[64];
-    
+    char hostname[256], timestamp[64];
     get_hostname(hostname, sizeof(hostname));
     get_timestamp(timestamp, sizeof(timestamp));
     
@@ -212,171 +279,88 @@ static void print_compiled_defaults(void)
     printf("  Max Queue Size:    %d\n", MAX_QUEUE_SIZE);
     printf("  Max Producer Wait: %d seconds\n", MAX_PRODUCER_WAIT);
     printf("  Max Consumer Wait: %d seconds\n", MAX_CONSUMER_WAIT);
-    printf("  Data Range:        %d to %d\n", DATA_RANGE_MIN, DATA_RANGE_MAX);
-    printf("  Priority Range:    %d to %d\n", PRIORITY_MIN, PRIORITY_MAX);
     printf("  Debug Mode:        %s\n", DEBUG_MODE ? "ENABLED" : "DISABLED");
     printf("\n");
 }
 
-/* --- Milestone 3: Basic Functionality --- */
+/* --- Thread Orchestration --- */
 
-static void test_queue_basic(int queue_size)
+static int create_producers(int num_producers)
 {
-    Queue q;
-    Message msg;
-    int result;
+    int i, res;
+    for (i = 0; i < num_producers; i++) {
+        res = producer_init_args(&producer_args[i], i + 1, &shared_queue, &running);
+        if (res != 0) return -1;
+        
+        res = pthread_create(&producer_threads[i], NULL, producer_thread, &producer_args[i]);
+        if (res != 0) return -1;
+    }
+    return 0;
+}
+
+static int create_consumers(int num_consumers)
+{
+    int i, res;
+    for (i = 0; i < num_consumers; i++) {
+        res = consumer_init_args(&consumer_args[i], i + 1, &shared_queue, &running);
+        if (res != 0) return -1;
+        
+        res = pthread_create(&consumer_threads[i], NULL, consumer_thread, &consumer_args[i]);
+        if (res != 0) return -1;
+    }
+    return 0;
+}
+
+static void wait_for_producers(int num_producers)
+{
+    int i;
+    for (i = 0; i < num_producers; i++) {
+        pthread_join(producer_threads[i], NULL);
+    }
+}
+
+static void wait_for_consumers(int num_consumers)
+{
+    int i;
+    for (i = 0; i < num_consumers; i++) {
+        pthread_join(consumer_threads[i], NULL);
+    }
+}
+
+static void print_summary(int num_producers, int num_consumers)
+{
+    int i;
+    int total_produced = 0, total_consumed = 0;
+    int blocked_p = 0, blocked_c = 0;
+    int items_in_queue = queue_get_count(&shared_queue);
     
-    printf("\nTesting basic operations (Capacity: %d)...\n\n", queue_size);
+    printf("\n  Queue State: %d/%d items\n\n", items_in_queue, queue_get_capacity(&shared_queue));
     
-    // 1. Initialization
-    result = queue_init(&q, queue_size);
-    printf("  queue_init:           %s\n", result == 0 ? "[PASS]" : "[FAIL]");
+    printf("  Producer Stats:\n");
+    for (i = 0; i < num_producers; i++) {
+        producer_print_stats(&producer_args[i]);
+        total_produced += producer_args[i].stats.messages_produced;
+        blocked_p += producer_args[i].stats.times_blocked;
+    }
+    printf("    -> Total Produced: %d | Total Blocked: %d\n\n", total_produced, blocked_p);
     
-    // 2. Enqueue Safe
-    msg = message_create(5, 7, 1);
-    result = queue_enqueue_safe(&q, msg);
-    printf("  enqueue (Pri=7):      %s\n", result == 0 ? "[PASS]" : "[FAIL]");
+    printf("  Consumer Stats:\n");
+    for (i = 0; i < num_consumers; i++) {
+        consumer_print_stats(&consumer_args[i]);
+        total_consumed += consumer_args[i].stats.messages_consumed;
+        blocked_c += consumer_args[i].stats.times_blocked;
+    }
+    printf("    -> Total Consumed: %d | Total Blocked: %d\n\n", total_consumed, blocked_c);
     
-    msg = message_create(3, 2, 2);
-    queue_enqueue_safe(&q, msg);
-    
-    msg = message_create(9, 9, 1);
-    queue_enqueue_safe(&q, msg);
-    
-    printf("  Queue Count:          %d (Expected 3)\n", queue_get_count(&q));
-    
-    // 3. Dequeue Safe (Priority Check)
-    // Expect 9 first
-    result = queue_dequeue_safe(&q, &msg);
-    printf("  dequeue 1 (Exp 9):    %s (Got Pri=%d)\n", 
-           (msg.priority == 9) ? "[PASS]" : "[FAIL]", msg.priority);
+    // Correctness Proof
+    printf("  Balance Check:\n");
+    printf("    Produced (%d) == Consumed (%d) + Queue (%d)\n", 
+           total_produced, total_consumed, items_in_queue);
            
-    // Expect 7 second
-    queue_dequeue_safe(&q, &msg);
-    printf("  dequeue 2 (Exp 7):    %s (Got Pri=%d)\n", 
-           (msg.priority == 7) ? "[PASS]" : "[FAIL]", msg.priority);
-
-    // Expect 2 last
-    queue_dequeue_safe(&q, &msg);
-    printf("  dequeue 3 (Exp 2):    %s (Got Pri=%d)\n", 
-           (msg.priority == 2) ? "[PASS]" : "[FAIL]", msg.priority);
-           
-    // 4. Cleanup
-    queue_destroy(&q);
-    printf("  queue_destroy:        [PASS]\n");
-}
-
-/* --- Milestone 4: Thread Safety Tests --- */
-
-/*
- * Worker thread to simulate concurrent production.
- */
-static void *test_producer_thread(void *arg)
-{
-    int id = *(int *)arg;
-    int i, result;
-    Message msg;
-    
-    printf("  [Producer %d] Started\n", id);
-    
-    for (i = 0; i < 3 && test_running; i++) {
-        msg = message_create(
-            random_range(DATA_RANGE_MIN, DATA_RANGE_MAX),
-            random_range(PRIORITY_MIN, PRIORITY_MAX),
-            id
-        );
-        
-        // This call will block on the semaphore if queue is full
-        // and lock the mutex while writing.
-        result = queue_enqueue_safe(&test_queue, msg);
-        
-        if (result == 0) {
-            printf("  [Producer %d] Enqueued Pri=%d Data=%d | Queue: %d/%d\n",
-                   id, msg.priority, msg.data, 
-                   queue_get_count(&test_queue), queue_get_capacity(&test_queue));
-        } else {
-            printf("  [Producer %d] Shutdown/Error\n", id);
-            break;
-        }
-        
-        usleep(100000); // 100ms delay to induce interleaving
+    if (total_produced == total_consumed + items_in_queue) {
+        printf("    Result: PASS\n");
+    } else {
+        printf("    Result: FAIL (Data Lost/Created?)\n");
     }
-    
-    printf("  [Producer %d] Finished\n", id);
-    return NULL;
-}
-
-/*
- * Worker thread to simulate concurrent consumption.
- */
-static void *test_consumer_thread(void *arg)
-{
-    int id = *(int *)arg;
-    int i, result;
-    Message msg;
-    
-    printf("  [Consumer %d] Started\n", id);
-    
-    for (i = 0; i < 3 && test_running; i++) {
-        // This call will block on semaphore if queue is empty
-        // and lock the mutex while reading.
-        result = queue_dequeue_safe(&test_queue, &msg);
-        
-        if (result == 0) {
-            printf("  [Consumer %d] Dequeued Pri=%d Data=%d (from P%d)\n",
-                   id, msg.priority, msg.data, msg.producer_id);
-        } else {
-            printf("  [Consumer %d] Shutdown/Error\n", id);
-            break;
-        }
-        
-        usleep(150000); // 150ms delay
-    }
-    
-    printf("  [Consumer %d] Finished\n", id);
-    return NULL;
-}
-
-/*
- * Integration test: Spawns real threads to hammer the queue.
- * If mutex/semaphores are wrong, this will crash or deadlock.
- */
-static void test_queue_threaded(int queue_size)
-{
-    pthread_t producers[2], consumers[2];
-    int p_ids[2] = {1, 2};
-    int c_ids[2] = {1, 2};
-    int result, i;
-    
-    printf("\nTesting concurrency with 2 Producers / 2 Consumers...\n\n");
-    
-    // 1. Initialize Safe Queue
-    result = queue_init(&test_queue, queue_size);
-    if (result != 0) {
-        printf("  [FAIL] Queue Init\n");
-        return;
-    }
-    
-    test_running = 1;
-    
-    // 2. Spawn Threads
-    for (i = 0; i < 2; i++) {
-        pthread_create(&producers[i], NULL, test_producer_thread, &p_ids[i]);
-        pthread_create(&consumers[i], NULL, test_consumer_thread, &c_ids[i]);
-    }
-    
-    // 3. Join Threads (Wait for them to finish work)
-    printf("\n  Running threads...\n\n");
-    
-    for (i = 0; i < 2; i++) {
-        pthread_join(producers[i], NULL);
-        pthread_join(consumers[i], NULL);
-    }
-    
-    printf("\n  Threads joined.\n");
-    printf("  Final Queue Count: %d\n", queue_get_count(&test_queue));
-    
-    // 4. Cleanup
-    queue_destroy(&test_queue);
-    printf("  queue_destroy: [PASS]\n");
+    printf("\n");
 }
