@@ -16,11 +16,11 @@ LDFLAGS = -pthread
 TARGET = model
 
 # Source files (update this list as we add queue.c, producer.c, etc.)
-SRCS = main.c utils.c
+SRCS = main.c utils.c queue.c
 OBJS = $(SRCS:.c=.o)
 
 # Header dependencies (recompile if these change)
-HDRS = config.h utils.h
+HDRS = config.h utils.h queue.h
 
 # --- Build Rules ---
 
