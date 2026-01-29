@@ -18,15 +18,18 @@ thread synchronization, graceful shutdown, and performance analysis.
 | Multi-threaded | Up to 10 producers and 3 consumers running concurrently |
 | Thread-safe queue | Mutex for buffer protection, semaphores for blocking |
 | Priority dequeue | Consumers always take the highest-priority item first |
-| Priority aging | Low-priority items gain priority over time to prevent starvation |
+| Priority aging | Low-priority items gain priority over time to prevent starvation. Configurable at runtime (`-a <ms>`, 0 to disable) |
 | Graceful shutdown | Timeout-based or Ctrl+C (SIGINT/SIGTERM), all threads joined cleanly |
 | Live TUI dashboard | ncurses visual mode with color-coded queue, throughput bars, sparkline |
 | Debug logging | 4 levels (OFF, ERROR, INFO, TRACE) controlled at runtime |
 | Analytics | Background sampling, final report, optimization recommendations |
 | CSV export | Queue occupancy over time, importable into Excel/Python |
 | Reproducible runs | `-s <seed>` flag for deterministic testing |
+| Input validation | All CLI arguments validated with `strtol` (rejects non-numeric input) |
+| Help flag | `-h` / `--help` displays usage and exits cleanly |
 | Test bench | 57 automated tests covering all corner cases |
-| CI pipeline | GitHub Actions runs the full test suite on every push |
+| CI pipeline | GitHub Actions runs the full test suite and valgrind memory check on every push |
+| Memory safety | Valgrind leak check integrated into CI (`make valgrind`) |
 
 ## Setup on a Fresh Machine (Linux Mint / Ubuntu / Debian)
 
@@ -79,7 +82,7 @@ Runs 57 automated tests. You should see `All tests passed.`
 ## Usage
 
 ```
-./model [-v] [-d <level>] [-s <seed>] <producers> <consumers> <queue_size> <timeout>
+./model [-h] [-v] [-d <level>] [-s <seed>] [-a <ms>] <producers> <consumers> <queue_size> <timeout>
 ```
 
 ### Parameters
@@ -95,9 +98,11 @@ Runs 57 automated tests. You should see `All tests passed.`
 
 | Flag | Description |
 |---|---|
+| `-h`, `--help` | Show usage information and exit |
 | `-v` | Enable the live ncurses TUI dashboard |
 | `-d <level>` | Debug verbosity: 0=OFF, 1=ERROR, 2=INFO, 3=TRACE |
 | `-s <seed>` | Set RNG seed for reproducible/deterministic runs |
+| `-a <ms>` | Priority aging interval in milliseconds (default: 500, 0=disabled) |
 
 Flags can appear in any order before the positional arguments.
 
@@ -132,6 +137,23 @@ Debug output goes to stderr. Filter with:
 ./model -s 42 3 2 10 10
 ```
 
+### Disable priority aging
+```bash
+./model -a 0 5 3 10 30
+```
+Items are dequeued strictly by their original priority (no aging boost).
+
+### Faster aging (250ms interval)
+```bash
+./model -a 250 5 3 10 30
+```
+Low-priority items get boosted twice as fast as the default (500ms).
+
+### Show help
+```bash
+./model --help
+```
+
 ### Graceful shutdown via signal
 Start any run, then press Ctrl+C. The program will:
 1. Stop all threads cleanly
@@ -155,6 +177,7 @@ Start any run, then press Ctrl+C. The program will:
 | `make test` | Quick test run (5P, 3C, Q10, 30s) |
 | `make visual` | Quick test in TUI mode (5P, 3C, Q20, 60s) |
 | `make bench` | Run the full 57-test suite |
+| `make valgrind` | Run valgrind memory leak check |
 
 ## File Structure
 
@@ -206,9 +229,10 @@ concurrent_queue_simulator/
 
 ### Priority Aging
 
-Items gain +1 effective priority for every 500ms they wait in the queue,
+Items gain +1 effective priority for every aging interval they wait in the queue,
 capped at priority 9. This prevents starvation of low-priority items.
-Configured via `AGING_INTERVAL_MS` in `config.h`.
+The default interval is 500ms (set in `config.h` via `AGING_INTERVAL_MS`).
+Override at runtime with `-a <ms>`, or disable entirely with `-a 0`.
 
 ### Debug Levels
 
@@ -248,3 +272,6 @@ The test bench (`test_bench.sh`) covers 57 tests across 13 categories:
 - `volatile sig_atomic_t` is used for flags shared with the signal handler (POSIX-correct).
 - Lock ordering is consistent (semaphore first, then mutex) to prevent deadlocks.
 - The balance check (`produced == consumed + remaining`) verifies no data is lost or duplicated.
+- All CLI input is validated with `strtol` (not `atoi`) to reject non-numeric arguments.
+- Thread sleep uses 200ms `nanosleep` chunks for responsive shutdown (exits within 200ms of signal).
+- Valgrind memory leak check runs in CI to verify zero leaks on every push.
