@@ -4,7 +4,7 @@
  * Date: Jan 27, 2026
  *
  * queue.h: Thread-Safe FIFO Queue Declarations
- * * Updated for Milestone 4: Synchronization
+ * * Includes synchronization for safe concurrent access.
  * * Defines the blocking interface using Mutex (exclusion) and Semaphores (signaling).
  */
 
@@ -93,7 +93,7 @@ void queue_display(const Queue *q);
  * 5. Increment 'items_available' (Signals a consumer).
  * Returns: 0 on success, -1 if shutdown.
  */
-int queue_enqueue_safe(Queue *q, Message msg);
+int queue_enqueue_safe(Queue *q, Message msg, int *was_blocked);
 
 /*
  * Blocking Dequeue (Priority Aware).
@@ -105,7 +105,7 @@ int queue_enqueue_safe(Queue *q, Message msg);
  * 5. Increment 'slots_available' (Signals a producer).
  * Returns: 0 on success, -1 if shutdown.
  */
-int queue_dequeue_safe(Queue *q, Message *msg);
+int queue_dequeue_safe(Queue *q, Message *msg, int *was_blocked);
 
 /*
  * Signal for Shutdown.

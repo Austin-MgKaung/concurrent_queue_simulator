@@ -12,7 +12,9 @@
 #define CONSUMER_H
 
 #include <pthread.h>
+#include <signal.h>
 #include "queue.h"
+#include "analytics.h"
 
 /* --- Data Structures --- */
 
@@ -32,8 +34,10 @@ typedef struct {
 typedef struct {
     int id;                     // Identification (1..N)
     Queue *queue;               // Reference to the shared buffer
-    volatile int *running;      // Pointer to the global stop flag
+    volatile sig_atomic_t *running; // Pointer to the global stop flag
     ConsumerStats stats;        // Local performance counters
+    int quiet_mode;             // Flag for quiet mode (TUI integration)
+    Analytics *analytics;       // Pointer to shared analytics (may be NULL)
 } ConsumerArgs;
 
 /* --- Function Prototypes --- */
@@ -52,7 +56,7 @@ void *consumer_thread(void *arg);
  * Helper to populate the argument struct before spawning threads.
  * Returns: 0 on success.
  */
-int consumer_init_args(ConsumerArgs *args, int id, Queue *queue, volatile int *running);
+int consumer_init_args(ConsumerArgs *args, int id, Queue *queue, volatile sig_atomic_t *running);
 
 /*
  * Prints the final usage statistics for this thread.

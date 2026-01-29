@@ -20,6 +20,10 @@
 
 #include "utils.h"
 
+/* --- Debug Level (Runtime) --- */
+
+int debug_level = 0;
+
 /* --- Static State (Internal) --- */
 
 static struct timespec program_start_time;

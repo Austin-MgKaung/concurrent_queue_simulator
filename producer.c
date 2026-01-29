@@ -6,9 +6,19 @@
  * producer.c: Producer Thread Implementation
  * * Implements the workload lifecycle: Generate Data -> Enqueue -> Sleep.
  * * Uses global time_elapsed() for synchronized logging.
+ * * Supports 'quiet_mode' for TUI integration.
+ *
+ * ERROR HANDLING STRATEGY:
+ * -----------------------
+ * This file protects against:
+ *   1. NULL argument to thread        — checked on entry, exits immediately
+ *   2. Enqueue failure (shutdown)     — normal exit path, not an error
+ *   3. Enqueue failure (other)        — logged, thread exits cleanly
+ *   4. Blocking detection             — reported via was_blocked from queue
+ *   5. Analytics NULL pointer         — checked before every analytics call
  */
 
-#define _POSIX_C_SOURCE 200809L // For time/sleep functions
+#define _POSIX_C_SOURCE 200809L
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -21,39 +31,56 @@
 
 /* --- Public API --- */
 
-int producer_init_args(ProducerArgs *args, int id, Queue *queue, volatile int *running)
+/*
+ * Populates a ProducerArgs struct before thread creation.
+ *
+ * Error handling: Validates all pointers and ID range.
+ * Returns -1 if any validation fails, preventing the caller
+ * from spawning a thread with invalid context.
+ */
+int producer_init_args(ProducerArgs *args, int id, Queue *queue, volatile sig_atomic_t *running)
 {
-    // Validate pointers
     if (args == NULL) {
-        fprintf(stderr, "Error: producer_init_args - NULL args\n");
+        fprintf(stderr, "[ERROR] producer_init_args: NULL args pointer\n");
         return -1;
     }
-    
+
     if (queue == NULL || running == NULL) {
-        fprintf(stderr, "Error: producer_init_args - Missing dependencies\n");
+        fprintf(stderr, "[ERROR] producer_init_args: NULL dependency "
+                "(queue=%p, running=%p)\n", (void *)queue, (void *)running);
         return -1;
     }
-    
+
     if (id < 1 || id > MAX_PRODUCERS) {
-        fprintf(stderr, "Error: producer_init_args - ID %d out of range\n", id);
+        fprintf(stderr, "[ERROR] producer_init_args: ID %d out of range [1, %d]\n",
+                id, MAX_PRODUCERS);
         return -1;
     }
-    
-    // Initialize context
+
     args->id = id;
     args->queue = queue;
     args->running = running;
-    
-    // Reset counters
+    args->quiet_mode = 0;
+    args->analytics = NULL;
+
     args->stats.messages_produced = 0;
     args->stats.times_blocked = 0;
-    
+
     return 0;
 }
 
 /*
  * The Main Producer Thread Logic.
  * Executed concurrently by pthread_create.
+ *
+ * Error handling:
+ *   - NULL arg check on entry (defensive — should never happen if
+ *     producer_init_args succeeded, but guards against misuse)
+ *   - Enqueue return value checked every iteration:
+ *     * result != 0 during shutdown is normal (thread exits cleanly)
+ *     * result != 0 while running is unexpected (logged as error)
+ *   - Blocking detection uses the accurate was_blocked output from
+ *     queue_enqueue_safe (no more racy pre-checks)
  */
 void *producer_thread(void *arg)
 {
@@ -63,92 +90,108 @@ void *producer_thread(void *arg)
     int priority;
     int result;
     int sleep_time;
-    int queue_count_before;
-    
+    int was_blocked;
+
     args = (ProducerArgs *)arg;
-    
+
+    /* Error handling: Guard against NULL argument.
+     * This would indicate a bug in main.c thread setup. */
     if (args == NULL) {
-        fprintf(stderr, "Error: producer_thread - NULL argument\n");
+        fprintf(stderr, "[ERROR] producer_thread: NULL argument\n");
         return NULL;
     }
-    
-    printf("[%06.2f] Producer %d: Started\n", time_elapsed(), args->id);
-    
-    if (DEBUG_MODE) {
-        printf("[DEBUG] Producer %d: Context Loaded\n", args->id);
+
+    if (!args->quiet_mode) {
+        printf("[%06.2f] Producer %d: Started\n", time_elapsed(), args->id);
     }
-    
-    // Main Lifecycle Loop
-    // Continues until the main thread sets the global 'running' flag to 0.
+
+    DBG(DBG_INFO, "Producer %d: Context Loaded", args->id);
+
+    /* Main Lifecycle Loop
+     * Continues until the main thread sets the global 'running' flag to 0. */
     while (*(args->running)) {
-        
-        // Step 1: Data Generation
+
+        /* Step 1: Data Generation */
         data = random_range(DATA_RANGE_MIN, DATA_RANGE_MAX);
         priority = random_range(PRIORITY_MIN, PRIORITY_MAX);
-        
         msg = message_create(data, priority, args->id);
-        
-        // Step 2: Pre-Enqueue Check (Statistics)
-        // Check if queue is full to track "Times Blocked" metric
-        queue_count_before = queue_get_count(args->queue);
-        
-        if (queue_is_full(args->queue)) {
+
+        DBG(DBG_TRACE, "Producer %d: Generated data=%d, pri=%d", args->id, data, priority);
+
+        /* Step 2: Enqueue (Blocking Operation)
+         * was_blocked is set by queue_enqueue_safe using sem_trywait.
+         * This gives us accurate block detection without race conditions. */
+        was_blocked = 0;
+        result = queue_enqueue_safe(args->queue, msg, &was_blocked);
+
+        /* Step 3: Record blocking if it occurred */
+        if (was_blocked) {
             args->stats.times_blocked++;
-            printf("[%06.2f] Producer %d: BLOCKED (queue full: %d/%d)\n",
-                   time_elapsed(), args->id,
-                   queue_count_before, queue_get_capacity(args->queue));
+            /* Error handling: analytics pointer may be NULL if analytics
+             * was not initialised. Check before calling. */
+            if (args->analytics) analytics_record_producer_block(args->analytics);
+            if (!args->quiet_mode) {
+                printf("[%06.2f] Producer %d: BLOCKED (queue was full)\n",
+                       time_elapsed(), args->id);
+            }
         }
-        
-        // Step 3: Enqueue (Blocking Operation)
-        // This call sleeps on the semaphore if the queue is full.
-        result = queue_enqueue_safe(args->queue, msg);
-        
-        // Handle shutdown signal
+
+        /* Error handling: Check enqueue result */
         if (result != 0) {
             if (*(args->running)) {
-                fprintf(stderr, "[%06.2f] Producer %d: Enqueue failed\n", 
-                        time_elapsed(), args->id);
+                /* Error handling: Enqueue failed while still running.
+                 * This is unexpected — could be a queue error, not shutdown.
+                 * Log it so the issue is visible in the output. */
+                if (!args->quiet_mode) {
+                    fprintf(stderr, "[%06.2f] Producer %d: Enqueue failed "
+                            "(unexpected)\n", time_elapsed(), args->id);
+                }
             }
-            break; // Exit loop
+            /* Whether shutdown or error, exit the loop cleanly */
+            break;
         }
-        
-        // Step 4: Success Logging
+
+        /* Step 4: Success Logging */
         args->stats.messages_produced++;
-        
-        printf("[%06.2f] Producer %d: Wrote (pri=%d, data=%d) | Queue: %d/%d\n",
-               time_elapsed(), args->id,
-               priority, data,
-               queue_get_count(args->queue), queue_get_capacity(args->queue));
-        
-        // Step 5: Simulated Processing Time
+        if (args->analytics) analytics_record_produce(args->analytics);
+
+        if (!args->quiet_mode) {
+            printf("[%06.2f] Producer %d: Wrote (pri=%d, data=%d) | Queue: %d/%d\n",
+                   time_elapsed(), args->id,
+                   priority, data,
+                   queue_get_count(args->queue), queue_get_capacity(args->queue));
+        }
+
+        /* Step 5: Simulated Processing Time
+         * Responsive sleep: wake every second to check shutdown flag.
+         * This ensures threads exit promptly (within 1s) when stopped. */
         if (*(args->running)) {
             sleep_time = random_range(0, MAX_PRODUCER_WAIT);
-            
-            if (DEBUG_MODE) {
-                printf("[DEBUG] Producer %d: Sleeping for %d s\n", args->id, sleep_time);
-            }
-            
-            // Responsive Sleep Loop:
-            // Wake up every second to check for shutdown signal
+
+            DBG(DBG_TRACE, "Producer %d: Sleeping for %d s", args->id, sleep_time);
+
             while (sleep_time > 0 && *(args->running)) {
                 sleep(1);
                 sleep_time--;
             }
         }
     }
-    
-    // Cleanup & Exit
-    printf("[%06.2f] Producer %d: Stopped (produced %d, blocked %d)\n",
-           time_elapsed(), args->id,
-           args->stats.messages_produced, args->stats.times_blocked);
-    
+
+    /* Cleanup & Exit */
+    if (!args->quiet_mode) {
+        printf("[%06.2f] Producer %d: Stopped (produced %d, blocked %d)\n",
+               time_elapsed(), args->id,
+               args->stats.messages_produced, args->stats.times_blocked);
+    }
+    DBG(DBG_INFO, "Producer %d: Exiting thread", args->id);
+
     return NULL;
 }
 
 void producer_print_stats(const ProducerArgs *args)
 {
     if (args == NULL) return;
-    
+
     printf("    Producer %d: %d messages produced, %d times blocked\n",
            args->id, args->stats.messages_produced, args->stats.times_blocked);
 }

@@ -1,0 +1,383 @@
+
+ELE430 Producer-Consumer Model
+-----------------------------------------------------------------------------
+SYSTEM INFORMATION
+-----------------------------------------------------------------------------
+  User:         kaung-austin
+  Hostname:     kaung-austin-HP
+  Date/Time:    Thu Jan 29 18:01:22 2026
+
+-----------------------------------------------------------------------------
+RUNTIME PARAMETERS
+-----------------------------------------------------------------------------
+  Debug Level:  0 (OFF)
+  Mode:         CONSOLE LOG
+  Producers:    5
+  Consumers:    3
+  Queue Size:   10
+  Timeout:      60 seconds
+
+-----------------------------------------------------------------------------
+COMPILED DEFAULTS (config.h)
+-----------------------------------------------------------------------------
+  Max Producers:     10
+  Max Consumers:     5
+  Max Queue Size:    20
+  Max Producer Wait: 2 seconds
+  Max Consumer Wait: 4 seconds
+  Debug Max Level:   3 (compile-time gate)
+
+-----------------------------------------------------------------------------
+INITIALISATION
+-----------------------------------------------------------------------------
+  Queue initialized.
+  Analytics initialized.
+-----------------------------------------------------------------------------
+SIMULATION START
+-----------------------------------------------------------------------------
+[000.00] Producer 1: Started
+[000.00] Producer 1: Wrote (pri=0, data=6) | Queue: 1/10
+[000.00] Producer 2: Started
+[000.00] Producer 2: Wrote (pri=6, data=3) | Queue: 2/10
+[000.00] Producer 3: Started
+[000.00] Producer 3: Wrote (pri=8, data=3) | Queue: 3/10
+[000.00] Producer 4: Started
+[000.00] Producer 4: Wrote (pri=2, data=5) | Queue: 4/10
+[000.00] Producer 4: Wrote (pri=7, data=0) | Queue: 5/10
+[000.00] Producer 5: Started
+[000.00] Producer 5: Wrote (pri=6, data=2) | Queue: 6/10
+[000.00] Consumer 1: Started
+[000.00] Consumer 1: Read (pri=8, data=3) from P3 | Queue: 5/10
+[000.00] Consumer 2: Started
+[000.00] Consumer 2: Read (pri=7, data=0) from P4 | Queue: 4/10
+[000.00] Consumer 3: Started
+[000.00] Consumer 3: Read (pri=6, data=3) from P2 | Queue: 3/10
+  All threads active. Running for 60 seconds...
+-----------------------------------------------------------------------------
+EXECUTION LOG
+-----------------------------------------------------------------------------
+[001.00] Producer 2: Wrote (pri=0, data=0) | Queue: 4/10
+[002.00] Producer 1: Wrote (pri=3, data=1) | Queue: 5/10
+[002.00] Producer 3: Wrote (pri=2, data=0) | Queue: 6/10
+[002.00] Producer 4: Wrote (pri=1, data=9) | Queue: 7/10
+[002.00] Producer 5: Wrote (pri=4, data=3) | Queue: 8/10
+[002.00] Consumer 2: Read (pri=6, data=2) from P5 | Queue: 7/10
+[003.00] Producer 2: Wrote (pri=4, data=9) | Queue: 8/10
+[003.00] Producer 2: Wrote (pri=8, data=6) | Queue: 9/10
+[003.00] Producer 4: Wrote (pri=5, data=6) | Queue: 10/10
+[003.00] Consumer 1: Read (pri=2, data=5) from P4 | Queue: 9/10
+[003.00] Producer 4: Wrote (pri=1, data=1) | Queue: 10/10
+[004.00] Consumer 3: Read (pri=8, data=6) from P2 | Queue: 9/10
+[004.00] Consumer 3: Read (pri=0, data=6) from P1 | Queue: 8/10
+[004.00] Producer 4: BLOCKED (queue was full)
+[004.00] Producer 4: Wrote (pri=4, data=6) | Queue: 9/10
+[004.00] Producer 5: BLOCKED (queue was full)
+[004.00] Producer 5: Wrote (pri=8, data=6) | Queue: 10/10
+[004.00] Consumer 2: Read (pri=8, data=6) from P5 | Queue: 9/10
+[004.00] Producer 1: BLOCKED (queue was full)
+[004.00] Producer 1: Wrote (pri=7, data=0) | Queue: 10/10
+[007.00] Consumer 1: Read (pri=0, data=0) from P2 | Queue: 9/10
+[007.00] Producer 2: BLOCKED (queue was full)
+[007.00] Producer 2: Wrote (pri=0, data=1) | Queue: 9/10
+[007.00] Consumer 3: Read (pri=3, data=1) from P1 | Queue: 9/10
+[007.00] Producer 3: BLOCKED (queue was full)
+[007.00] Producer 3: Wrote (pri=6, data=7) | Queue: 10/10
+[008.00] Consumer 2: Read (pri=2, data=0) from P3 | Queue: 9/10
+[008.00] Producer 4: BLOCKED (queue was full)
+[008.00] Producer 4: Wrote (pri=6, data=6) | Queue: 10/10
+[009.00] Consumer 2: Read (pri=1, data=9) from P4 | Queue: 9/10
+[009.00] Producer 2: Wrote (pri=5, data=9) | Queue: 10/10
+[010.00] --- 50 seconds remaining ---
+[010.00] Producer 1: BLOCKED (queue was full)
+[010.00] Producer 1: Wrote (pri=1, data=4) | Queue: 10/10
+[010.00] Consumer 1: Read (pri=4, data=3) from P5 | Queue: 9/10
+[011.00] Consumer 3: Read (pri=4, data=9) from P2 | Queue: 9/10
+[011.00] Producer 4: BLOCKED (queue was full)
+[011.00] Producer 4: Wrote (pri=3, data=7) | Queue: 10/10
+[012.00] Consumer 2: Read (pri=5, data=6) from P4 | Queue: 9/10
+[012.00] Producer 3: BLOCKED (queue was full)
+[012.00] Producer 3: Wrote (pri=3, data=6) | Queue: 10/10
+[013.00] Consumer 3: Read (pri=1, data=1) from P4 | Queue: 9/10
+[013.00] Producer 3: Wrote (pri=4, data=6) | Queue: 10/10
+[013.00] Producer 4: Wrote (pri=6, data=1) | Queue: 10/10
+[013.00] Consumer 3: Read (pri=4, data=6) from P4 | Queue: 10/10
+[014.00] Consumer 1: Read (pri=7, data=0) from P1 | Queue: 9/10
+[014.00] Consumer 1: Read (pri=0, data=1) from P2 | Queue: 9/10
+[014.00] Producer 2: BLOCKED (queue was full)
+[014.00] Producer 2: Wrote (pri=1, data=2) | Queue: 10/10
+[014.00] Producer 4: Wrote (pri=0, data=5) | Queue: 9/10
+[015.00] Consumer 2: Read (pri=6, data=7) from P3 | Queue: 9/10
+[015.00] Producer 5: BLOCKED (queue was full)
+[015.00] Producer 5: Wrote (pri=0, data=4) | Queue: 10/10
+[017.00] Consumer 3: Read (pri=6, data=6) from P4 | Queue: 8/10
+[017.00] Producer 1: BLOCKED (queue was full)
+[017.00] Producer 3: BLOCKED (queue was full)
+[017.00] Consumer 3: Read (pri=0, data=4) from P5 | Queue: 9/10
+[017.00] Producer 3: Wrote (pri=6, data=7) | Queue: 9/10
+[017.00] Producer 5: BLOCKED (queue was full)
+[017.00] Producer 5: Wrote (pri=5, data=1) | Queue: 10/10
+[017.00] Producer 1: Wrote (pri=2, data=1) | Queue: 10/10
+[017.00] Consumer 2: Read (pri=1, data=4) from P1 | Queue: 8/10
+[018.00] Consumer 1: Read (pri=3, data=7) from P4 | Queue: 9/10
+[018.00] Producer 4: BLOCKED (queue was full)
+[018.00] Producer 4: Wrote (pri=6, data=7) | Queue: 10/10
+[020.00] --- 40 seconds remaining ---
+[021.00] Consumer 1: Read (pri=5, data=9) from P2 | Queue: 9/10
+[021.00] Producer 2: BLOCKED (queue was full)
+[021.00] Producer 2: Wrote (pri=8, data=1) | Queue: 9/10
+[021.00] Producer 2: Wrote (pri=6, data=6) | Queue: 10/10
+[021.00] Consumer 3: Read (pri=3, data=6) from P3 | Queue: 10/10
+[021.00] Consumer 2: Read (pri=1, data=2) from P2 | Queue: 8/10
+[021.00] Producer 1: BLOCKED (queue was full)
+[021.00] Producer 1: Wrote (pri=1, data=9) | Queue: 10/10
+[021.00] Producer 3: BLOCKED (queue was full)
+[021.00] Consumer 3: Read (pri=2, data=1) from P1 | Queue: 10/10
+[021.00] Producer 3: Wrote (pri=8, data=1) | Queue: 10/10
+[022.00] Consumer 1: Read (pri=4, data=6) from P3 | Queue: 9/10
+[022.00] Producer 5: BLOCKED (queue was full)
+[022.00] Producer 5: Wrote (pri=7, data=5) | Queue: 10/10
+[022.00] Producer 4: BLOCKED (queue was full)
+[022.00] Consumer 1: Read (pri=6, data=1) from P4 | Queue: 10/10
+[022.00] Producer 4: Wrote (pri=0, data=2) | Queue: 10/10
+[024.00] Consumer 2: Read (pri=0, data=5) from P4 | Queue: 9/10
+[024.00] Consumer 2: Read (pri=6, data=7) from P3 | Queue: 8/10
+[024.00] Consumer 1: Read (pri=5, data=1) from P5 | Queue: 8/10
+[024.00] Producer 3: BLOCKED (queue was full)
+[024.00] Producer 3: Wrote (pri=4, data=0) | Queue: 8/10
+[024.00] Producer 4: BLOCKED (queue was full)
+[024.00] Producer 4: Wrote (pri=3, data=9) | Queue: 9/10
+[024.00] Producer 2: BLOCKED (queue was full)
+[024.00] Producer 2: Wrote (pri=2, data=0) | Queue: 10/10
+[024.00] Consumer 3: Read (pri=6, data=7) from P4 | Queue: 8/10
+[024.00] Producer 5: Wrote (pri=1, data=7) | Queue: 10/10
+[025.00] Producer 4: Wrote (pri=0, data=0) | Queue: 10/10
+[025.00] Consumer 1: Read (pri=8, data=1) from P2 | Queue: 10/10
+[027.00] Consumer 3: Read (pri=8, data=1) from P3 | Queue: 9/10
+[027.00] Producer 5: BLOCKED (queue was full)
+[027.00] Producer 5: Wrote (pri=9, data=7) | Queue: 10/10
+[028.00] Consumer 1: Read (pri=1, data=9) from P1 | Queue: 8/10
+[028.00] Consumer 2: Read (pri=7, data=5) from P5 | Queue: 7/10
+[028.00] Producer 1: BLOCKED (queue was full)
+[028.00] Producer 4: BLOCKED (queue was full)
+[028.00] Producer 1: Wrote (pri=2, data=0) | Queue: 9/10
+[028.00] Producer 4: Wrote (pri=5, data=9) | Queue: 9/10
+[028.00] Producer 3: BLOCKED (queue was full)
+[028.00] Producer 3: Wrote (pri=9, data=5) | Queue: 10/10
+[028.00] Consumer 1: Read (pri=0, data=2) from P4 | Queue: 8/10
+[030.00] --- 30 seconds remaining ---
+[030.00] Consumer 3: Read (pri=6, data=6) from P2 | Queue: 8/10
+[030.00] Consumer 2: Read (pri=4, data=0) from P3 | Queue: 8/10
+[030.01] Consumer 2: Read (pri=3, data=9) from P4 | Queue: 7/10
+[030.01] Producer 5: BLOCKED (queue was full)
+[030.01] Producer 1: BLOCKED (queue was full)
+[030.01] Producer 5: Wrote (pri=6, data=8) | Queue: 10/10
+[030.01] Producer 1: Wrote (pri=1, data=8) | Queue: 10/10
+[030.01] Producer 2: BLOCKED (queue was full)
+[030.01] Producer 2: Wrote (pri=4, data=9) | Queue: 10/10
+[032.01] Consumer 2: Read (pri=2, data=0) from P2 | Queue: 8/10
+[032.01] Producer 3: BLOCKED (queue was full)
+[032.01] Producer 3: Wrote (pri=5, data=2) | Queue: 9/10
+[032.01] Producer 3: Wrote (pri=7, data=3) | Queue: 10/10
+[032.01] Consumer 3: Read (pri=2, data=0) from P1 | Queue: 8/10
+[032.01] Consumer 1: Read (pri=1, data=7) from P5 | Queue: 9/10
+[032.01] Producer 5: BLOCKED (queue was full)
+[032.01] Producer 5: Wrote (pri=6, data=6) | Queue: 10/10
+[033.01] Consumer 2: Read (pri=9, data=7) from P5 | Queue: 9/10
+[033.01] Producer 1: BLOCKED (queue was full)
+[033.01] Producer 1: Wrote (pri=1, data=7) | Queue: 10/10
+[033.01] Consumer 3: Read (pri=0, data=0) from P4 | Queue: 9/10
+[033.01] Producer 2: BLOCKED (queue was full)
+[033.01] Producer 2: Wrote (pri=9, data=8) | Queue: 10/10
+[035.01] Consumer 1: Read (pri=5, data=9) from P4 | Queue: 9/10
+[035.01] Producer 4: BLOCKED (queue was full)
+[035.01] Consumer 1: Read (pri=9, data=5) from P3 | Queue: 9/10
+[035.01] Producer 5: BLOCKED (queue was full)
+[035.01] Producer 4: Wrote (pri=3, data=1) | Queue: 9/10
+[035.01] Producer 5: Wrote (pri=4, data=1) | Queue: 10/10
+[037.01] Consumer 2: Read (pri=4, data=9) from P2 | Queue: 8/10
+[037.01] Consumer 3: Read (pri=6, data=8) from P5 | Queue: 8/10
+[037.01] Producer 3: BLOCKED (queue was full)
+[037.01] Producer 3: Wrote (pri=8, data=8) | Queue: 10/10
+[037.01] Producer 1: BLOCKED (queue was full)
+[037.01] Producer 1: Wrote (pri=3, data=0) | Queue: 10/10
+[039.01] Consumer 3: Read (pri=1, data=8) from P1 | Queue: 9/10
+[039.01] Producer 2: BLOCKED (queue was full)
+[039.01] Producer 4: BLOCKED (queue was full)
+[039.01] Consumer 1: Read (pri=5, data=2) from P3 | Queue: 9/10
+[039.01] Producer 2: Wrote (pri=8, data=7) | Queue: 10/10
+[039.01] Producer 4: Wrote (pri=4, data=5) | Queue: 10/10
+[040.01] --- 20 seconds remaining ---
+[041.01] Consumer 2: Read (pri=3, data=1) from P4 | Queue: 9/10
+[041.01] Producer 5: BLOCKED (queue was full)
+[041.01] Producer 5: Wrote (pri=3, data=4) | Queue: 10/10
+[042.01] Consumer 1: Read (pri=6, data=6) from P5 | Queue: 9/10
+[042.01] Producer 1: BLOCKED (queue was full)
+[042.01] Producer 1: Wrote (pri=5, data=1) | Queue: 10/10
+[043.01] Producer 1: Wrote (pri=3, data=6) | Queue: 10/10
+[043.01] Consumer 3: Read (pri=1, data=7) from P1 | Queue: 10/10
+[044.01] Consumer 1: Read (pri=9, data=8) from P2 | Queue: 9/10
+[044.01] Producer 4: BLOCKED (queue was full)
+[044.01] Producer 4: Wrote (pri=5, data=9) | Queue: 10/10
+[045.01] Consumer 2: Read (pri=7, data=3) from P3 | Queue: 9/10
+[045.01] Consumer 2: Read (pri=8, data=8) from P3 | Queue: 7/10
+[045.01] Consumer 3: Read (pri=4, data=1) from P5 | Queue: 7/10
+[045.01] Producer 2: BLOCKED (queue was full)
+[045.01] Producer 2: Wrote (pri=3, data=3) | Queue: 8/10
+[045.01] Producer 5: BLOCKED (queue was full)
+[045.01] Producer 5: Wrote (pri=6, data=3) | Queue: 9/10
+[045.01] Producer 1: BLOCKED (queue was full)
+[045.01] Producer 1: Wrote (pri=0, data=0) | Queue: 10/10
+[046.01] Producer 2: Wrote (pri=0, data=6) | Queue: 10/10
+[046.01] Consumer 3: Read (pri=3, data=0) from P1 | Queue: 10/10
+[047.01] Consumer 1: Read (pri=8, data=7) from P2 | Queue: 9/10
+[047.01] Consumer 1: Read (pri=4, data=5) from P4 | Queue: 9/10
+[047.01] Producer 4: BLOCKED (queue was full)
+[047.01] Producer 4: Wrote (pri=0, data=1) | Queue: 9/10
+[047.01] Producer 3: BLOCKED (queue was full)
+[047.01] Producer 3: Wrote (pri=2, data=8) | Queue: 10/10
+[048.01] Consumer 2: Read (pri=3, data=4) from P5 | Queue: 9/10
+[048.01] Consumer 1: Read (pri=5, data=1) from P1 | Queue: 7/10
+[048.01] Producer 5: BLOCKED (queue was full)
+[048.01] Consumer 2: Read (pri=5, data=9) from P4 | Queue: 7/10
+[048.01] Consumer 2: Read (pri=2, data=8) from P3 | Queue: 8/10
+[048.01] Consumer 3: Read (pri=3, data=3) from P2 | Queue: 8/10
+[048.01] Producer 3: BLOCKED (queue was full)
+[048.01] Producer 3: Wrote (pri=2, data=5) | Queue: 9/10
+[048.01] Producer 1: BLOCKED (queue was full)
+[048.01] Producer 3: Wrote (pri=1, data=6) | Queue: 10/10
+[048.01] Producer 1: Wrote (pri=3, data=1) | Queue: 10/10
+[048.01] Producer 2: BLOCKED (queue was full)
+[048.01] Producer 2: Wrote (pri=8, data=0) | Queue: 10/10
+[048.01] Producer 5: Wrote (pri=5, data=2) | Queue: 9/10
+[050.01] --- 10 seconds remaining ---
+[051.01] Consumer 1: Read (pri=6, data=3) from P5 | Queue: 9/10
+[051.01] Producer 5: BLOCKED (queue was full)
+[051.01] Producer 5: Wrote (pri=7, data=3) | Queue: 9/10
+[051.01] Consumer 1: Read (pri=3, data=6) from P1 | Queue: 9/10
+[051.01] Consumer 3: Read (pri=0, data=0) from P1 | Queue: 9/10
+[051.01] Producer 4: BLOCKED (queue was full)
+[051.01] Producer 2: BLOCKED (queue was full)
+[051.01] Producer 2: Wrote (pri=2, data=7) | Queue: 9/10
+[051.01] Consumer 2: Read (pri=0, data=1) from P4 | Queue: 9/10
+[051.01] Producer 3: BLOCKED (queue was full)
+[051.01] Producer 3: Wrote (pri=1, data=1) | Queue: 10/10
+[051.01] Producer 4: Wrote (pri=1, data=6) | Queue: 10/10
+[052.01] Consumer 3: Read (pri=0, data=6) from P2 | Queue: 9/10
+[052.01] Consumer 1: Read (pri=5, data=2) from P5 | Queue: 9/10
+[052.01] Producer 4: BLOCKED (queue was full)
+[052.01] Producer 4: Wrote (pri=1, data=5) | Queue: 9/10
+[052.01] Producer 4: Wrote (pri=3, data=0) | Queue: 10/10
+[052.01] Consumer 1: Read (pri=3, data=1) from P1 | Queue: 10/10
+[052.01] Producer 1: BLOCKED (queue was full)
+[052.01] Producer 1: Wrote (pri=6, data=7) | Queue: 10/10
+[053.01] Consumer 1: Read (pri=8, data=0) from P2 | Queue: 9/10
+[053.01] Producer 3: BLOCKED (queue was full)
+[053.01] Producer 3: Wrote (pri=7, data=6) | Queue: 10/10
+[054.01] Consumer 3: Read (pri=2, data=5) from P3 | Queue: 8/10
+[054.01] Producer 2: BLOCKED (queue was full)
+[054.01] Producer 2: Wrote (pri=5, data=7) | Queue: 10/10
+[054.01] Producer 4: Wrote (pri=4, data=7) | Queue: 10/10
+[054.01] Consumer 2: Read (pri=1, data=6) from P3 | Queue: 8/10
+[055.01] Consumer 2: Read (pri=7, data=3) from P5 | Queue: 9/10
+[055.01] Producer 5: BLOCKED (queue was full)
+[055.01] Producer 5: Wrote (pri=4, data=5) | Queue: 10/10
+[056.01] Consumer 1: Read (pri=1, data=6) from P4 | Queue: 9/10
+[056.01] Producer 2: BLOCKED (queue was full)
+[056.01] Producer 2: Wrote (pri=0, data=7) | Queue: 10/10
+[057.01] Producer 1: BLOCKED (queue was full)
+[057.01] Producer 3: BLOCKED (queue was full)
+[057.01] Consumer 3: Read (pri=2, data=7) from P2 | Queue: 10/10
+[057.01] Producer 3: Wrote (pri=4, data=3) | Queue: 10/10
+[057.01] Producer 1: Wrote (pri=1, data=7) | Queue: 10/10
+[057.01] Consumer 2: Read (pri=1, data=1) from P3 | Queue: 9/10
+[058.01] Consumer 3: Read (pri=6, data=7) from P1 | Queue: 9/10
+[058.01] Producer 4: BLOCKED (queue was full)
+[058.01] Producer 4: Wrote (pri=1, data=3) | Queue: 10/10
+[059.01] Consumer 1: Read (pri=1, data=5) from P4 | Queue: 9/10
+[059.01] Producer 5: BLOCKED (queue was full)
+[059.01] Producer 5: Wrote (pri=8, data=5) | Queue: 10/10
+[059.01] Consumer 3: Read (pri=3, data=0) from P4 | Queue: 9/10
+[059.01] Consumer 2: Read (pri=7, data=6) from P3 | Queue: 8/10
+[059.01] Producer 2: BLOCKED (queue was full)
+[059.01] Producer 2: Wrote (pri=1, data=5) | Queue: 10/10
+[059.01] Producer 3: BLOCKED (queue was full)
+[059.01] Producer 3: Wrote (pri=4, data=2) | Queue: 10/10
+[060.01] --- 0 seconds remaining ---
+-----------------------------------------------------------------------------
+SHUTDOWN
+-----------------------------------------------------------------------------
+[060.01] Producer 1: Stopped (produced 16, blocked 13)
+[060.01] Producer 2: Stopped (produced 20, blocked 13)
+[060.01] Consumer 1: Stopped (Total: 30, Blocked: 0)
+[060.01] Consumer 3: Stopped (Total: 28, Blocked: 0)
+[060.01] Producer 4: Stopped (produced 24, blocked 14)
+[060.01] Consumer 2: Stopped (Total: 28, Blocked: 0)
+[060.01] Producer 5: Stopped (produced 17, blocked 14)
+[060.01] Producer 3: Stopped (produced 19, blocked 14)
+  Waiting for threads to finish...
+  All threads joined.
+-----------------------------------------------------------------------------
+THREAD SUMMARY
+-----------------------------------------------------------------------------
+
+  Queue Final State: 10/10 items
+
+  Producer Statistics:
+    Producer 1: 16 messages produced, 13 times blocked
+    Producer 2: 20 messages produced, 13 times blocked
+    Producer 3: 19 messages produced, 14 times blocked
+    Producer 4: 24 messages produced, 14 times blocked
+    Producer 5: 17 messages produced, 14 times blocked
+    -> Total Produced: 96 | Total Blocked: 68
+
+  Consumer Statistics:
+    Consumer 1: 30 messages consumed, 0 times blocked
+    Consumer 2: 28 messages consumed, 0 times blocked
+    Consumer 3: 28 messages consumed, 0 times blocked
+    -> Total Consumed: 86 | Total Blocked: 0
+
+  Balance Check:
+    Produced (96) == Consumed (86) + Queue (10)
+    Result: PASS
+
+-----------------------------------------------------------------------------
+ANALYTICS REPORT
+-----------------------------------------------------------------------------
+
+ANALYTICS SUMMARY
+------------------------------------------------------------
+CONFIGURATION
+  Producers:        5     Consumers:        3    
+  Queue Capacity:   10    Runtime:          61.01 sec
+
+QUEUE METRICS
+  Avg Occupancy:    9.64 items (96.4% Utilisation)
+  Peak Occupancy:   10 items
+  Time Full:        86.9%
+  Time Empty:       0.0%
+
+THROUGHPUT
+  Produced:         96 (1.57 msg/sec)
+  Consumed:         86 (1.41 msg/sec)
+
+BLOCKING EVENTS
+  Producer Blocks:  68 (Queue Full)
+  Consumer Blocks:  0 (Queue Empty)
+------------------------------------------------------------
+
+OPTIMIZATION RECOMMENDATION
+------------------------------------------------------------
+  Current Size:     10
+  Suggested Size:   20
+  Action:           INCREASE Queue Size
+  Rationale:        High producer blocking frequency (Queue Full)
+------------------------------------------------------------
+
+  Trace exported to: queue_occupancy_p5_c3_q10.csv (61 samples)
+-----------------------------------------------------------------------------
+CLEANUP
+-----------------------------------------------------------------------------
+  Resources released.
+
+[Execution Complete. Exit: SUCCESS]
+

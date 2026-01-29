@@ -7,23 +7,24 @@
 
 # --- Compiler Settings ---
 CC = gcc
-# -pedantic and -Wall are crucial for catching potential logic errors early
-# -pthread is required for POSIX threads (producer/consumer)
-CFLAGS = -Wall -Wextra -pedantic -std=c99 -pthread
-LDFLAGS = -pthread
+# -Werror: Treat all warnings as errors (Demonstrates code quality)
+# -D_POSIX_C_SOURCE: Required for sleep/time functions
+CFLAGS = -Wall -Wextra -pedantic -std=c99 -pthread -D_POSIX_C_SOURCE=200809L -Werror
+LDFLAGS = -pthread -lncursesw
 
 # --- File Definitions ---
 TARGET = model
 
-
-# Source files - ADD NEW FILES HERE AS WE PROGRESS
-SRCS = main.c utils.c queue.c producer.c consumer.c
+# Source files
+# Added cli.c (Argument Parsing) and tui.c (Visualization)
+SRCS = main.c utils.c cli.c queue.c producer.c consumer.c analytics.c tui.c
 
 # Object files (generated from source files)
 OBJS = $(SRCS:.c=.o)
 
-# Header files (dependencies) - ADD NEW HEADERS HERE
-HDRS = config.h utils.h queue.h producer.h consumer.h
+# Header files (dependencies)
+# Added cli.h and tui.h
+HDRS = config.h utils.h cli.h queue.h producer.h consumer.h analytics.h tui.h
 
 # --- Build Rules ---
 
@@ -44,10 +45,10 @@ $(TARGET): $(OBJS)
 
 # --- Utility Targets ---
 
-# Cleans up build artifacts to force a fresh start
+# Cleans up build artifacts and CSV traces
 clean:
 	@echo "Cleaning..."
-	rm -f $(OBJS) $(TARGET)
+	rm -f $(OBJS) $(TARGET) *.csv
 
 # Shortcut for a clean rebuild
 rebuild: clean all
@@ -57,9 +58,9 @@ test: $(TARGET)
 	@echo "Running test configuration..."
 	./$(TARGET) 5 3 10 30
 
-# Debug build: Adds symbols (-g) and enables verbose logs (DEBUG_MODE)
-debug: CFLAGS += -g -DDEBUG_MODE=1
-debug: rebuild
-	@echo "Debug build complete."
+# Visual test shortcut (Enables TUI mode)
+visual: $(TARGET)
+	@echo "Running visual mode..."
+	./$(TARGET) -v 5 3 20 60
 
-.PHONY: all clean rebuild test debug
+.PHONY: all clean rebuild test visual

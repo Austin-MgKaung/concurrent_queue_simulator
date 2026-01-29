@@ -34,6 +34,13 @@
 #define PRIORITY_MIN            0   
 #define PRIORITY_MAX            9   // 9 is highest priority
 
+/* --- Priority Aging ---
+ * Prevents starvation of low-priority items.
+ * Every AGING_INTERVAL_MS milliseconds an item waits, its effective
+ * priority increases by 1 (capped at PRIORITY_MAX).
+ */
+#define AGING_INTERVAL_MS       500 // Boost effective priority every 500ms of wait time
+
 /* --- Runtime Validation ---
  * Strict bounds checked against command line arguments in main.c.
  */
@@ -43,7 +50,14 @@
 #define MIN_QUEUE_SIZE          1   
 #define MIN_TIMEOUT             1   // Simulation minimum duration
 
-/* --- Debugging --- */
-#define DEBUG_MODE              0   // 0 = Normal output (report), 1 = Verbose trace
+/* --- Debug Levels --- */
+#define DBG_OFF     0
+#define DBG_ERROR   1
+#define DBG_INFO    2
+#define DBG_TRACE   3
+
+/* Compile-time maximum. Code above this level is removed entirely.
+ * Set to 0 for zero-overhead production builds. */
+#define DEBUG_MAX_LEVEL  3
 
 #endif /* CONFIG_H */

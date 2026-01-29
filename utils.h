@@ -12,6 +12,19 @@
 #define UTILS_H
 
 #include <stddef.h> /* For size_t */
+#include <stdio.h>
+#include "config.h"
+
+/* --- Debug System --- */
+
+extern int debug_level;
+
+#define DBG(level, fmt, ...) \
+    do { \
+        if ((level) <= DEBUG_MAX_LEVEL && debug_level >= (level)) \
+            fprintf(stderr, "[DBG:%d] [%06.2f] " fmt "\n", \
+                    (level), time_elapsed(), ##__VA_ARGS__); \
+    } while (0)
 
 /* --- System Information --- */
 
