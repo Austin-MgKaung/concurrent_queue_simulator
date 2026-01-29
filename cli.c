@@ -26,10 +26,11 @@ void print_usage(const char *program_name)
 {
     printf("\nELE430 Producer-Consumer Model - Usage\n");
     print_separator();
-    printf("Usage: %s [-v] [-d <level>] <producers> <consumers> <queue_size> <timeout>\n", program_name);
+    printf("Usage: %s [-v] [-d <level>] [-s <seed>] <producers> <consumers> <queue_size> <timeout>\n", program_name);
     printf("\nArguments:\n");
     printf("  -v          - Enable Visual Dashboard (Optional)\n");
     printf("  -d <level>  - Debug level 0-3: OFF, ERROR, INFO, TRACE (Optional)\n");
+    printf("  -s <seed>   - RNG seed for reproducible runs (Optional)\n");
     printf("  producers   - Number of producer threads  [%d to %d]\n", MIN_PRODUCERS, MAX_PRODUCERS);
     printf("  consumers   - Number of consumer threads  [%d to %d]\n", MIN_CONSUMERS, MAX_RUNTIME_CONSUMERS);
     printf("  queue_size  - Maximum queue capacity      [%d to %d]\n", MIN_QUEUE_SIZE, MAX_QUEUE_SIZE);
@@ -92,6 +93,8 @@ int parse_arguments(int argc, char *argv[], RuntimeParams *params)
     // Initialize defaults
     params->tui_enabled = 0;
     params->debug_level = 0;
+    params->seed_set = 0;
+    params->seed = 0;
 
     int arg_idx = 1;
 
@@ -103,6 +106,14 @@ int parse_arguments(int argc, char *argv[], RuntimeParams *params)
         if (strcmp(argv[arg_idx], "-v") == 0) {
             params->tui_enabled = 1;
             arg_idx++;
+        } else if (strcmp(argv[arg_idx], "-s") == 0) {
+            if (arg_idx + 1 >= argc) {
+                fprintf(stderr, "Error: -s requires a seed argument\n");
+                return -1;
+            }
+            params->seed = (unsigned int)atoi(argv[arg_idx + 1]);
+            params->seed_set = 1;
+            arg_idx += 2;
         } else if (strcmp(argv[arg_idx], "-d") == 0) {
             if (arg_idx + 1 >= argc) {
                 fprintf(stderr, "Error: -d requires a level argument (0-3)\n");

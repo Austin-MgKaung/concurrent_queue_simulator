@@ -111,6 +111,15 @@ void random_init(void)
 }
 
 /*
+ * Seeds the RNG with a caller-specified value.
+ * Allows deterministic, reproducible runs for testing.
+ */
+void random_init_seed(unsigned int seed)
+{
+    srand(seed);
+}
+
+/*
  * Generates a random integer in [min, max].
  * Used for both priority generation and sleep times.
  */

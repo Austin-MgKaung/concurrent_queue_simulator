@@ -57,6 +57,12 @@ char* get_timestamp(char *buffer, size_t size);
 void random_init(void);
 
 /*
+ * Seeds the RNG with a specific value for reproducible runs.
+ * Used by the -s flag for deterministic testing.
+ */
+void random_init_seed(unsigned int seed);
+
+/*
  * Generates a pseudo-random integer between min and max (inclusive).
  * Used for data generation and priority assignment.
  */

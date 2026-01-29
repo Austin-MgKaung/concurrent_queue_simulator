@@ -84,7 +84,6 @@ int main(int argc, char *argv[])
     char csv_filename[256];
 
     /* 1. Initialisation */
-    random_init();
     time_start();
 
     /* 2. Setup — parse and validate CLI arguments
@@ -95,6 +94,13 @@ int main(int argc, char *argv[])
         validate_parameters(&runtime_params) != 0) {
         print_usage(argv[0]);
         return EXIT_FAILURE;
+    }
+
+    /* Seed RNG: use explicit seed if provided (-s), otherwise time-based */
+    if (runtime_params.seed_set) {
+        random_init_seed(runtime_params.seed);
+    } else {
+        random_init();
     }
 
     debug_level = runtime_params.debug_level;

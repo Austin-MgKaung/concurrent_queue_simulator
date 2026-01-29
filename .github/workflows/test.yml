@@ -1,0 +1,31 @@
+# CI Pipeline: Build and Test the Producer-Consumer Model
+# Triggers on every push and pull request to main.
+
+name: Build & Test
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1. Check out the repository code
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # 2. Install build dependencies (ncurses for the TUI)
+      - name: Install dependencies
+        run: sudo apt-get update && sudo apt-get install -y libncursesw5-dev
+
+      # 3. Compile the project (with -Werror, so warnings = failure)
+      - name: Build
+        run: make rebuild
+
+      # 4. Run the full test bench
+      - name: Run test bench
+        run: ./test_bench.sh
