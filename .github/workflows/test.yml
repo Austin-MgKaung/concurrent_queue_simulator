@@ -18,14 +18,14 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      # 2. Install build dependencies (ncurses for the TUI)
+      # 2. Install build dependencies
       - name: Install dependencies
-        run: sudo apt-get update && sudo apt-get install -y libncursesw5-dev
+        run: make deps
 
       # 3. Compile the project (with -Werror, so warnings = failure)
       - name: Build
         run: make rebuild
 
-      # 4. Run the full test bench
+      # 4. Run the full test bench (57 tests)
       - name: Run test bench
-        run: ./test_bench.sh
+        run: make bench

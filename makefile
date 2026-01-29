@@ -63,4 +63,16 @@ visual: $(TARGET)
 	@echo "Running visual mode..."
 	./$(TARGET) -v 5 3 20 60
 
-.PHONY: all clean rebuild test visual
+# Install required system packages (Ubuntu/Debian)
+deps:
+	@echo "Installing dependencies..."
+	sudo apt-get update
+	sudo apt-get install -y gcc make libncursesw5-dev
+	@echo "Dependencies installed."
+
+# Run the full test bench (57 tests)
+bench: $(TARGET)
+	@echo "Running test bench..."
+	./test_bench.sh
+
+.PHONY: all clean rebuild test visual deps bench
