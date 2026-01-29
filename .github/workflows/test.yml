@@ -28,10 +28,14 @@ jobs:
       - name: Build
         run: make rebuild
 
-      # 4. Run the full test bench (57 tests)
+      # 4. Run the full test bench
       - name: Run test bench
         run: make bench
 
       # 5. Check for memory leaks with valgrind
       - name: Memory leak check
         run: make valgrind
+
+      # 6. Build with AddressSanitizer and run a quick check
+      - name: AddressSanitizer check
+        run: make sanitize

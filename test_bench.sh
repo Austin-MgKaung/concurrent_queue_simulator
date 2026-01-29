@@ -13,6 +13,11 @@
 #   8. Reproducibility (same seed → same output)
 #   9. Combined flags (-v -d -s in any order)
 #  10. Stress test (max producers, max consumers)
+#  11. Timeout accuracy
+#  12. Queue size 1 (extreme boundary)
+#  13. Help flag (-h / --help)
+#  14. Input validation (strtol rejects non-numeric)
+#  15. Aging interval flag (-a)
 #
 # Usage:  ./test_bench.sh
 # Exit:   0 if all tests pass, 1 if any fail
@@ -604,6 +609,137 @@ if [ "$Q1_BLOCKS" -gt 0 ]; then
     pass "Queue=1 → blocking observed ($Q1_BLOCKS events)"
 else
     printf "  ${YELLOW}WARN${RESET}  Queue=1 → no blocking observed (unlikely but possible)\n"
+fi
+
+# =============================================================================
+# 14. HELP FLAG
+# =============================================================================
+section "14. Help Flag"
+
+# 14a. -h exits with success (not failure)
+run 5 -h
+if [ "$EXIT_CODE" -eq 0 ]; then
+    pass "-h → exits with code 0 (success)"
+else
+    fail "-h → should exit with code 0" "exit=$EXIT_CODE"
+fi
+
+# 14b. --help exits with success
+run 5 --help
+if [ "$EXIT_CODE" -eq 0 ]; then
+    pass "--help → exits with code 0 (success)"
+else
+    fail "--help → should exit with code 0" "exit=$EXIT_CODE"
+fi
+
+# 14c. -h shows usage text
+if echo "$OUTPUT" | grep -q "Usage:"; then
+    pass "--help → displays usage information"
+else
+    fail "--help → should display usage"
+fi
+
+# =============================================================================
+# 15. INPUT VALIDATION (strtol)
+# =============================================================================
+section "15. Input Validation (Non-Numeric)"
+
+# 15a. Non-numeric producer count
+run 5 abc 1 5 10
+if [ "$EXIT_CODE" -ne 0 ]; then
+    pass "Non-numeric producer 'abc' → rejected"
+else
+    fail "Non-numeric producer → should be rejected"
+fi
+
+# 15b. Non-numeric with trailing text
+run 5 3x 1 5 10
+if [ "$EXIT_CODE" -ne 0 ]; then
+    pass "Trailing text '3x' → rejected"
+else
+    fail "Trailing text in argument → should be rejected"
+fi
+
+# 15c. Empty string for -d level
+run 5 -d abc 1 1 5 10
+if [ "$EXIT_CODE" -ne 0 ]; then
+    pass "Non-numeric debug level 'abc' → rejected"
+else
+    fail "Non-numeric debug level → should be rejected"
+fi
+
+# 15d. Non-numeric seed
+run 5 -s hello 1 1 5 10
+if [ "$EXIT_CODE" -ne 0 ]; then
+    pass "Non-numeric seed 'hello' → rejected"
+else
+    fail "Non-numeric seed → should be rejected"
+fi
+
+# =============================================================================
+# 16. AGING INTERVAL FLAG (-a)
+# =============================================================================
+section "16. Aging Interval (-a flag)"
+
+# 16a. -a 0 disables aging (runs successfully)
+run 10 -s 42 -a 0 1 1 5 2
+if [ "$EXIT_CODE" -eq 0 ]; then
+    pass "-a 0 (aging disabled) → runs successfully"
+else
+    fail "-a 0 → should succeed" "exit=$EXIT_CODE"
+fi
+
+# 16b. -a 0 shows disabled in output
+if echo "$OUTPUT" | grep -q "Aging:.*Disabled"; then
+    pass "-a 0 → shows 'Disabled' in startup info"
+else
+    fail "-a 0 → should show 'Disabled'"
+fi
+
+# 16c. -a 0 balance check
+if echo "$OUTPUT" | grep -q "Result: PASS"; then
+    pass "-a 0 → balance check PASS"
+else
+    fail "-a 0 → balance check should PASS"
+fi
+
+# 16d. Custom aging interval
+run 10 -s 42 -a 250 1 1 5 2
+if [ "$EXIT_CODE" -eq 0 ]; then
+    pass "-a 250 (custom interval) → runs successfully"
+else
+    fail "-a 250 → should succeed" "exit=$EXIT_CODE"
+fi
+
+# 16e. -a 250 shows interval in output
+if echo "$OUTPUT" | grep -q "Aging:.*250 ms"; then
+    pass "-a 250 → shows '250 ms' in startup info"
+else
+    fail "-a 250 → should show '250 ms'"
+fi
+
+# 16f. -a without argument
+run 5 -a
+if [ "$EXIT_CODE" -ne 0 ]; then
+    pass "-a without argument → non-zero exit"
+else
+    fail "-a without argument → should exit with error"
+fi
+
+# 16g. -a with negative value
+run 5 -a -1 1 1 5 10
+if [ "$EXIT_CODE" -ne 0 ]; then
+    pass "-a -1 (negative) → rejected"
+else
+    fail "-a -1 → should be rejected"
+fi
+
+# 16h. -a with non-numeric value
+run 5 -a abc 1 1 5 10
+if [ "$EXIT_CODE" -ne 0 ]; then
+    pass "-a abc (non-numeric) → rejected"
+else
+    fail "-a abc → should be rejected"
 fi
 
 # =============================================================================

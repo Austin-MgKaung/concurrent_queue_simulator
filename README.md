@@ -27,57 +27,65 @@ thread synchronization, graceful shutdown, and performance analysis.
 | Reproducible runs | `-s <seed>` flag for deterministic testing |
 | Input validation | All CLI arguments validated with `strtol` (rejects non-numeric input) |
 | Help flag | `-h` / `--help` displays usage and exits cleanly |
-| Test bench | 57 automated tests covering all corner cases |
+| Test bench | 72 automated tests covering all corner cases |
 | CI pipeline | GitHub Actions runs the full test suite and valgrind memory check on every push |
 | Memory safety | Valgrind leak check integrated into CI (`make valgrind`) |
 
 ## Setup on a Fresh Machine (Linux Mint / Ubuntu / Debian)
 
-### Step 1: Install Git (if not already installed)
+Choose **one** of the two routes below depending on how you received the project.
+
+### Route A: From GitHub (Clone)
 
 ```bash
-sudo apt-get update
-sudo apt-get install -y git
-```
+# 1. Install git (if not already installed)
+sudo apt-get update && sudo apt-get install -y git
 
-### Step 2: Clone the Repository
-
-```bash
+# 2. Clone the repository
 git clone https://github.com/Austin-MgKaung/concurrent_queue_simulator.git
 cd concurrent_queue_simulator
-```
 
-### Step 3: Install Dependencies
-
-This installs `gcc`, `make`, and `libncursesw5-dev` (needed for the TUI):
-
-```bash
+# 3. Install build dependencies
 make deps
-```
 
-### Step 4: Build
-
-```bash
+# 4. Build
 make rebuild
-```
 
-You should see `Build complete.` with zero warnings.
-
-### Step 5: Run
-
-```bash
+# 5. Run
 ./model 5 3 10 30
 ```
 
-This runs 5 producers, 3 consumers, queue size 10, for 30 seconds.
+### Route B: From ZIP File
 
-### Step 6: Run the Test Suite (Optional)
+```bash
+# 1. Extract the zip (replace with your actual filename)
+unzip concurrent_queue_simulator.zip
+cd concurrent_queue_simulator
+
+# 2. Install build dependencies (gcc, make, ncurses)
+make deps
+
+# 3. Make the test bench executable (zip may lose permissions)
+chmod +x test_bench.sh
+
+# 4. Build
+make rebuild
+
+# 5. Run
+./model 5 3 10 30
+```
+
+Both routes are identical after step 2 — `make deps` handles all system packages.
+
+You should see `Build complete.` with zero warnings.
+
+### Run the Test Suite (Optional)
 
 ```bash
 make bench
 ```
 
-Runs 57 automated tests. You should see `All tests passed.`
+Runs 72 automated tests. You should see `All tests passed.`
 
 ## Usage
 
@@ -176,8 +184,9 @@ Start any run, then press Ctrl+C. The program will:
 | `make deps` | Install required system packages (Ubuntu/Debian) |
 | `make test` | Quick test run (5P, 3C, Q10, 30s) |
 | `make visual` | Quick test in TUI mode (5P, 3C, Q20, 60s) |
-| `make bench` | Run the full 57-test suite |
+| `make bench` | Run the full 72-test suite |
 | `make valgrind` | Run valgrind memory leak check |
+| `make sanitize` | Build and run with AddressSanitizer (catches buffer overflows) |
 
 ## File Structure
 
@@ -193,7 +202,7 @@ concurrent_queue_simulator/
 ├── utils.c / utils.h        Timing, RNG, system info, debug macro (DBG)
 ├── config.h                 All compile-time constants (limits, timing, debug levels)
 ├── makefile                 Build automation with deps/test/bench targets
-├── test_bench.sh            57 automated tests (CLI, boundaries, signals, priority, stress)
+├── test_bench.sh            72 automated tests (CLI, boundaries, signals, priority, stress)
 └── .github/workflows/test.yml  GitHub Actions CI pipeline
 ```
 
@@ -247,7 +256,7 @@ Set `DEBUG_MAX_LEVEL` to 0 in `config.h` and rebuild for zero-overhead productio
 
 ## Test Suite
 
-The test bench (`test_bench.sh`) covers 57 tests across 13 categories:
+The test bench (`test_bench.sh`) covers 72 tests across 16 categories:
 
 | Category | Tests | What it verifies |
 |---|---|---|
@@ -264,6 +273,9 @@ The test bench (`test_bench.sh`) covers 57 tests across 13 categories:
 | Timeout | 1 | Wall-clock time matches requested duration |
 | Stress Test | 4 | 10P+3C, all threads start, balance PASS, cleanup |
 | Queue Size 1 | 3 | Extreme boundary, blocking triggered, balance PASS |
+| Help Flag | 3 | `-h` and `--help` exit with success, display usage |
+| Input Validation | 4 | Non-numeric arguments rejected (`abc`, `3x`, bad `-d`, bad `-s`) |
+| Aging Interval | 8 | `-a 0` disables aging, `-a 250` custom interval, bad values rejected |
 
 ## Notes for Reviewers
 

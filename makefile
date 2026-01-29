@@ -48,7 +48,7 @@ $(TARGET): $(OBJS)
 # Cleans up build artifacts and CSV traces
 clean:
 	@echo "Cleaning..."
-	rm -f $(OBJS) $(TARGET) *.csv
+	rm -f $(OBJS) $(TARGET) model_asan *.csv
 
 # Shortcut for a clean rebuild
 rebuild: clean all
@@ -70,7 +70,7 @@ deps:
 	sudo apt-get install -y gcc make libncursesw5-dev
 	@echo "Dependencies installed."
 
-# Run the full test bench (57 tests)
+# Run the full test bench (72 tests)
 bench: $(TARGET)
 	@echo "Running test bench..."
 	./test_bench.sh
@@ -81,4 +81,14 @@ valgrind: $(TARGET)
 	valgrind --leak-check=full --show-leak-kinds=all --error-exitcode=1 \
 		./$(TARGET) 1 1 5 2
 
-.PHONY: all clean rebuild test visual deps bench valgrind
+# AddressSanitizer build and quick run (catches buffer overflows, use-after-free)
+sanitize:
+	@echo "Building with AddressSanitizer..."
+	$(CC) $(CFLAGS) -fsanitize=address,undefined -fno-omit-frame-pointer \
+		-o model_asan $(SRCS) $(LDFLAGS) -fsanitize=address,undefined
+	@echo "Running sanitizer check..."
+	./model_asan 1 1 5 2
+	@echo "Sanitizer check passed."
+	rm -f model_asan
+
+.PHONY: all clean rebuild test visual deps bench valgrind sanitize
