@@ -26,10 +26,12 @@ typedef struct {
     int num_consumers;
     int queue_size;
     int timeout_seconds;
-    int tui_enabled;  // -v flag for visualization
-    int debug_level;  // -d flag for debug verbosity
-    int seed_set;     // 1 if -s was provided
-    unsigned int seed; // RNG seed for reproducible runs
+    int tui_enabled;      // -v flag for visualization
+    int debug_level;      // -d flag for debug verbosity
+    int seed_set;         // 1 if -s was provided
+    unsigned int seed;    // RNG seed for reproducible runs
+    int help_requested;   // -h/--help flag
+    int aging_interval;   // -a flag: aging interval in ms (0 = disabled)
 } RuntimeParams;
 
 /* --- UI / Display Functions --- */

@@ -10,6 +10,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <errno.h>
+#include <limits.h>
 
 #include "cli.h"
 #include "config.h"
@@ -26,11 +28,13 @@ void print_usage(const char *program_name)
 {
     printf("\nELE430 Producer-Consumer Model - Usage\n");
     print_separator();
-    printf("Usage: %s [-v] [-d <level>] [-s <seed>] <producers> <consumers> <queue_size> <timeout>\n", program_name);
+    printf("Usage: %s [-h] [-v] [-d <level>] [-s <seed>] [-a <ms>] <producers> <consumers> <queue_size> <timeout>\n", program_name);
     printf("\nArguments:\n");
+    printf("  -h, --help  - Show this help message and exit\n");
     printf("  -v          - Enable Visual Dashboard (Optional)\n");
     printf("  -d <level>  - Debug level 0-3: OFF, ERROR, INFO, TRACE (Optional)\n");
     printf("  -s <seed>   - RNG seed for reproducible runs (Optional)\n");
+    printf("  -a <ms>     - Priority aging interval in ms (default: %d, 0=disabled)\n", AGING_INTERVAL_MS);
     printf("  producers   - Number of producer threads  [%d to %d]\n", MIN_PRODUCERS, MAX_PRODUCERS);
     printf("  consumers   - Number of consumer threads  [%d to %d]\n", MIN_CONSUMERS, MAX_RUNTIME_CONSUMERS);
     printf("  queue_size  - Maximum queue capacity      [%d to %d]\n", MIN_QUEUE_SIZE, MAX_QUEUE_SIZE);
@@ -69,6 +73,10 @@ void print_startup_info(const RuntimeParams *params)
     printf("  Consumers:    %d\n", params->num_consumers);
     printf("  Queue Size:   %d\n", params->queue_size);
     printf("  Timeout:      %d seconds\n", params->timeout_seconds);
+    if (params->aging_interval == 0)
+        printf("  Aging:        Disabled\n");
+    else
+        printf("  Aging:        %d ms\n", params->aging_interval);
     printf("\n");
 }
 
@@ -88,22 +96,47 @@ void print_compiled_defaults(void)
 
 /* --- Input Handling --- */
 
+/*
+ * Safely converts a string to int using strtol.
+ * Returns 0 on success, -1 if the string is not a valid integer.
+ */
+static int safe_strtoi(const char *str, int *out)
+{
+    char *endptr;
+    long val;
+
+    errno = 0;
+    val = strtol(str, &endptr, 10);
+
+    if (errno != 0 || endptr == str || *endptr != '\0') return -1;
+    if (val < INT_MIN || val > INT_MAX) return -1;
+
+    *out = (int)val;
+    return 0;
+}
+
 int parse_arguments(int argc, char *argv[], RuntimeParams *params)
 {
-    // Initialize defaults
+    int tmp;
+    int arg_idx = 1;
+
+    /* Initialize defaults */
     params->tui_enabled = 0;
     params->debug_level = 0;
     params->seed_set = 0;
     params->seed = 0;
+    params->help_requested = 0;
+    params->aging_interval = AGING_INTERVAL_MS;
 
-    int arg_idx = 1;
-
-    // Check for not enough arguments first
+    /* Check for not enough arguments first */
     if (argc < 2) return -1;
 
-    // Parse optional flags before positional arguments
+    /* Parse optional flags before positional arguments */
     while (arg_idx < argc && argv[arg_idx][0] == '-') {
-        if (strcmp(argv[arg_idx], "-v") == 0) {
+        if (strcmp(argv[arg_idx], "-h") == 0 || strcmp(argv[arg_idx], "--help") == 0) {
+            params->help_requested = 1;
+            return 0;
+        } else if (strcmp(argv[arg_idx], "-v") == 0) {
             params->tui_enabled = 1;
             arg_idx++;
         } else if (strcmp(argv[arg_idx], "-s") == 0) {
@@ -111,7 +144,11 @@ int parse_arguments(int argc, char *argv[], RuntimeParams *params)
                 fprintf(stderr, "Error: -s requires a seed argument\n");
                 return -1;
             }
-            params->seed = (unsigned int)atoi(argv[arg_idx + 1]);
+            if (safe_strtoi(argv[arg_idx + 1], &tmp) != 0) {
+                fprintf(stderr, "Error: -s requires a numeric argument\n");
+                return -1;
+            }
+            params->seed = (unsigned int)tmp;
             params->seed_set = 1;
             arg_idx += 2;
         } else if (strcmp(argv[arg_idx], "-d") == 0) {
@@ -119,11 +156,26 @@ int parse_arguments(int argc, char *argv[], RuntimeParams *params)
                 fprintf(stderr, "Error: -d requires a level argument (0-3)\n");
                 return -1;
             }
-            params->debug_level = atoi(argv[arg_idx + 1]);
+            if (safe_strtoi(argv[arg_idx + 1], &tmp) != 0) {
+                fprintf(stderr, "Error: -d requires a numeric argument\n");
+                return -1;
+            }
+            params->debug_level = tmp;
             if (params->debug_level < 0 || params->debug_level > DBG_TRACE) {
                 fprintf(stderr, "Error: Debug level must be 0-3\n");
                 return -1;
             }
+            arg_idx += 2;
+        } else if (strcmp(argv[arg_idx], "-a") == 0) {
+            if (arg_idx + 1 >= argc) {
+                fprintf(stderr, "Error: -a requires an interval in ms\n");
+                return -1;
+            }
+            if (safe_strtoi(argv[arg_idx + 1], &tmp) != 0 || tmp < 0) {
+                fprintf(stderr, "Error: -a requires a non-negative numeric argument\n");
+                return -1;
+            }
+            params->aging_interval = tmp;
             arg_idx += 2;
         } else {
             fprintf(stderr, "Error: Unknown option '%s'\n", argv[arg_idx]);
@@ -131,17 +183,20 @@ int parse_arguments(int argc, char *argv[], RuntimeParams *params)
         }
     }
 
-    // Check if we have the correct number of remaining arguments (4 required)
+    /* Check if we have the correct number of remaining arguments (4 required) */
     if (argc - arg_idx != 4) {
         fprintf(stderr, "Error: Expected 4 numeric arguments, received %d\n", argc - arg_idx);
         return -1;
     }
 
-    params->num_producers = atoi(argv[arg_idx]);
-    params->num_consumers = atoi(argv[arg_idx + 1]);
-    params->queue_size = atoi(argv[arg_idx + 2]);
-    params->timeout_seconds = atoi(argv[arg_idx + 3]);
-    
+    if (safe_strtoi(argv[arg_idx], &params->num_producers) != 0 ||
+        safe_strtoi(argv[arg_idx + 1], &params->num_consumers) != 0 ||
+        safe_strtoi(argv[arg_idx + 2], &params->queue_size) != 0 ||
+        safe_strtoi(argv[arg_idx + 3], &params->timeout_seconds) != 0) {
+        fprintf(stderr, "Error: All arguments must be valid integers\n");
+        return -1;
+    }
+
     return 0;
 }
 

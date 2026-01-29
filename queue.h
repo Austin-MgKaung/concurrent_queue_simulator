@@ -49,6 +49,9 @@ typedef struct {
     
     /* Control Flags */
     int shutdown;                    // Set to 1 to signal all threads to exit
+
+    /* Priority Aging */
+    int aging_interval_ms;           // Aging interval in ms (0 = disabled)
 } Queue;
 
 /* --- Lifecycle & Management --- */
@@ -57,7 +60,7 @@ typedef struct {
  * Initialises the queue and OS synchronization resources.
  * Returns: 0 on success, -1 if mutex/sem init fails.
  */
-int queue_init(Queue *q, int capacity);
+int queue_init(Queue *q, int capacity, int aging_interval_ms);
 
 /*
  * Destroys the queue and cleans up OS resources.

@@ -20,7 +20,9 @@ jobs:
 
       # 2. Install build dependencies
       - name: Install dependencies
-        run: make deps
+        run: |
+          make deps
+          sudo apt-get install -y valgrind
 
       # 3. Compile the project (with -Werror, so warnings = failure)
       - name: Build
@@ -29,3 +31,7 @@ jobs:
       # 4. Run the full test bench (57 tests)
       - name: Run test bench
         run: make bench
+
+      # 5. Check for memory leaks with valgrind
+      - name: Memory leak check
+        run: make valgrind

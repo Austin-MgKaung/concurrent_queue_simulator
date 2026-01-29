@@ -170,9 +170,15 @@ void *producer_thread(void *arg)
 
             DBG(DBG_TRACE, "Producer %d: Sleeping for %d s", args->id, sleep_time);
 
-            while (sleep_time > 0 && *(args->running)) {
-                sleep(1);
-                sleep_time--;
+            {
+                int remaining_ms = sleep_time * 1000;
+                struct timespec ts;
+                ts.tv_sec = 0;
+                ts.tv_nsec = 200000000L; /* 200ms chunks for responsive shutdown */
+                while (remaining_ms > 0 && *(args->running)) {
+                    nanosleep(&ts, NULL);
+                    remaining_ms -= 200;
+                }
             }
         }
     }

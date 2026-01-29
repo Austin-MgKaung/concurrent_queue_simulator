@@ -75,4 +75,10 @@ bench: $(TARGET)
 	@echo "Running test bench..."
 	./test_bench.sh
 
-.PHONY: all clean rebuild test visual deps bench
+# Memory leak check with valgrind
+valgrind: $(TARGET)
+	@echo "Running valgrind memory check..."
+	valgrind --leak-check=full --show-leak-kinds=all --error-exitcode=1 \
+		./$(TARGET) 1 1 5 2
+
+.PHONY: all clean rebuild test visual deps bench valgrind

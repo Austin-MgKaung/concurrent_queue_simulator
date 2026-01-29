@@ -90,8 +90,17 @@ int main(int argc, char *argv[])
      * Error handling: parse_arguments and validate_parameters return -1
      * on failure. We print usage and exit immediately since we can't
      * run without valid parameters. */
-    if (parse_arguments(argc, argv, &runtime_params) != 0 ||
-        validate_parameters(&runtime_params) != 0) {
+    if (parse_arguments(argc, argv, &runtime_params) != 0) {
+        print_usage(argv[0]);
+        return EXIT_FAILURE;
+    }
+
+    if (runtime_params.help_requested) {
+        print_usage(argv[0]);
+        return EXIT_SUCCESS;
+    }
+
+    if (validate_parameters(&runtime_params) != 0) {
         print_usage(argv[0]);
         return EXIT_FAILURE;
     }
@@ -116,7 +125,7 @@ int main(int argc, char *argv[])
     printf("INITIALISATION\n");
     print_separator();
 
-    if (queue_init(&shared_queue, runtime_params.queue_size) != 0) {
+    if (queue_init(&shared_queue, runtime_params.queue_size, runtime_params.aging_interval) != 0) {
         fprintf(stderr, "[ERROR] Failed to initialise queue\n");
         return EXIT_FAILURE;
     }

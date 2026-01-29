@@ -67,13 +67,13 @@ static long get_current_time_ms(void)
  * the message timestamp, wait will be <= 0 and no boost is applied.
  * This is a safe degradation — priorities work normally without aging.
  */
-static int effective_priority(const Message *msg, long now_ms)
+static int effective_priority(const Message *msg, long now_ms, int aging_interval_ms)
 {
     long wait = now_ms - msg->timestamp;
     int boost = 0;
 
-    if (wait > 0 && AGING_INTERVAL_MS > 0)
-        boost = (int)(wait / AGING_INTERVAL_MS);
+    if (wait > 0 && aging_interval_ms > 0)
+        boost = (int)(wait / aging_interval_ms);
 
     int eff = msg->priority + boost;
     if (eff > PRIORITY_MAX) eff = PRIORITY_MAX;
@@ -107,12 +107,12 @@ static int find_highest_priority_index(const Queue *q)
     now_ms = get_current_time_ms();
 
     highest_index = q->front;
-    highest_priority = effective_priority(&q->buffer[q->front], now_ms);
+    highest_priority = effective_priority(&q->buffer[q->front], now_ms, q->aging_interval_ms);
     oldest_timestamp = q->buffer[q->front].timestamp;
 
     for (i = 0; i < q->count; i++) {
         current_index = (q->front + i) % q->capacity;
-        int eff = effective_priority(&q->buffer[current_index], now_ms);
+        int eff = effective_priority(&q->buffer[current_index], now_ms, q->aging_interval_ms);
 
         if (eff > highest_priority) {
             highest_priority = eff;
@@ -211,7 +211,7 @@ static int internal_dequeue(Queue *q, Message *msg)
  * all previously initialised resources are destroyed before returning.
  * This prevents resource leaks on partial initialisation.
  */
-int queue_init(Queue *q, int capacity)
+int queue_init(Queue *q, int capacity, int aging_interval_ms)
 {
     if (q == NULL) return -1;
     if (capacity < MIN_QUEUE_SIZE || capacity > MAX_QUEUE_SIZE) {
@@ -226,6 +226,7 @@ int queue_init(Queue *q, int capacity)
     q->count = 0;
     q->capacity = capacity;
     q->shutdown = 0;
+    q->aging_interval_ms = aging_interval_ms;
     memset(q->buffer, 0, sizeof(q->buffer));
 
     /* 1. Initialise Mutex — protects buffer/indices in critical sections */
