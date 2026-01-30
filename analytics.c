@@ -79,6 +79,13 @@ static void *sampling_thread_func(void *arg)
             sample.occupancy = occupancy;
             sample.capacity = analytics->queue_capacity;
 
+            int cur_produced = analytics->total_produced;
+            int cur_consumed = analytics->total_consumed;
+            sample.produced = cur_produced - analytics->prev_produced;
+            sample.consumed = cur_consumed - analytics->prev_consumed;
+            analytics->prev_produced = cur_produced;
+            analytics->prev_consumed = cur_consumed;
+
             analytics->queue_samples[analytics->num_samples] = sample;
             analytics->num_samples++;
         }
@@ -419,6 +426,17 @@ void analytics_print_summary(const Analytics *analytics)
     } else {
         printf("  No messages consumed.\n");
     }
+
+    if (analytics->num_samples > 0) {
+        printf("\nTHROUGHPUT OVER TIME (per second)\n");
+        printf("  %-8s %-10s %-10s\n", "Time", "Produced", "Consumed");
+        for (int i = 0; i < analytics->num_samples; i++) {
+            printf("  %-8.2f %-10d %-10d\n",
+                   analytics->queue_samples[i].timestamp,
+                   analytics->queue_samples[i].produced,
+                   analytics->queue_samples[i].consumed);
+        }
+    }
     printf("------------------------------------------------------------\n");
 }
 
@@ -523,7 +541,7 @@ int analytics_export_csv(const Analytics *analytics, const char *filename)
     }
 
     /* Write header */
-    if (fprintf(fp, "Time,Occupancy,Capacity,Utilisation\n") < 0) {
+    if (fprintf(fp, "Time,Occupancy,Capacity,Utilisation,Produced,Consumed\n") < 0) {
         fprintf(stderr, "[ERROR] analytics_export_csv: failed writing header\n");
         fclose(fp);
         return -1;
@@ -539,11 +557,13 @@ int analytics_export_csv(const Analytics *analytics, const char *filename)
             util = 0.0;
         }
 
-        if (fprintf(fp, "%.2f,%d,%d,%.1f\n",
+        if (fprintf(fp, "%.2f,%d,%d,%.1f,%d,%d\n",
                     analytics->queue_samples[i].timestamp,
                     analytics->queue_samples[i].occupancy,
                     analytics->queue_samples[i].capacity,
-                    util) < 0) {
+                    util,
+                    analytics->queue_samples[i].produced,
+                    analytics->queue_samples[i].consumed) < 0) {
             /* Error handling: fprintf failed — likely disk full.
              * Count the error but continue trying remaining rows. */
             write_errors++;

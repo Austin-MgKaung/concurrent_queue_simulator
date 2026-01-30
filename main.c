@@ -226,7 +226,10 @@ int main(int argc, char *argv[])
 
     if (!runtime_params.tui_enabled) printf("  Waiting for threads to finish...\n");
     wait_for_threads();
-    if (!runtime_params.tui_enabled) printf("  All threads joined.\n");
+    if (!runtime_params.tui_enabled) {
+        printf("  All threads joined.\n");
+        printf("  All thread resources destroyed.\n");
+    }
 
     /* 7. Reporting */
     analytics_finalise(&analytics);

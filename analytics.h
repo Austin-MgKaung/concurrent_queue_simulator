@@ -32,6 +32,8 @@ typedef struct {
     double timestamp;           // Time since start (seconds)
     int occupancy;              // Number of items in queue
     int capacity;               // Max capacity at that moment
+    int produced;               // Messages produced this interval
+    int consumed;               // Messages consumed this interval
 } QueueSample;
 
 /*
@@ -58,6 +60,10 @@ typedef struct {
     /* Bottleneck Stats */
     int total_producer_blocks;
     int total_consumer_blocks;
+
+    /* Throughput Sampling (for per-second deltas) */
+    int prev_produced;              // Snapshot for delta calculation
+    int prev_consumed;              // Snapshot for delta calculation
 
     /* Message Latency Stats (time spent in queue) */
     long long total_latency_ms;     // Sum of all message latencies

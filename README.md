@@ -25,7 +25,8 @@ thread synchronization, graceful shutdown, and performance analysis.
 | Analytics | Background sampling, final report, optimization recommendations |
 | Message latency | Tracks avg/min/max time messages spend waiting in the queue |
 | Configurable rates | `-p <sec>` and `-c <sec>` flags to tune producer/consumer speed |
-| CSV export | Queue occupancy over time, importable into Excel/Python |
+| Throughput timeline | Per-second produce/consume rates in the summary report |
+| CSV export | Queue occupancy and throughput over time, importable into Excel/Python |
 | Reproducible runs | `-s <seed>` flag for deterministic testing |
 | Input validation | All CLI arguments validated with `strtol` (rejects non-numeric input) |
 | Help flag | `-h` / `--help` displays usage and exits cleanly |
