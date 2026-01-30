@@ -1,0 +1,203 @@
+[DBG:2] [000.00] Producer 2: Context Loaded
+[DBG:3] [000.00] Producer 2: Generated data=8, pri=4
+[DBG:3] [000.00] Enqueue: pri=4, slot=0, count=1/1, was_blocked=0
+[DBG:3] [000.00] Producer 2: Sleeping for 0 s
+[DBG:3] [000.00] Producer 2: Generated data=0, pri=8
+[DBG:2] [000.00] Producer 4: Context Loaded
+[DBG:3] [000.00] Producer 4: Generated data=6, pri=1
+[DBG:2] [000.00] Producer 5: Context Loaded
+[DBG:3] [000.00] Producer 5: Generated data=8, pri=1
+[DBG:2] [000.00] Producer 6: Context Loaded
+[DBG:3] [000.00] Producer 6: Generated data=0, pri=6
+[DBG:2] [000.00] Producer 3: Context Loaded
+[DBG:2] [000.00] Producer 1: Context Loaded
+[DBG:2] [000.00] Producer 7: Context Loaded
+[DBG:3] [000.00] Producer 3: Generated data=7, pri=5
+[DBG:3] [000.00] Producer 1: Generated data=2, pri=0
+[DBG:3] [000.00] Producer 7: Generated data=6, pri=1
+[DBG:2] [000.00] Producer 8: Context Loaded
+[DBG:3] [000.00] Producer 8: Generated data=9, pri=0
+[DBG:2] [000.00] Producer 9: Context Loaded
+[DBG:3] [000.00] Producer 9: Generated data=7, pri=3
+[DBG:2] [000.00] Producer 10: Context Loaded
+[DBG:3] [000.00] Producer 10: Generated data=5, pri=8
+[DBG:2] [000.00] Consumer 1: Context Loaded
+[DBG:3] [000.00] Aging: pri=4, wait=1ms, boost=0, effective=4
+[DBG:3] [000.00] Aging: pri=4, wait=1ms, boost=0, effective=4
+[DBG:3] [000.00] Dequeue: pri=4, data=8, from P2, count=0/1
+[DBG:3] [000.00] Consumer 1: Read pri=4, data=8 from P2, queue=0/1
+[DBG:3] [000.00] Enqueue: pri=8, slot=0, count=1/1, was_blocked=1
+[DBG:3] [000.00] Producer 2: Sleeping for 1 s
+[DBG:2] [000.00] Analytics sampler started
+[DBG:3] [000.00] Analytics sample: occupancy=1/1 (1 samples)
+[DBG:3] [000.00] Consumer 1: Sleeping for 1 s
+[DBG:3] [001.00] Analytics sample: occupancy=1/1 (2 samples)
+[DBG:3] [001.00] Aging: pri=8, wait=1001ms, boost=2, effective=9
+[DBG:3] [001.00] Aging: pri=8, wait=1001ms, boost=2, effective=9
+[DBG:3] [001.00] Dequeue: pri=8, data=0, from P2, count=0/1
+[DBG:3] [001.00] Consumer 1: Read pri=8, data=0 from P2, queue=0/1
+[DBG:3] [001.00] Consumer 1: Sleeping for 3 s
+[DBG:3] [001.00] Producer 2: Generated data=8, pri=9
+[DBG:3] [001.00] Enqueue: pri=9, slot=0, count=1/1, was_blocked=0
+[DBG:3] [001.00] Producer 2: Sleeping for 0 s
+[DBG:3] [001.00] Producer 2: Generated data=4, pri=8
+[DBG:3] [002.00] Analytics sample: occupancy=1/1 (3 samples)
+[DBG:3] [003.00] Analytics sample: occupancy=1/1 (4 samples)
+[DBG:3] [004.01] Analytics sample: occupancy=1/1 (5 samples)
+[DBG:3] [004.01] Aging: pri=9, wait=3005ms, boost=6, effective=9
+[DBG:3] [004.01] Aging: pri=9, wait=3005ms, boost=6, effective=9
+[DBG:3] [004.01] Dequeue: pri=9, data=8, from P2, count=0/1
+[DBG:3] [004.01] Enqueue: pri=1, slot=0, count=1/1, was_blocked=1
+[DBG:3] [004.01] Producer 5: Sleeping for 1 s
+[DBG:3] [004.01] Consumer 1: Read pri=9, data=8 from P2, queue=1/1
+[DBG:3] [004.01] Consumer 1: Sleeping for 0 s
+[DBG:3] [004.01] Aging: pri=1, wait=4006ms, boost=8, effective=9
+[DBG:3] [004.01] Aging: pri=1, wait=4006ms, boost=8, effective=9
+[DBG:3] [004.01] Dequeue: pri=1, data=8, from P5, count=0/1
+[DBG:3] [004.01] Consumer 1: Read pri=1, data=8 from P5, queue=0/1
+[DBG:3] [004.01] Consumer 1: Sleeping for 0 s
+[DBG:3] [004.01] Enqueue: pri=6, slot=0, count=1/1, was_blocked=1
+[DBG:3] [004.01] Producer 6: Sleeping for 1 s
+[DBG:3] [004.01] Aging: pri=6, wait=4006ms, boost=8, effective=9
+[DBG:3] [004.01] Aging: pri=6, wait=4006ms, boost=8, effective=9
+[DBG:3] [004.01] Dequeue: pri=6, data=0, from P6, count=0/1
+[DBG:3] [004.01] Enqueue: pri=5, slot=0, count=1/1, was_blocked=1
+[DBG:3] [004.01] Producer 3: Sleeping for 2 s
+[DBG:3] [004.01] Consumer 1: Read pri=6, data=0 from P6, queue=1/1
+[DBG:3] [004.01] Consumer 1: Sleeping for 3 s
+[DBG:3] [005.01] Analytics sample: occupancy=1/1 (6 samples)
+[DBG:3] [005.01] Producer 5: Generated data=0, pri=6
+[DBG:3] [005.01] Producer 6: Generated data=1, pri=0
+[DBG:3] [006.01] Analytics sample: occupancy=1/1 (7 samples)
+[DBG:3] [006.02] Producer 3: Generated data=5, pri=5
+[DBG:3] [007.01] Analytics sample: occupancy=1/1 (8 samples)
+[DBG:3] [007.02] Aging: pri=5, wait=7016ms, boost=14, effective=9
+[DBG:3] [007.02] Aging: pri=5, wait=7016ms, boost=14, effective=9
+[DBG:3] [007.02] Dequeue: pri=5, data=7, from P3, count=0/1
+[DBG:3] [007.02] Enqueue: pri=0, slot=0, count=1/1, was_blocked=1
+[DBG:3] [007.02] Producer 1: Sleeping for 2 s
+[DBG:3] [007.02] Consumer 1: Read pri=5, data=7 from P3, queue=1/1
+[DBG:3] [007.02] Consumer 1: Sleeping for 2 s
+[DBG:3] [008.01] Analytics sample: occupancy=1/1 (9 samples)
+[DBG:3] [009.01] Analytics sample: occupancy=1/1 (10 samples)
+[DBG:3] [009.02] Aging: pri=0, wait=9017ms, boost=18, effective=9
+[DBG:3] [009.02] Aging: pri=0, wait=9017ms, boost=18, effective=9
+[DBG:3] [009.02] Dequeue: pri=0, data=2, from P1, count=0/1
+[DBG:3] [009.02] Consumer 1: Read pri=0, data=2 from P1, queue=0/1
+[DBG:3] [009.02] Consumer 1: Sleeping for 3 s
+[DBG:3] [009.02] Enqueue: pri=1, slot=0, count=1/1, was_blocked=1
+[DBG:3] [009.02] Producer 7: Sleeping for 0 s
+[DBG:3] [009.02] Producer 7: Generated data=3, pri=2
+[DBG:3] [009.02] Producer 1: Generated data=1, pri=1
+[DBG:3] [010.02] Analytics sample: occupancy=1/1 (11 samples)
+[DBG:3] [011.02] Analytics sample: occupancy=1/1 (12 samples)
+[DBG:3] [012.04] Aging: pri=1, wait=12034ms, boost=24, effective=9
+[DBG:3] [012.04] Aging: pri=1, wait=12034ms, boost=24, effective=9
+[DBG:3] [012.04] Dequeue: pri=1, data=6, from P7, count=0/1
+[DBG:3] [012.04] Consumer 1: Read pri=1, data=6 from P7, queue=0/1
+[DBG:3] [012.04] Consumer 1: Sleeping for 0 s
+[DBG:3] [012.04] Enqueue: pri=0, slot=0, count=1/1, was_blocked=1
+[DBG:3] [012.04] Producer 8: Sleeping for 1 s
+[DBG:3] [012.04] Analytics sample: occupancy=1/1 (13 samples)
+[DBG:3] [012.04] Aging: pri=0, wait=12035ms, boost=24, effective=9
+[DBG:3] [012.04] Aging: pri=0, wait=12035ms, boost=24, effective=9
+[DBG:3] [012.04] Dequeue: pri=0, data=9, from P8, count=0/1
+[DBG:3] [012.04] Consumer 1: Read pri=0, data=9 from P8, queue=0/1
+[DBG:3] [012.04] Consumer 1: Sleeping for 1 s
+[DBG:3] [012.04] Enqueue: pri=3, slot=0, count=1/1, was_blocked=1
+[DBG:3] [012.04] Producer 9: Sleeping for 2 s
+[DBG:3] [013.04] Analytics sample: occupancy=1/1 (14 samples)
+[DBG:3] [013.04] Producer 8: Generated data=6, pri=1
+[DBG:3] [013.04] Aging: pri=3, wait=13036ms, boost=26, effective=9
+[DBG:3] [013.04] Aging: pri=3, wait=13036ms, boost=26, effective=9
+[DBG:3] [013.04] Dequeue: pri=3, data=7, from P9, count=0/1
+[DBG:3] [013.04] Consumer 1: Read pri=3, data=7 from P9, queue=0/1
+[DBG:3] [013.04] Consumer 1: Sleeping for 0 s
+[DBG:3] [013.04] Enqueue: pri=8, slot=0, count=1/1, was_blocked=1
+[DBG:3] [013.04] Producer 10: Sleeping for 2 s
+[DBG:3] [013.04] Aging: pri=8, wait=13036ms, boost=26, effective=9
+[DBG:3] [013.04] Aging: pri=8, wait=13036ms, boost=26, effective=9
+[DBG:3] [013.04] Dequeue: pri=8, data=5, from P10, count=0/1
+[DBG:3] [013.04] Consumer 1: Read pri=8, data=5 from P10, queue=0/1
+[DBG:3] [013.04] Consumer 1: Sleeping for 4 s
+[DBG:3] [013.04] Enqueue: pri=8, slot=0, count=1/1, was_blocked=1
+[DBG:3] [013.04] Producer 2: Sleeping for 0 s
+[DBG:3] [013.04] Producer 2: Generated data=6, pri=6
+[DBG:3] [014.04] Analytics sample: occupancy=1/1 (15 samples)
+[DBG:3] [014.04] Producer 9: Generated data=6, pri=8
+[DBG:3] [015.04] Analytics sample: occupancy=1/1 (16 samples)
+[DBG:3] [015.06] Producer 10: Generated data=5, pri=4
+[DBG:3] [016.04] Analytics sample: occupancy=1/1 (17 samples)
+[DBG:3] [017.04] Analytics sample: occupancy=1/1 (18 samples)
+[DBG:3] [017.06] Aging: pri=8, wait=16059ms, boost=32, effective=9
+[DBG:3] [017.06] Aging: pri=8, wait=16059ms, boost=32, effective=9
+[DBG:3] [017.06] Dequeue: pri=8, data=4, from P2, count=0/1
+[DBG:3] [017.06] Consumer 1: Read pri=8, data=4 from P2, queue=0/1
+[DBG:3] [017.06] Consumer 1: Sleeping for 3 s
+[DBG:3] [017.06] Enqueue: pri=1, slot=0, count=1/1, was_blocked=1
+[DBG:3] [017.06] Producer 4: Sleeping for 2 s
+[DBG:3] [018.04] Analytics sample: occupancy=1/1 (19 samples)
+[DBG:3] [019.04] Analytics sample: occupancy=1/1 (20 samples)
+[DBG:3] [019.12] Producer 4: Generated data=3, pri=9
+[DBG:3] [020.04] Analytics sample: occupancy=1/1 (21 samples)
+[DBG:3] [020.08] Aging: pri=1, wait=20072ms, boost=40, effective=9
+[DBG:3] [020.08] Aging: pri=1, wait=20072ms, boost=40, effective=9
+[DBG:3] [020.08] Dequeue: pri=1, data=6, from P4, count=0/1
+[DBG:3] [020.08] Consumer 1: Read pri=1, data=6 from P4, queue=0/1
+[DBG:3] [020.08] Consumer 1: Sleeping for 3 s
+[DBG:3] [020.08] Enqueue: pri=6, slot=0, count=1/1, was_blocked=1
+[DBG:3] [020.08] Producer 5: Sleeping for 1 s
+[DBG:3] [021.04] Analytics sample: occupancy=1/1 (22 samples)
+[DBG:3] [021.08] Producer 5: Generated data=5, pri=3
+[DBG:3] [022.04] Analytics sample: occupancy=1/1 (23 samples)
+[DBG:3] [023.04] Analytics sample: occupancy=1/1 (24 samples)
+[DBG:3] [023.08] Aging: pri=6, wait=18067ms, boost=36, effective=9
+[DBG:3] [023.08] Aging: pri=6, wait=18067ms, boost=36, effective=9
+[DBG:3] [023.08] Dequeue: pri=6, data=0, from P5, count=0/1
+[DBG:3] [023.08] Consumer 1: Read pri=6, data=0 from P5, queue=0/1
+[DBG:3] [023.08] Consumer 1: Sleeping for 0 s
+[DBG:3] [023.08] Enqueue: pri=0, slot=0, count=1/1, was_blocked=1
+[DBG:3] [023.08] Producer 6: Sleeping for 2 s
+[DBG:3] [023.08] Aging: pri=0, wait=18067ms, boost=36, effective=9
+[DBG:3] [023.08] Aging: pri=0, wait=18067ms, boost=36, effective=9
+[DBG:3] [023.08] Dequeue: pri=0, data=1, from P6, count=0/1
+[DBG:3] [023.08] Enqueue: pri=5, slot=0, count=1/1, was_blocked=1
+[DBG:3] [023.08] Producer 3: Sleeping for 0 s
+[DBG:3] [023.08] Producer 3: Generated data=6, pri=2
+[DBG:3] [023.08] Consumer 1: Read pri=0, data=1 from P6, queue=1/1
+[DBG:3] [023.08] Consumer 1: Sleeping for 3 s
+[DBG:3] [024.04] Analytics sample: occupancy=1/1 (25 samples)
+[DBG:3] [025.04] Analytics sample: occupancy=1/1 (26 samples)
+[DBG:3] [025.08] Producer 6: Generated data=7, pri=7
+[DBG:3] [026.04] Analytics sample: occupancy=1/1 (27 samples)
+[DBG:3] [026.08] Aging: pri=5, wait=20062ms, boost=40, effective=9
+[DBG:3] [026.08] Aging: pri=5, wait=20062ms, boost=40, effective=9
+[DBG:3] [026.08] Dequeue: pri=5, data=5, from P3, count=0/1
+[DBG:3] [026.08] Consumer 1: Read pri=5, data=5 from P3, queue=0/1
+[DBG:3] [026.08] Consumer 1: Sleeping for 2 s
+[DBG:3] [026.08] Enqueue: pri=2, slot=0, count=1/1, was_blocked=1
+[DBG:3] [026.08] Producer 7: Sleeping for 0 s
+[DBG:3] [026.08] Producer 7: Generated data=1, pri=3
+[DBG:3] [027.04] Analytics sample: occupancy=1/1 (28 samples)
+[DBG:3] [028.04] Analytics sample: occupancy=1/1 (29 samples)
+[DBG:3] [028.08] Aging: pri=2, wait=19060ms, boost=38, effective=9
+[DBG:3] [028.08] Aging: pri=2, wait=19060ms, boost=38, effective=9
+[DBG:3] [028.08] Dequeue: pri=2, data=3, from P7, count=0/1
+[DBG:3] [028.08] Consumer 1: Read pri=2, data=3 from P7, queue=0/1
+[DBG:3] [028.08] Consumer 1: Sleeping for 2 s
+[DBG:3] [028.08] Enqueue: pri=1, slot=0, count=1/1, was_blocked=1
+[DBG:3] [028.08] Producer 1: Sleeping for 2 s
+[DBG:3] [029.04] Analytics sample: occupancy=1/1 (30 samples)
+[DBG:2] [030.02] Producer 2: Exiting thread
+[DBG:2] [030.02] Producer 3: Exiting thread
+[DBG:2] [030.02] Producer 8: Exiting thread
+[DBG:2] [030.02] Producer 9: Exiting thread
+[DBG:2] [030.02] Producer 5: Exiting thread
+[DBG:2] [030.02] Shutdown initiated: Timeout
+[DBG:2] [030.02] Producer 6: Exiting thread
+[DBG:2] [030.02] Producer 4: Exiting thread
+[DBG:2] [030.02] Producer 7: Exiting thread
+[DBG:2] [030.02] Producer 10: Exiting thread
+[DBG:2] [030.04] Analytics sampler stopped
+[DBG:2] [030.08] Producer 1: Exiting thread
+[DBG:2] [030.08] Consumer 1: Exiting thread

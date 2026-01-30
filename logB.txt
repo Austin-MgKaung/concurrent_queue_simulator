@@ -1,0 +1,2323 @@
+[DBG:2] [000.00] Producer 1: Context Loaded
+[DBG:3] [000.00] Producer 1: Generated data=9, pri=9
+[DBG:3] [000.00] Enqueue: pri=9, slot=0, count=1/20, was_blocked=0
+[DBG:3] [000.00] Producer 1: Sleeping for 0 s
+[DBG:3] [000.00] Producer 1: Generated data=9, pri=0
+[DBG:3] [000.00] Enqueue: pri=0, slot=1, count=2/20, was_blocked=0
+[DBG:3] [000.00] Producer 1: Sleeping for 2 s
+[DBG:2] [000.00] Producer 6: Context Loaded
+[DBG:3] [000.00] Producer 6: Generated data=9, pri=1
+[DBG:3] [000.00] Enqueue: pri=1, slot=2, count=3/20, was_blocked=0
+[DBG:3] [000.00] Producer 6: Sleeping for 0 s
+[DBG:3] [000.00] Producer 6: Generated data=3, pri=2
+[DBG:3] [000.00] Enqueue: pri=2, slot=3, count=4/20, was_blocked=0
+[DBG:3] [000.00] Producer 6: Sleeping for 0 s
+[DBG:3] [000.00] Producer 6: Generated data=9, pri=0
+[DBG:3] [000.00] Enqueue: pri=0, slot=4, count=5/20, was_blocked=0
+[DBG:3] [000.00] Producer 6: Sleeping for 2 s
+[DBG:2] [000.00] Producer 7: Context Loaded
+[DBG:3] [000.00] Producer 7: Generated data=1, pri=2
+[DBG:3] [000.00] Enqueue: pri=2, slot=5, count=6/20, was_blocked=0
+[DBG:3] [000.00] Producer 7: Sleeping for 1 s
+[DBG:2] [000.00] Producer 9: Context Loaded
+[DBG:3] [000.00] Producer 9: Generated data=0, pri=9
+[DBG:3] [000.00] Enqueue: pri=9, slot=6, count=7/20, was_blocked=0
+[DBG:3] [000.00] Producer 9: Sleeping for 0 s
+[DBG:3] [000.00] Producer 9: Generated data=4, pri=7
+[DBG:3] [000.00] Enqueue: pri=7, slot=7, count=8/20, was_blocked=0
+[DBG:3] [000.00] Producer 9: Sleeping for 1 s
+[DBG:2] [000.00] Producer 10: Context Loaded
+[DBG:3] [000.00] Producer 10: Generated data=9, pri=4
+[DBG:3] [000.00] Enqueue: pri=4, slot=8, count=9/20, was_blocked=0
+[DBG:3] [000.00] Producer 10: Sleeping for 2 s
+[DBG:2] [000.00] Consumer 1: Context Loaded
+[DBG:3] [000.00] Aging: pri=9, wait=0ms, boost=0, effective=9
+[DBG:3] [000.00] Aging: pri=9, wait=0ms, boost=0, effective=9
+[DBG:3] [000.00] Aging: pri=0, wait=0ms, boost=0, effective=0
+[DBG:3] [000.00] Aging: pri=1, wait=0ms, boost=0, effective=1
+[DBG:3] [000.00] Aging: pri=2, wait=0ms, boost=0, effective=2
+[DBG:3] [000.00] Aging: pri=0, wait=0ms, boost=0, effective=0
+[DBG:3] [000.00] Aging: pri=2, wait=0ms, boost=0, effective=2
+[DBG:3] [000.00] Aging: pri=9, wait=0ms, boost=0, effective=9
+[DBG:3] [000.00] Aging: pri=7, wait=0ms, boost=0, effective=7
+[DBG:3] [000.00] Aging: pri=4, wait=0ms, boost=0, effective=4
+[DBG:3] [000.00] Dequeue: pri=9, data=9, from P1, count=8/20
+[DBG:3] [000.00] Consumer 1: Read pri=9, data=9 from P1, queue=8/20
+[DBG:3] [000.00] Consumer 1: Sleeping for 2 s
+[DBG:2] [000.00] Producer 2: Context Loaded
+[DBG:3] [000.00] Producer 2: Generated data=4, pri=3
+[DBG:3] [000.00] Enqueue: pri=3, slot=9, count=9/20, was_blocked=0
+[DBG:3] [000.00] Producer 2: Sleeping for 1 s
+[DBG:2] [000.00] Producer 3: Context Loaded
+[DBG:3] [000.00] Producer 3: Generated data=5, pri=2
+[DBG:3] [000.00] Enqueue: pri=2, slot=10, count=10/20, was_blocked=0
+[DBG:3] [000.00] Producer 3: Sleeping for 1 s
+[DBG:2] [000.00] Producer 5: Context Loaded
+[DBG:2] [000.00] Consumer 3: Context Loaded
+[DBG:3] [000.00] Producer 5: Generated data=6, pri=2
+[DBG:2] [000.00] Producer 8: Context Loaded
+[DBG:2] [000.00] Consumer 5: Context Loaded
+[DBG:3] [000.00] Aging: pri=0, wait=0ms, boost=0, effective=0
+[DBG:3] [000.00] Aging: pri=0, wait=0ms, boost=0, effective=0
+[DBG:3] [000.00] Aging: pri=1, wait=0ms, boost=0, effective=1
+[DBG:2] [000.00] Producer 4: Context Loaded
+[DBG:2] [000.00] Analytics sampler started
+[DBG:2] [000.00] Consumer 2: Context Loaded
+[DBG:3] [000.00] Analytics sample: occupancy=10/20 (1 samples)
+[DBG:2] [000.00] Consumer 4: Context Loaded
+[DBG:3] [000.00] Aging: pri=2, wait=0ms, boost=0, effective=2
+[DBG:3] [000.00] Producer 4: Generated data=6, pri=7
+[DBG:3] [000.00] Aging: pri=0, wait=0ms, boost=0, effective=0
+[DBG:3] [000.00] Aging: pri=2, wait=0ms, boost=0, effective=2
+[DBG:3] [000.00] Aging: pri=9, wait=0ms, boost=0, effective=9
+[DBG:3] [000.00] Aging: pri=7, wait=0ms, boost=0, effective=7
+[DBG:3] [000.00] Aging: pri=4, wait=0ms, boost=0, effective=4
+[DBG:3] [000.00] Aging: pri=3, wait=0ms, boost=0, effective=3
+[DBG:3] [000.00] Aging: pri=2, wait=0ms, boost=0, effective=2
+[DBG:3] [000.00] Dequeue: pri=9, data=0, from P9, count=9/20
+[DBG:3] [000.00] Consumer 3: Read pri=9, data=0 from P9, queue=9/20
+[DBG:3] [000.00] Enqueue: pri=2, slot=11, count=10/20, was_blocked=0
+[DBG:3] [000.00] Producer 5: Sleeping for 1 s
+[DBG:3] [000.00] Aging: pri=0, wait=0ms, boost=0, effective=0
+[DBG:3] [000.00] Aging: pri=0, wait=0ms, boost=0, effective=0
+[DBG:3] [000.00] Aging: pri=1, wait=0ms, boost=0, effective=1
+[DBG:3] [000.00] Aging: pri=2, wait=0ms, boost=0, effective=2
+[DBG:3] [000.00] Aging: pri=0, wait=0ms, boost=0, effective=0
+[DBG:3] [000.00] Aging: pri=2, wait=0ms, boost=0, effective=2
+[DBG:3] [000.00] Aging: pri=7, wait=0ms, boost=0, effective=7
+[DBG:3] [000.00] Aging: pri=4, wait=0ms, boost=0, effective=4
+[DBG:3] [000.00] Aging: pri=3, wait=0ms, boost=0, effective=3
+[DBG:3] [000.00] Aging: pri=2, wait=0ms, boost=0, effective=2
+[DBG:3] [000.00] Aging: pri=2, wait=0ms, boost=0, effective=2
+[DBG:3] [000.00] Dequeue: pri=7, data=4, from P9, count=9/20
+[DBG:3] [000.00] Consumer 5: Read pri=7, data=4 from P9, queue=9/20
+[DBG:3] [000.00] Consumer 5: Sleeping for 4 s
+[DBG:3] [000.00] Aging: pri=0, wait=1ms, boost=0, effective=0
+[DBG:3] [000.00] Aging: pri=0, wait=1ms, boost=0, effective=0
+[DBG:3] [000.00] Aging: pri=1, wait=1ms, boost=0, effective=1
+[DBG:3] [000.00] Aging: pri=2, wait=1ms, boost=0, effective=2
+[DBG:3] [000.00] Aging: pri=0, wait=1ms, boost=0, effective=0
+[DBG:3] [000.00] Aging: pri=2, wait=1ms, boost=0, effective=2
+[DBG:3] [000.00] Aging: pri=4, wait=1ms, boost=0, effective=4
+[DBG:3] [000.00] Aging: pri=3, wait=1ms, boost=0, effective=3
+[DBG:3] [000.00] Aging: pri=2, wait=1ms, boost=0, effective=2
+[DBG:3] [000.00] Aging: pri=2, wait=1ms, boost=0, effective=2
+[DBG:3] [000.00] Dequeue: pri=4, data=9, from P10, count=8/20
+[DBG:3] [000.00] Consumer 2: Read pri=4, data=9 from P10, queue=8/20
+[DBG:3] [000.00] Consumer 2: Sleeping for 3 s
+[DBG:3] [000.00] Aging: pri=0, wait=1ms, boost=0, effective=0
+[DBG:3] [000.00] Aging: pri=0, wait=1ms, boost=0, effective=0
+[DBG:3] [000.00] Aging: pri=1, wait=1ms, boost=0, effective=1
+[DBG:3] [000.00] Aging: pri=2, wait=1ms, boost=0, effective=2
+[DBG:3] [000.00] Aging: pri=0, wait=1ms, boost=0, effective=0
+[DBG:3] [000.00] Aging: pri=2, wait=1ms, boost=0, effective=2
+[DBG:3] [000.00] Aging: pri=3, wait=1ms, boost=0, effective=3
+[DBG:3] [000.00] Aging: pri=2, wait=1ms, boost=0, effective=2
+[DBG:3] [000.00] Aging: pri=2, wait=1ms, boost=0, effective=2
+[DBG:3] [000.00] Dequeue: pri=3, data=4, from P2, count=7/20
+[DBG:3] [000.00] Consumer 4: Read pri=3, data=4 from P2, queue=7/20
+[DBG:3] [000.00] Consumer 4: Sleeping for 2 s
+[DBG:3] [000.00] Consumer 3: Sleeping for 1 s
+[DBG:3] [000.00] Enqueue: pri=7, slot=12, count=8/20, was_blocked=0
+[DBG:3] [000.00] Producer 4: Sleeping for 0 s
+[DBG:3] [000.00] Producer 4: Generated data=4, pri=4
+[DBG:3] [000.00] Enqueue: pri=4, slot=13, count=9/20, was_blocked=0
+[DBG:3] [000.00] Producer 4: Sleeping for 1 s
+[DBG:3] [000.00] Producer 8: Generated data=8, pri=6
+[DBG:3] [000.00] Enqueue: pri=6, slot=14, count=10/20, was_blocked=0
+[DBG:3] [000.00] Producer 8: Sleeping for 0 s
+[DBG:3] [000.00] Producer 8: Generated data=5, pri=6
+[DBG:3] [000.00] Enqueue: pri=6, slot=15, count=11/20, was_blocked=0
+[DBG:3] [000.00] Producer 8: Sleeping for 0 s
+[DBG:3] [000.00] Producer 8: Generated data=3, pri=7
+[DBG:3] [000.00] Enqueue: pri=7, slot=16, count=12/20, was_blocked=0
+[DBG:3] [000.00] Producer 8: Sleeping for 0 s
+[DBG:3] [000.00] Producer 8: Generated data=9, pri=6
+[DBG:3] [000.00] Enqueue: pri=6, slot=17, count=13/20, was_blocked=0
+[DBG:3] [000.00] Producer 8: Sleeping for 1 s
+[DBG:3] [001.00] Producer 7: Generated data=5, pri=0
+[DBG:3] [001.00] Enqueue: pri=0, slot=18, count=14/20, was_blocked=0
+[DBG:3] [001.00] Producer 7: Sleeping for 1 s
+[DBG:3] [001.00] Producer 9: Generated data=7, pri=0
+[DBG:3] [001.00] Enqueue: pri=0, slot=19, count=15/20, was_blocked=0
+[DBG:3] [001.00] Producer 9: Sleeping for 2 s
+[DBG:3] [001.00] Analytics sample: occupancy=15/20 (2 samples)
+[DBG:3] [001.00] Producer 2: Generated data=7, pri=9
+[DBG:3] [001.00] Enqueue: pri=9, slot=0, count=16/20, was_blocked=0
+[DBG:3] [001.00] Producer 2: Sleeping for 1 s
+[DBG:3] [001.00] Producer 3: Generated data=5, pri=7
+[DBG:3] [001.00] Enqueue: pri=7, slot=1, count=17/20, was_blocked=0
+[DBG:3] [001.00] Producer 3: Sleeping for 1 s
+[DBG:3] [001.00] Producer 5: Generated data=6, pri=7
+[DBG:3] [001.00] Enqueue: pri=7, slot=2, count=18/20, was_blocked=0
+[DBG:3] [001.00] Producer 5: Sleeping for 2 s
+[DBG:3] [001.00] Aging: pri=0, wait=1001ms, boost=2, effective=2
+[DBG:3] [001.00] Aging: pri=0, wait=1001ms, boost=2, effective=2
+[DBG:3] [001.00] Aging: pri=1, wait=1001ms, boost=2, effective=3
+[DBG:3] [001.00] Aging: pri=2, wait=1001ms, boost=2, effective=4
+[DBG:3] [001.00] Aging: pri=0, wait=1001ms, boost=2, effective=2
+[DBG:3] [001.00] Aging: pri=2, wait=1001ms, boost=2, effective=4
+[DBG:3] [001.00] Aging: pri=2, wait=1001ms, boost=2, effective=4
+[DBG:3] [001.00] Aging: pri=2, wait=1001ms, boost=2, effective=4
+[DBG:3] [001.00] Aging: pri=7, wait=1001ms, boost=2, effective=9
+[DBG:3] [001.00] Aging: pri=4, wait=1000ms, boost=2, effective=6
+[DBG:3] [001.00] Aging: pri=6, wait=1001ms, boost=2, effective=8
+[DBG:3] [001.00] Aging: pri=6, wait=1000ms, boost=2, effective=8
+[DBG:3] [001.00] Aging: pri=7, wait=1000ms, boost=2, effective=9
+[DBG:3] [001.00] Producer 8: Generated data=1, pri=5
+[DBG:3] [001.00] Producer 4: Generated data=1, pri=0
+[DBG:3] [001.00] Aging: pri=6, wait=1000ms, boost=2, effective=8
+[DBG:3] [001.00] Aging: pri=0, wait=1ms, boost=0, effective=0
+[DBG:3] [001.00] Aging: pri=0, wait=1ms, boost=0, effective=0
+[DBG:3] [001.00] Aging: pri=9, wait=0ms, boost=0, effective=9
+[DBG:3] [001.00] Aging: pri=7, wait=0ms, boost=0, effective=7
+[DBG:3] [001.00] Aging: pri=7, wait=0ms, boost=0, effective=7
+[DBG:3] [001.00] Dequeue: pri=7, data=6, from P4, count=17/20
+[DBG:3] [001.00] Enqueue: pri=5, slot=3, count=18/20, was_blocked=0
+[DBG:3] [001.00] Producer 8: Sleeping for 0 s
+[DBG:3] [001.00] Producer 8: Generated data=3, pri=1
+[DBG:3] [001.00] Enqueue: pri=0, slot=4, count=19/20, was_blocked=0
+[DBG:3] [001.00] Consumer 3: Read pri=7, data=6 from P4, queue=19/20
+[DBG:3] [001.00] Consumer 3: Sleeping for 2 s
+[DBG:3] [001.00] Producer 4: Sleeping for 1 s
+[DBG:3] [001.00] Enqueue: pri=1, slot=5, count=20/20, was_blocked=1
+[DBG:3] [001.00] Producer 8: Sleeping for 2 s
+[DBG:3] [002.00] Producer 1: Generated data=5, pri=9
+[DBG:3] [002.00] Analytics sample: occupancy=20/20 (3 samples)
+[DBG:3] [002.00] Producer 6: Generated data=7, pri=4
+[DBG:3] [002.00] Aging: pri=0, wait=2001ms, boost=4, effective=4
+[DBG:3] [002.00] Aging: pri=0, wait=2001ms, boost=4, effective=4
+[DBG:3] [002.00] Aging: pri=1, wait=2001ms, boost=4, effective=5
+[DBG:3] [002.00] Aging: pri=2, wait=2001ms, boost=4, effective=6
+[DBG:3] [002.00] Aging: pri=0, wait=2001ms, boost=4, effective=4
+[DBG:3] [002.00] Aging: pri=2, wait=2001ms, boost=4, effective=6
+[DBG:3] [002.00] Aging: pri=2, wait=2001ms, boost=4, effective=6
+[DBG:3] [002.00] Aging: pri=2, wait=2001ms, boost=4, effective=6
+[DBG:3] [002.00] Aging: pri=4, wait=2000ms, boost=4, effective=8
+[DBG:3] [002.00] Aging: pri=6, wait=2001ms, boost=4, effective=9
+[DBG:3] [002.00] Aging: pri=6, wait=2000ms, boost=4, effective=9
+[DBG:3] [002.00] Aging: pri=7, wait=2000ms, boost=4, effective=9
+[DBG:3] [002.00] Aging: pri=6, wait=2000ms, boost=4, effective=9
+[DBG:3] [002.00] Aging: pri=0, wait=1001ms, boost=2, effective=2
+[DBG:3] [002.00] Aging: pri=0, wait=1001ms, boost=2, effective=2
+[DBG:3] [002.00] Aging: pri=9, wait=1000ms, boost=2, effective=9
+[DBG:3] [002.00] Aging: pri=7, wait=1000ms, boost=2, effective=9
+[DBG:3] [002.00] Aging: pri=7, wait=1000ms, boost=2, effective=9
+[DBG:3] [002.00] Aging: pri=5, wait=1000ms, boost=2, effective=7
+[DBG:3] [002.00] Aging: pri=0, wait=1000ms, boost=2, effective=2
+[DBG:3] [002.00] Aging: pri=1, wait=1000ms, boost=2, effective=3
+[DBG:3] [002.00] Dequeue: pri=6, data=8, from P8, count=19/20
+[DBG:3] [002.00] Consumer 1: Read pri=6, data=8 from P8, queue=19/20
+[DBG:3] [002.00] Consumer 1: Sleeping for 4 s
+[DBG:3] [002.00] Enqueue: pri=9, slot=6, count=20/20, was_blocked=1
+[DBG:3] [002.00] Producer 3: Generated data=1, pri=6
+[DBG:3] [002.00] Producer 7: Generated data=8, pri=7
+[DBG:3] [002.00] Producer 1: Sleeping for 2 s
+[DBG:3] [002.00] Producer 2: Generated data=8, pri=5
+[DBG:3] [002.00] Producer 10: Generated data=9, pri=0
+[DBG:3] [002.00] Aging: pri=0, wait=2001ms, boost=4, effective=4
+[DBG:3] [002.00] Aging: pri=0, wait=2001ms, boost=4, effective=4
+[DBG:3] [002.00] Aging: pri=1, wait=2001ms, boost=4, effective=5
+[DBG:3] [002.00] Aging: pri=2, wait=2001ms, boost=4, effective=6
+[DBG:3] [002.00] Aging: pri=0, wait=2001ms, boost=4, effective=4
+[DBG:3] [002.00] Aging: pri=2, wait=2001ms, boost=4, effective=6
+[DBG:3] [002.00] Aging: pri=2, wait=2001ms, boost=4, effective=6
+[DBG:3] [002.00] Aging: pri=2, wait=2001ms, boost=4, effective=6
+[DBG:3] [002.00] Aging: pri=4, wait=2000ms, boost=4, effective=8
+[DBG:3] [002.00] Aging: pri=6, wait=2000ms, boost=4, effective=9
+[DBG:3] [002.00] Aging: pri=7, wait=2000ms, boost=4, effective=9
+[DBG:3] [002.00] Aging: pri=6, wait=2000ms, boost=4, effective=9
+[DBG:3] [002.00] Aging: pri=0, wait=1001ms, boost=2, effective=2
+[DBG:3] [002.00] Aging: pri=0, wait=1001ms, boost=2, effective=2
+[DBG:3] [002.00] Aging: pri=9, wait=1000ms, boost=2, effective=9
+[DBG:3] [002.00] Aging: pri=7, wait=1000ms, boost=2, effective=9
+[DBG:3] [002.00] Aging: pri=7, wait=1000ms, boost=2, effective=9
+[DBG:3] [002.00] Aging: pri=5, wait=1000ms, boost=2, effective=7
+[DBG:3] [002.00] Aging: pri=0, wait=1000ms, boost=2, effective=2
+[DBG:3] [002.00] Aging: pri=1, wait=1000ms, boost=2, effective=3
+[DBG:3] [002.00] Aging: pri=9, wait=1ms, boost=0, effective=9
+[DBG:3] [002.00] Dequeue: pri=6, data=5, from P8, count=19/20
+[DBG:3] [002.00] Consumer 4: Read pri=6, data=5 from P8, queue=19/20
+[DBG:3] [002.00] Consumer 4: Sleeping for 1 s
+[DBG:3] [002.00] Enqueue: pri=4, slot=7, count=20/20, was_blocked=1
+[DBG:3] [002.00] Producer 6: Sleeping for 1 s
+[DBG:3] [002.00] Producer 4: Generated data=4, pri=0
+[DBG:3] [003.00] Analytics sample: occupancy=20/20 (4 samples)
+[DBG:3] [003.00] Producer 9: Generated data=2, pri=4
+[DBG:3] [003.00] Producer 8: Generated data=4, pri=3
+[DBG:3] [003.00] Aging: pri=0, wait=3002ms, boost=6, effective=6
+[DBG:3] [003.00] Aging: pri=0, wait=3002ms, boost=6, effective=6
+[DBG:3] [003.00] Aging: pri=1, wait=3002ms, boost=6, effective=7
+[DBG:3] [003.00] Aging: pri=2, wait=3002ms, boost=6, effective=8
+[DBG:3] [003.00] Aging: pri=0, wait=3002ms, boost=6, effective=6
+[DBG:3] [003.00] Aging: pri=2, wait=3002ms, boost=6, effective=8
+[DBG:3] [003.00] Aging: pri=2, wait=3002ms, boost=6, effective=8
+[DBG:3] [003.00] Aging: pri=2, wait=3002ms, boost=6, effective=8
+[DBG:3] [003.00] Aging: pri=4, wait=3001ms, boost=6, effective=9
+[DBG:3] [003.00] Aging: pri=7, wait=3001ms, boost=6, effective=9
+[DBG:3] [003.00] Aging: pri=6, wait=3001ms, boost=6, effective=9
+[DBG:3] [003.00] Aging: pri=0, wait=2002ms, boost=4, effective=4
+[DBG:3] [003.00] Aging: pri=0, wait=2002ms, boost=4, effective=4
+[DBG:3] [003.00] Aging: pri=9, wait=2001ms, boost=4, effective=9
+[DBG:3] [003.00] Aging: pri=7, wait=2001ms, boost=4, effective=9
+[DBG:3] [003.00] Aging: pri=7, wait=2001ms, boost=4, effective=9
+[DBG:3] [003.00] Aging: pri=5, wait=2001ms, boost=4, effective=9
+[DBG:3] [003.00] Aging: pri=0, wait=2001ms, boost=4, effective=4
+[DBG:3] [003.00] Aging: pri=1, wait=2001ms, boost=4, effective=5
+[DBG:3] [003.00] Aging: pri=9, wait=1002ms, boost=2, effective=9
+[DBG:3] [003.00] Aging: pri=4, wait=1001ms, boost=2, effective=6
+[DBG:3] [003.00] Dequeue: pri=4, data=4, from P4, count=19/20
+[DBG:3] [003.00] Consumer 2: Read pri=4, data=4 from P4, queue=19/20
+[DBG:3] [003.00] Consumer 2: Sleeping for 4 s
+[DBG:3] [003.00] Enqueue: pri=6, slot=8, count=20/20, was_blocked=1
+[DBG:3] [003.00] Producer 3: Sleeping for 0 s
+[DBG:3] [003.00] Producer 3: Generated data=1, pri=0
+[DBG:3] [003.00] Aging: pri=0, wait=3003ms, boost=6, effective=6
+[DBG:3] [003.00] Aging: pri=0, wait=3003ms, boost=6, effective=6
+[DBG:3] [003.00] Aging: pri=1, wait=3003ms, boost=6, effective=7
+[DBG:3] [003.00] Aging: pri=2, wait=3003ms, boost=6, effective=8
+[DBG:3] [003.00] Aging: pri=0, wait=3003ms, boost=6, effective=6
+[DBG:3] [003.01] Aging: pri=2, wait=3003ms, boost=6, effective=8
+[DBG:3] [003.01] Aging: pri=2, wait=3003ms, boost=6, effective=8
+[DBG:3] [003.01] Aging: pri=2, wait=3003ms, boost=6, effective=8
+[DBG:3] [003.01] Aging: pri=7, wait=3002ms, boost=6, effective=9
+[DBG:3] [003.01] Aging: pri=6, wait=3002ms, boost=6, effective=9
+[DBG:3] [003.01] Aging: pri=0, wait=2003ms, boost=4, effective=4
+[DBG:3] [003.01] Aging: pri=0, wait=2003ms, boost=4, effective=4
+[DBG:3] [003.01] Aging: pri=9, wait=2002ms, boost=4, effective=9
+[DBG:3] [003.01] Aging: pri=7, wait=2002ms, boost=4, effective=9
+[DBG:3] [003.01] Aging: pri=7, wait=2002ms, boost=4, effective=9
+[DBG:3] [003.01] Aging: pri=5, wait=2002ms, boost=4, effective=9
+[DBG:3] [003.01] Aging: pri=0, wait=2002ms, boost=4, effective=4
+[DBG:3] [003.01] Aging: pri=1, wait=2002ms, boost=4, effective=5
+[DBG:3] [003.01] Aging: pri=9, wait=1003ms, boost=2, effective=9
+[DBG:3] [003.01] Aging: pri=4, wait=1002ms, boost=2, effective=6
+[DBG:3] [003.01] Aging: pri=6, wait=1002ms, boost=2, effective=8
+[DBG:3] [003.01] Dequeue: pri=7, data=3, from P8, count=19/20
+[DBG:3] [003.01] Consumer 3: Read pri=7, data=3 from P8, queue=19/20
+[DBG:3] [003.01] Consumer 3: Sleeping for 3 s
+[DBG:3] [003.01] Enqueue: pri=7, slot=9, count=20/20, was_blocked=1
+[DBG:3] [003.01] Producer 5: Generated data=5, pri=8
+[DBG:3] [003.01] Producer 6: Generated data=4, pri=2
+[DBG:3] [003.01] Aging: pri=0, wait=3003ms, boost=6, effective=6
+[DBG:3] [003.01] Aging: pri=0, wait=3003ms, boost=6, effective=6
+[DBG:3] [003.01] Aging: pri=1, wait=3003ms, boost=6, effective=7
+[DBG:3] [003.01] Aging: pri=2, wait=3003ms, boost=6, effective=8
+[DBG:3] [003.01] Aging: pri=0, wait=3003ms, boost=6, effective=6
+[DBG:3] [003.01] Aging: pri=2, wait=3003ms, boost=6, effective=8
+[DBG:3] [003.01] Aging: pri=2, wait=3003ms, boost=6, effective=8
+[DBG:3] [003.01] Aging: pri=2, wait=3003ms, boost=6, effective=8
+[DBG:3] [003.01] Aging: pri=6, wait=3002ms, boost=6, effective=9
+[DBG:3] [003.01] Aging: pri=0, wait=2003ms, boost=4, effective=4
+[DBG:3] [003.01] Aging: pri=0, wait=2003ms, boost=4, effective=4
+[DBG:3] [003.01] Aging: pri=9, wait=2002ms, boost=4, effective=9
+[DBG:3] [003.01] Aging: pri=7, wait=2002ms, boost=4, effective=9
+[DBG:3] [003.01] Aging: pri=7, wait=2002ms, boost=4, effective=9
+[DBG:3] [003.01] Aging: pri=5, wait=2002ms, boost=4, effective=9
+[DBG:3] [003.01] Aging: pri=0, wait=2002ms, boost=4, effective=4
+[DBG:3] [003.01] Aging: pri=1, wait=2002ms, boost=4, effective=5
+[DBG:3] [003.01] Aging: pri=9, wait=1003ms, boost=2, effective=9
+[DBG:3] [003.01] Aging: pri=4, wait=1002ms, boost=2, effective=6
+[DBG:3] [003.01] Aging: pri=6, wait=1002ms, boost=2, effective=8
+[DBG:3] [003.01] Aging: pri=7, wait=1002ms, boost=2, effective=9
+[DBG:3] [003.01] Dequeue: pri=6, data=9, from P8, count=19/20
+[DBG:3] [003.01] Consumer 4: Read pri=6, data=9 from P8, queue=19/20
+[DBG:3] [003.01] Consumer 4: Sleeping for 4 s
+[DBG:3] [003.01] Enqueue: pri=5, slot=10, count=20/20, was_blocked=1
+[DBG:3] [003.01] Producer 2: Sleeping for 0 s
+[DBG:3] [003.01] Producer 2: Generated data=3, pri=7
+[DBG:3] [003.01] Producer 7: Sleeping for 1 s
+[DBG:3] [004.00] Analytics sample: occupancy=20/20 (5 samples)
+[DBG:3] [004.00] Producer 1: Generated data=4, pri=4
+[DBG:3] [004.00] Aging: pri=0, wait=4002ms, boost=8, effective=8
+[DBG:3] [004.00] Aging: pri=0, wait=4002ms, boost=8, effective=8
+[DBG:3] [004.00] Aging: pri=1, wait=4002ms, boost=8, effective=9
+[DBG:3] [004.00] Aging: pri=2, wait=4002ms, boost=8, effective=9
+[DBG:3] [004.00] Aging: pri=0, wait=4002ms, boost=8, effective=8
+[DBG:3] [004.00] Aging: pri=2, wait=4002ms, boost=8, effective=9
+[DBG:3] [004.00] Aging: pri=2, wait=4002ms, boost=8, effective=9
+[DBG:3] [004.00] Aging: pri=2, wait=4002ms, boost=8, effective=9
+[DBG:3] [004.00] Aging: pri=0, wait=3002ms, boost=6, effective=6
+[DBG:3] [004.00] Aging: pri=0, wait=3002ms, boost=6, effective=6
+[DBG:3] [004.00] Aging: pri=9, wait=3001ms, boost=6, effective=9
+[DBG:3] [004.00] Aging: pri=7, wait=3001ms, boost=6, effective=9
+[DBG:3] [004.00] Aging: pri=7, wait=3001ms, boost=6, effective=9
+[DBG:3] [004.00] Aging: pri=5, wait=3001ms, boost=6, effective=9
+[DBG:3] [004.00] Aging: pri=0, wait=3001ms, boost=6, effective=6
+[DBG:3] [004.00] Aging: pri=1, wait=3001ms, boost=6, effective=7
+[DBG:3] [004.00] Aging: pri=9, wait=2002ms, boost=4, effective=9
+[DBG:3] [004.00] Aging: pri=4, wait=2001ms, boost=4, effective=8
+[DBG:3] [004.00] Aging: pri=6, wait=2001ms, boost=4, effective=9
+[DBG:3] [004.00] Aging: pri=7, wait=2001ms, boost=4, effective=9
+[DBG:3] [004.00] Aging: pri=5, wait=2001ms, boost=4, effective=9
+[DBG:3] [004.00] Dequeue: pri=1, data=9, from P6, count=19/20
+[DBG:3] [004.00] Consumer 5: Read pri=1, data=9 from P6, queue=19/20
+[DBG:3] [004.00] Consumer 5: Sleeping for 2 s
+[DBG:3] [004.00] Enqueue: pri=0, slot=11, count=20/20, was_blocked=1
+[DBG:3] [004.00] Producer 10: Sleeping for 1 s
+[DBG:3] [004.01] Producer 7: Generated data=6, pri=3
+[DBG:3] [005.00] Analytics sample: occupancy=20/20 (6 samples)
+[DBG:3] [005.01] Producer 10: Generated data=1, pri=6
+[DBG:3] [006.00] Analytics sample: occupancy=20/20 (7 samples)
+[DBG:3] [006.01] Aging: pri=0, wait=6003ms, boost=12, effective=9
+[DBG:3] [006.01] Aging: pri=0, wait=6003ms, boost=12, effective=9
+[DBG:3] [006.01] Aging: pri=2, wait=6003ms, boost=12, effective=9
+[DBG:3] [006.01] Aging: pri=0, wait=6003ms, boost=12, effective=9
+[DBG:3] [006.01] Aging: pri=2, wait=6003ms, boost=12, effective=9
+[DBG:3] [006.01] Aging: pri=2, wait=6003ms, boost=12, effective=9
+[DBG:3] [006.01] Aging: pri=2, wait=6003ms, boost=12, effective=9
+[DBG:3] [006.01] Aging: pri=0, wait=5003ms, boost=10, effective=9
+[DBG:3] [006.01] Aging: pri=0, wait=5003ms, boost=10, effective=9
+[DBG:3] [006.01] Aging: pri=9, wait=5002ms, boost=10, effective=9
+[DBG:3] [006.01] Aging: pri=7, wait=5002ms, boost=10, effective=9
+[DBG:3] [006.01] Aging: pri=7, wait=5002ms, boost=10, effective=9
+[DBG:3] [006.01] Aging: pri=5, wait=5002ms, boost=10, effective=9
+[DBG:3] [006.01] Aging: pri=0, wait=5002ms, boost=10, effective=9
+[DBG:3] [006.01] Aging: pri=1, wait=5002ms, boost=10, effective=9
+[DBG:3] [006.01] Aging: pri=9, wait=4003ms, boost=8, effective=9
+[DBG:3] [006.01] Aging: pri=4, wait=4002ms, boost=8, effective=9
+[DBG:3] [006.01] Aging: pri=6, wait=4002ms, boost=8, effective=9
+[DBG:3] [006.01] Aging: pri=7, wait=4002ms, boost=8, effective=9
+[DBG:3] [006.01] Aging: pri=5, wait=4002ms, boost=8, effective=9
+[DBG:3] [006.01] Aging: pri=0, wait=4002ms, boost=8, effective=8
+[DBG:3] [006.01] Dequeue: pri=0, data=9, from P1, count=19/20
+[DBG:3] [006.01] Consumer 1: Read pri=0, data=9 from P1, queue=19/20
+[DBG:3] [006.01] Consumer 1: Sleeping for 1 s
+[DBG:3] [006.01] Enqueue: pri=0, slot=12, count=20/20, was_blocked=1
+[DBG:3] [006.01] Producer 4: Sleeping for 2 s
+[DBG:3] [006.01] Aging: pri=2, wait=6004ms, boost=12, effective=9
+[DBG:3] [006.01] Aging: pri=2, wait=6004ms, boost=12, effective=9
+[DBG:3] [006.01] Aging: pri=0, wait=6004ms, boost=12, effective=9
+[DBG:3] [006.01] Aging: pri=2, wait=6004ms, boost=12, effective=9
+[DBG:3] [006.01] Aging: pri=2, wait=6004ms, boost=12, effective=9
+[DBG:3] [006.01] Aging: pri=2, wait=6004ms, boost=12, effective=9
+[DBG:3] [006.01] Aging: pri=0, wait=5004ms, boost=10, effective=9
+[DBG:3] [006.01] Aging: pri=0, wait=5004ms, boost=10, effective=9
+[DBG:3] [006.01] Aging: pri=9, wait=5003ms, boost=10, effective=9
+[DBG:3] [006.01] Aging: pri=7, wait=5003ms, boost=10, effective=9
+[DBG:3] [006.01] Aging: pri=7, wait=5003ms, boost=10, effective=9
+[DBG:3] [006.01] Aging: pri=5, wait=5003ms, boost=10, effective=9
+[DBG:3] [006.01] Aging: pri=0, wait=5003ms, boost=10, effective=9
+[DBG:3] [006.01] Aging: pri=1, wait=5003ms, boost=10, effective=9
+[DBG:3] [006.01] Aging: pri=9, wait=4004ms, boost=8, effective=9
+[DBG:3] [006.01] Aging: pri=4, wait=4003ms, boost=8, effective=9
+[DBG:3] [006.01] Aging: pri=6, wait=4003ms, boost=8, effective=9
+[DBG:3] [006.01] Aging: pri=7, wait=4003ms, boost=8, effective=9
+[DBG:3] [006.01] Aging: pri=5, wait=4003ms, boost=8, effective=9
+[DBG:3] [006.01] Aging: pri=0, wait=4003ms, boost=8, effective=8
+[DBG:3] [006.01] Aging: pri=0, wait=4002ms, boost=8, effective=8
+[DBG:3] [006.01] Dequeue: pri=2, data=3, from P6, count=19/20
+[DBG:3] [006.01] Consumer 5: Read pri=2, data=3 from P6, queue=19/20
+[DBG:3] [006.01] Consumer 5: Sleeping for 2 s
+[DBG:3] [006.01] Enqueue: pri=4, slot=13, count=20/20, was_blocked=1
+[DBG:3] [006.01] Producer 9: Sleeping for 0 s
+[DBG:3] [006.01] Producer 9: Generated data=4, pri=6
+[DBG:3] [006.01] Aging: pri=0, wait=6005ms, boost=12, effective=9
+[DBG:3] [006.01] Aging: pri=0, wait=6005ms, boost=12, effective=9
+[DBG:3] [006.01] Aging: pri=2, wait=6005ms, boost=12, effective=9
+[DBG:3] [006.01] Aging: pri=2, wait=6005ms, boost=12, effective=9
+[DBG:3] [006.01] Aging: pri=2, wait=6005ms, boost=12, effective=9
+[DBG:3] [006.01] Aging: pri=0, wait=5005ms, boost=10, effective=9
+[DBG:3] [006.01] Aging: pri=0, wait=5005ms, boost=10, effective=9
+[DBG:3] [006.01] Aging: pri=9, wait=5004ms, boost=10, effective=9
+[DBG:3] [006.01] Aging: pri=7, wait=5004ms, boost=10, effective=9
+[DBG:3] [006.01] Aging: pri=7, wait=5004ms, boost=10, effective=9
+[DBG:3] [006.01] Aging: pri=5, wait=5004ms, boost=10, effective=9
+[DBG:3] [006.01] Aging: pri=0, wait=5004ms, boost=10, effective=9
+[DBG:3] [006.01] Aging: pri=1, wait=5004ms, boost=10, effective=9
+[DBG:3] [006.01] Aging: pri=9, wait=4005ms, boost=8, effective=9
+[DBG:3] [006.01] Aging: pri=4, wait=4004ms, boost=8, effective=9
+[DBG:3] [006.01] Aging: pri=6, wait=4004ms, boost=8, effective=9
+[DBG:3] [006.01] Aging: pri=7, wait=4004ms, boost=8, effective=9
+[DBG:3] [006.01] Aging: pri=5, wait=4004ms, boost=8, effective=9
+[DBG:3] [006.01] Aging: pri=0, wait=4004ms, boost=8, effective=8
+[DBG:3] [006.01] Aging: pri=0, wait=4003ms, boost=8, effective=8
+[DBG:3] [006.01] Aging: pri=4, wait=3004ms, boost=6, effective=9
+[DBG:3] [006.01] Dequeue: pri=0, data=9, from P6, count=19/20
+[DBG:3] [006.01] Consumer 3: Read pri=0, data=9 from P6, queue=19/20
+[DBG:3] [006.01] Consumer 3: Sleeping for 1 s
+[DBG:3] [006.01] Enqueue: pri=3, slot=14, count=20/20, was_blocked=1
+[DBG:3] [006.01] Producer 8: Sleeping for 1 s
+[DBG:3] [007.00] Analytics sample: occupancy=20/20 (8 samples)
+[DBG:3] [007.01] Aging: pri=2, wait=7004ms, boost=14, effective=9
+[DBG:3] [007.01] Aging: pri=2, wait=7004ms, boost=14, effective=9
+[DBG:3] [007.01] Aging: pri=2, wait=7004ms, boost=14, effective=9
+[DBG:3] [007.01] Aging: pri=2, wait=7004ms, boost=14, effective=9
+[DBG:3] [007.01] Aging: pri=0, wait=6004ms, boost=12, effective=9
+[DBG:3] [007.01] Aging: pri=0, wait=6004ms, boost=12, effective=9
+[DBG:3] [007.01] Aging: pri=9, wait=6003ms, boost=12, effective=9
+[DBG:3] [007.01] Aging: pri=7, wait=6003ms, boost=12, effective=9
+[DBG:3] [007.01] Aging: pri=7, wait=6003ms, boost=12, effective=9
+[DBG:3] [007.01] Aging: pri=5, wait=6003ms, boost=12, effective=9
+[DBG:3] [007.01] Aging: pri=0, wait=6003ms, boost=12, effective=9
+[DBG:3] [007.01] Aging: pri=1, wait=6003ms, boost=12, effective=9
+[DBG:3] [007.01] Aging: pri=9, wait=5004ms, boost=10, effective=9
+[DBG:3] [007.01] Aging: pri=4, wait=5003ms, boost=10, effective=9
+[DBG:3] [007.01] Aging: pri=6, wait=5003ms, boost=10, effective=9
+[DBG:3] [007.01] Aging: pri=7, wait=5003ms, boost=10, effective=9
+[DBG:3] [007.01] Aging: pri=5, wait=5003ms, boost=10, effective=9
+[DBG:3] [007.01] Aging: pri=0, wait=5003ms, boost=10, effective=9
+[DBG:3] [007.01] Aging: pri=0, wait=5002ms, boost=10, effective=9
+[DBG:3] [007.01] Aging: pri=4, wait=4003ms, boost=8, effective=9
+[DBG:3] [007.01] Aging: pri=3, wait=4002ms, boost=8, effective=9
+[DBG:3] [007.01] Dequeue: pri=2, data=1, from P7, count=19/20
+[DBG:3] [007.01] Consumer 1: Read pri=2, data=1 from P7, queue=19/20
+[DBG:3] [007.01] Consumer 1: Sleeping for 1 s
+[DBG:3] [007.01] Enqueue: pri=0, slot=15, count=20/20, was_blocked=1
+[DBG:3] [007.01] Producer 3: Sleeping for 2 s
+[DBG:3] [007.01] Aging: pri=2, wait=7005ms, boost=14, effective=9
+[DBG:3] [007.01] Aging: pri=2, wait=7005ms, boost=14, effective=9
+[DBG:3] [007.01] Aging: pri=2, wait=7005ms, boost=14, effective=9
+[DBG:3] [007.01] Aging: pri=0, wait=6005ms, boost=12, effective=9
+[DBG:3] [007.01] Aging: pri=0, wait=6005ms, boost=12, effective=9
+[DBG:3] [007.01] Aging: pri=9, wait=6004ms, boost=12, effective=9
+[DBG:3] [007.01] Aging: pri=7, wait=6004ms, boost=12, effective=9
+[DBG:3] [007.01] Aging: pri=7, wait=6004ms, boost=12, effective=9
+[DBG:3] [007.01] Aging: pri=5, wait=6004ms, boost=12, effective=9
+[DBG:3] [007.01] Aging: pri=0, wait=6004ms, boost=12, effective=9
+[DBG:3] [007.01] Aging: pri=1, wait=6004ms, boost=12, effective=9
+[DBG:3] [007.01] Aging: pri=9, wait=5005ms, boost=10, effective=9
+[DBG:3] [007.01] Aging: pri=4, wait=5004ms, boost=10, effective=9
+[DBG:3] [007.01] Aging: pri=6, wait=5004ms, boost=10, effective=9
+[DBG:3] [007.01] Aging: pri=7, wait=5004ms, boost=10, effective=9
+[DBG:3] [007.01] Aging: pri=5, wait=5004ms, boost=10, effective=9
+[DBG:3] [007.01] Aging: pri=0, wait=5004ms, boost=10, effective=9
+[DBG:3] [007.01] Aging: pri=0, wait=5003ms, boost=10, effective=9
+[DBG:3] [007.01] Aging: pri=4, wait=4004ms, boost=8, effective=9
+[DBG:3] [007.01] Aging: pri=3, wait=4003ms, boost=8, effective=9
+[DBG:3] [007.01] Aging: pri=0, wait=4003ms, boost=8, effective=8
+[DBG:3] [007.01] Dequeue: pri=2, data=5, from P3, count=19/20
+[DBG:3] [007.01] Consumer 2: Read pri=2, data=5 from P3, queue=19/20
+[DBG:3] [007.01] Consumer 2: Sleeping for 4 s
+[DBG:3] [007.01] Aging: pri=2, wait=7006ms, boost=14, effective=9
+[DBG:3] [007.01] Aging: pri=2, wait=7006ms, boost=14, effective=9
+[DBG:3] [007.01] Aging: pri=0, wait=6006ms, boost=12, effective=9
+[DBG:3] [007.01] Aging: pri=0, wait=6006ms, boost=12, effective=9
+[DBG:3] [007.01] Aging: pri=9, wait=6005ms, boost=12, effective=9
+[DBG:3] [007.01] Aging: pri=7, wait=6005ms, boost=12, effective=9
+[DBG:3] [007.01] Aging: pri=7, wait=6005ms, boost=12, effective=9
+[DBG:3] [007.01] Aging: pri=5, wait=6005ms, boost=12, effective=9
+[DBG:3] [007.01] Aging: pri=0, wait=6005ms, boost=12, effective=9
+[DBG:3] [007.01] Aging: pri=1, wait=6005ms, boost=12, effective=9
+[DBG:3] [007.01] Aging: pri=9, wait=5006ms, boost=10, effective=9
+[DBG:3] [007.01] Aging: pri=4, wait=5005ms, boost=10, effective=9
+[DBG:3] [007.01] Aging: pri=6, wait=5005ms, boost=10, effective=9
+[DBG:3] [007.01] Aging: pri=7, wait=5005ms, boost=10, effective=9
+[DBG:3] [007.01] Aging: pri=5, wait=5005ms, boost=10, effective=9
+[DBG:3] [007.01] Aging: pri=0, wait=5005ms, boost=10, effective=9
+[DBG:3] [007.01] Aging: pri=0, wait=5004ms, boost=10, effective=9
+[DBG:3] [007.01] Aging: pri=4, wait=4005ms, boost=8, effective=9
+[DBG:3] [007.01] Aging: pri=3, wait=4004ms, boost=8, effective=9
+[DBG:3] [007.01] Aging: pri=0, wait=4004ms, boost=8, effective=8
+[DBG:3] [007.01] Dequeue: pri=2, data=6, from P5, count=18/20
+[DBG:3] [007.01] Consumer 4: Read pri=2, data=6 from P5, queue=18/20
+[DBG:3] [007.01] Enqueue: pri=2, slot=16, count=19/20, was_blocked=1
+[DBG:3] [007.01] Producer 6: Sleeping for 2 s
+[DBG:3] [007.01] Consumer 4: Sleeping for 2 s
+[DBG:3] [007.01] Producer 8: Generated data=8, pri=2
+[DBG:3] [007.01] Enqueue: pri=2, slot=17, count=20/20, was_blocked=0
+[DBG:3] [007.01] Producer 8: Sleeping for 1 s
+[DBG:3] [007.01] Aging: pri=0, wait=6006ms, boost=12, effective=9
+[DBG:3] [007.01] Aging: pri=0, wait=6006ms, boost=12, effective=9
+[DBG:3] [007.01] Aging: pri=0, wait=6006ms, boost=12, effective=9
+[DBG:3] [007.01] Aging: pri=9, wait=6005ms, boost=12, effective=9
+[DBG:3] [007.01] Aging: pri=7, wait=6005ms, boost=12, effective=9
+[DBG:3] [007.01] Aging: pri=7, wait=6005ms, boost=12, effective=9
+[DBG:3] [007.01] Aging: pri=5, wait=6005ms, boost=12, effective=9
+[DBG:3] [007.01] Aging: pri=0, wait=6005ms, boost=12, effective=9
+[DBG:3] [007.01] Aging: pri=1, wait=6005ms, boost=12, effective=9
+[DBG:3] [007.01] Aging: pri=9, wait=5006ms, boost=10, effective=9
+[DBG:3] [007.01] Aging: pri=4, wait=5005ms, boost=10, effective=9
+[DBG:3] [007.01] Aging: pri=6, wait=5005ms, boost=10, effective=9
+[DBG:3] [007.01] Aging: pri=7, wait=5005ms, boost=10, effective=9
+[DBG:3] [007.01] Aging: pri=5, wait=5005ms, boost=10, effective=9
+[DBG:3] [007.01] Aging: pri=0, wait=5005ms, boost=10, effective=9
+[DBG:3] [007.01] Aging: pri=0, wait=5004ms, boost=10, effective=9
+[DBG:3] [007.01] Aging: pri=4, wait=4005ms, boost=8, effective=9
+[DBG:3] [007.01] Aging: pri=3, wait=4004ms, boost=8, effective=9
+[DBG:3] [007.01] Aging: pri=0, wait=4004ms, boost=8, effective=8
+[DBG:3] [007.01] Aging: pri=2, wait=4003ms, boost=8, effective=9
+[DBG:3] [007.01] Aging: pri=2, wait=0ms, boost=0, effective=2
+[DBG:3] [007.01] Dequeue: pri=0, data=5, from P7, count=19/20
+[DBG:3] [007.01] Consumer 3: Read pri=0, data=5 from P7, queue=19/20
+[DBG:3] [007.01] Consumer 3: Sleeping for 0 s
+[DBG:3] [007.01] Aging: pri=0, wait=6006ms, boost=12, effective=9
+[DBG:3] [007.01] Aging: pri=0, wait=6006ms, boost=12, effective=9
+[DBG:3] [007.01] Aging: pri=9, wait=6005ms, boost=12, effective=9
+[DBG:3] [007.01] Aging: pri=7, wait=6005ms, boost=12, effective=9
+[DBG:3] [007.01] Aging: pri=7, wait=6005ms, boost=12, effective=9
+[DBG:3] [007.01] Aging: pri=5, wait=6005ms, boost=12, effective=9
+[DBG:3] [007.01] Aging: pri=0, wait=6005ms, boost=12, effective=9
+[DBG:3] [007.01] Aging: pri=1, wait=6005ms, boost=12, effective=9
+[DBG:3] [007.01] Aging: pri=9, wait=5006ms, boost=10, effective=9
+[DBG:3] [007.01] Aging: pri=4, wait=5005ms, boost=10, effective=9
+[DBG:3] [007.01] Aging: pri=6, wait=5005ms, boost=10, effective=9
+[DBG:3] [007.01] Aging: pri=7, wait=5005ms, boost=10, effective=9
+[DBG:3] [007.01] Aging: pri=5, wait=5005ms, boost=10, effective=9
+[DBG:3] [007.01] Aging: pri=0, wait=5005ms, boost=10, effective=9
+[DBG:3] [007.01] Aging: pri=0, wait=5004ms, boost=10, effective=9
+[DBG:3] [007.01] Aging: pri=4, wait=4005ms, boost=8, effective=9
+[DBG:3] [007.01] Aging: pri=3, wait=4004ms, boost=8, effective=9
+[DBG:3] [007.01] Aging: pri=0, wait=4004ms, boost=8, effective=8
+[DBG:3] [007.01] Aging: pri=2, wait=4003ms, boost=8, effective=9
+[DBG:3] [007.01] Aging: pri=2, wait=0ms, boost=0, effective=2
+[DBG:3] [007.01] Dequeue: pri=0, data=7, from P9, count=18/20
+[DBG:3] [007.01] Consumer 3: Read pri=0, data=7 from P9, queue=18/20
+[DBG:3] [007.01] Consumer 3: Sleeping for 2 s
+[DBG:3] [007.01] Enqueue: pri=7, slot=18, count=19/20, was_blocked=1
+[DBG:3] [007.01] Producer 2: Sleeping for 1 s
+[DBG:3] [007.01] Enqueue: pri=4, slot=19, count=20/20, was_blocked=1
+[DBG:3] [007.01] Producer 1: Sleeping for 2 s
+[DBG:3] [008.00] Analytics sample: occupancy=20/20 (9 samples)
+[DBG:3] [008.01] Producer 4: Generated data=4, pri=7
+[DBG:3] [008.01] Aging: pri=9, wait=7004ms, boost=14, effective=9
+[DBG:3] [008.01] Aging: pri=9, wait=7004ms, boost=14, effective=9
+[DBG:3] [008.01] Aging: pri=7, wait=7004ms, boost=14, effective=9
+[DBG:3] [008.01] Aging: pri=7, wait=7004ms, boost=14, effective=9
+[DBG:3] [008.01] Aging: pri=5, wait=7004ms, boost=14, effective=9
+[DBG:3] [008.01] Aging: pri=0, wait=7004ms, boost=14, effective=9
+[DBG:3] [008.01] Aging: pri=1, wait=7004ms, boost=14, effective=9
+[DBG:3] [008.01] Aging: pri=9, wait=6005ms, boost=12, effective=9
+[DBG:3] [008.01] Aging: pri=4, wait=6004ms, boost=12, effective=9
+[DBG:3] [008.01] Aging: pri=6, wait=6004ms, boost=12, effective=9
+[DBG:3] [008.01] Aging: pri=7, wait=6004ms, boost=12, effective=9
+[DBG:3] [008.01] Aging: pri=5, wait=6004ms, boost=12, effective=9
+[DBG:3] [008.01] Aging: pri=0, wait=6004ms, boost=12, effective=9
+[DBG:3] [008.01] Aging: pri=0, wait=6003ms, boost=12, effective=9
+[DBG:3] [008.01] Aging: pri=4, wait=5004ms, boost=10, effective=9
+[DBG:3] [008.01] Aging: pri=3, wait=5003ms, boost=10, effective=9
+[DBG:3] [008.01] Aging: pri=0, wait=5003ms, boost=10, effective=9
+[DBG:3] [008.01] Aging: pri=2, wait=5002ms, boost=10, effective=9
+[DBG:3] [008.01] Aging: pri=2, wait=999ms, boost=1, effective=3
+[DBG:3] [008.01] Aging: pri=7, wait=5002ms, boost=10, effective=9
+[DBG:3] [008.01] Aging: pri=4, wait=4003ms, boost=8, effective=9
+[DBG:3] [008.01] Dequeue: pri=9, data=7, from P2, count=19/20
+[DBG:3] [008.01] Consumer 1: Read pri=9, data=7 from P2, queue=19/20
+[DBG:3] [008.01] Consumer 1: Sleeping for 4 s
+[DBG:3] [008.01] Enqueue: pri=3, slot=0, count=20/20, was_blocked=1
+[DBG:3] [008.01] Producer 7: Sleeping for 1 s
+[DBG:3] [008.01] Aging: pri=7, wait=7004ms, boost=14, effective=9
+[DBG:3] [008.01] Aging: pri=7, wait=7004ms, boost=14, effective=9
+[DBG:3] [008.01] Aging: pri=7, wait=7004ms, boost=14, effective=9
+[DBG:3] [008.01] Aging: pri=5, wait=7004ms, boost=14, effective=9
+[DBG:3] [008.01] Aging: pri=0, wait=7004ms, boost=14, effective=9
+[DBG:3] [008.01] Aging: pri=1, wait=7004ms, boost=14, effective=9
+[DBG:3] [008.01] Aging: pri=9, wait=6005ms, boost=12, effective=9
+[DBG:3] [008.01] Aging: pri=4, wait=6004ms, boost=12, effective=9
+[DBG:3] [008.01] Aging: pri=6, wait=6004ms, boost=12, effective=9
+[DBG:3] [008.01] Aging: pri=7, wait=6004ms, boost=12, effective=9
+[DBG:3] [008.01] Aging: pri=5, wait=6004ms, boost=12, effective=9
+[DBG:3] [008.01] Aging: pri=0, wait=6004ms, boost=12, effective=9
+[DBG:3] [008.01] Aging: pri=0, wait=6003ms, boost=12, effective=9
+[DBG:3] [008.01] Aging: pri=4, wait=5004ms, boost=10, effective=9
+[DBG:3] [008.01] Aging: pri=3, wait=5003ms, boost=10, effective=9
+[DBG:3] [008.01] Aging: pri=0, wait=5003ms, boost=10, effective=9
+[DBG:3] [008.01] Aging: pri=2, wait=5002ms, boost=10, effective=9
+[DBG:3] [008.01] Aging: pri=2, wait=999ms, boost=1, effective=3
+[DBG:3] [008.01] Aging: pri=7, wait=5002ms, boost=10, effective=9
+[DBG:3] [008.01] Aging: pri=4, wait=4003ms, boost=8, effective=9
+[DBG:3] [008.01] Aging: pri=3, wait=4000ms, boost=8, effective=9
+[DBG:3] [008.01] Dequeue: pri=7, data=5, from P3, count=19/20
+[DBG:3] [008.01] Consumer 5: Read pri=7, data=5 from P3, queue=19/20
+[DBG:3] [008.01] Consumer 5: Sleeping for 4 s
+[DBG:3] [008.01] Producer 8: Generated data=3, pri=1
+[DBG:3] [008.01] Enqueue: pri=1, slot=1, count=20/20, was_blocked=0
+[DBG:3] [008.01] Producer 8: Sleeping for 2 s
+[DBG:3] [008.01] Producer 2: Generated data=8, pri=4
+[DBG:3] [009.00] Analytics sample: occupancy=20/20 (10 samples)
+[DBG:3] [009.01] Producer 7: Generated data=6, pri=1
+[DBG:3] [009.01] Producer 3: Generated data=9, pri=0
+[DBG:3] [009.01] Producer 6: Generated data=9, pri=3
+[DBG:3] [009.01] Aging: pri=7, wait=8006ms, boost=16, effective=9
+[DBG:3] [009.01] Aging: pri=7, wait=8006ms, boost=16, effective=9
+[DBG:3] [009.01] Aging: pri=5, wait=8006ms, boost=16, effective=9
+[DBG:3] [009.01] Aging: pri=0, wait=8006ms, boost=16, effective=9
+[DBG:3] [009.01] Aging: pri=1, wait=8006ms, boost=16, effective=9
+[DBG:3] [009.01] Aging: pri=9, wait=7007ms, boost=14, effective=9
+[DBG:3] [009.01] Aging: pri=4, wait=7006ms, boost=14, effective=9
+[DBG:3] [009.01] Aging: pri=6, wait=7006ms, boost=14, effective=9
+[DBG:3] [009.01] Aging: pri=7, wait=7006ms, boost=14, effective=9
+[DBG:3] [009.01] Aging: pri=5, wait=7006ms, boost=14, effective=9
+[DBG:3] [009.01] Aging: pri=0, wait=7006ms, boost=14, effective=9
+[DBG:3] [009.01] Aging: pri=0, wait=7005ms, boost=14, effective=9
+[DBG:3] [009.01] Aging: pri=4, wait=6006ms, boost=12, effective=9
+[DBG:3] [009.01] Aging: pri=3, wait=6005ms, boost=12, effective=9
+[DBG:3] [009.01] Aging: pri=0, wait=6005ms, boost=12, effective=9
+[DBG:3] [009.01] Aging: pri=2, wait=6004ms, boost=12, effective=9
+[DBG:3] [009.01] Aging: pri=2, wait=2001ms, boost=4, effective=6
+[DBG:3] [009.01] Aging: pri=7, wait=6004ms, boost=12, effective=9
+[DBG:3] [009.01] Aging: pri=4, wait=5005ms, boost=10, effective=9
+[DBG:3] [009.01] Aging: pri=3, wait=5002ms, boost=10, effective=9
+[DBG:3] [009.01] Aging: pri=1, wait=1001ms, boost=2, effective=3
+[DBG:3] [009.01] Dequeue: pri=7, data=6, from P5, count=19/20
+[DBG:3] [009.01] Consumer 4: Read pri=7, data=6 from P5, queue=19/20
+[DBG:3] [009.01] Consumer 4: Sleeping for 1 s
+[DBG:3] [009.01] Producer 1: Generated data=0, pri=4
+[DBG:3] [009.01] Enqueue: pri=4, slot=2, count=20/20, was_blocked=0
+[DBG:3] [009.01] Producer 1: Sleeping for 0 s
+[DBG:3] [009.01] Producer 1: Generated data=6, pri=5
+[DBG:3] [009.01] Aging: pri=5, wait=8006ms, boost=16, effective=9
+[DBG:3] [009.01] Aging: pri=5, wait=8006ms, boost=16, effective=9
+[DBG:3] [009.01] Aging: pri=0, wait=8006ms, boost=16, effective=9
+[DBG:3] [009.01] Aging: pri=1, wait=8006ms, boost=16, effective=9
+[DBG:3] [009.01] Aging: pri=9, wait=7007ms, boost=14, effective=9
+[DBG:3] [009.01] Aging: pri=4, wait=7006ms, boost=14, effective=9
+[DBG:3] [009.01] Aging: pri=6, wait=7006ms, boost=14, effective=9
+[DBG:3] [009.01] Aging: pri=7, wait=7006ms, boost=14, effective=9
+[DBG:3] [009.01] Aging: pri=5, wait=7006ms, boost=14, effective=9
+[DBG:3] [009.01] Aging: pri=0, wait=7006ms, boost=14, effective=9
+[DBG:3] [009.01] Aging: pri=0, wait=7005ms, boost=14, effective=9
+[DBG:3] [009.01] Aging: pri=4, wait=6006ms, boost=12, effective=9
+[DBG:3] [009.01] Aging: pri=3, wait=6005ms, boost=12, effective=9
+[DBG:3] [009.01] Aging: pri=0, wait=6005ms, boost=12, effective=9
+[DBG:3] [009.01] Aging: pri=2, wait=6004ms, boost=12, effective=9
+[DBG:3] [009.01] Aging: pri=2, wait=2001ms, boost=4, effective=6
+[DBG:3] [009.01] Aging: pri=7, wait=6004ms, boost=12, effective=9
+[DBG:3] [009.01] Aging: pri=4, wait=5005ms, boost=10, effective=9
+[DBG:3] [009.01] Aging: pri=3, wait=5002ms, boost=10, effective=9
+[DBG:3] [009.01] Aging: pri=1, wait=1001ms, boost=2, effective=3
+[DBG:3] [009.01] Aging: pri=4, wait=0ms, boost=0, effective=4
+[DBG:3] [009.01] Dequeue: pri=5, data=1, from P8, count=19/20
+[DBG:3] [009.01] Consumer 3: Read pri=5, data=1 from P8, queue=19/20
+[DBG:3] [009.01] Consumer 3: Sleeping for 2 s
+[DBG:3] [009.01] Enqueue: pri=8, slot=3, count=20/20, was_blocked=1
+[DBG:3] [009.01] Producer 5: Sleeping for 1 s
+[DBG:3] [010.00] Analytics sample: occupancy=20/20 (11 samples)
+[DBG:3] [010.01] Producer 8: Generated data=0, pri=1
+[DBG:3] [010.01] Aging: pri=0, wait=9006ms, boost=18, effective=9
+[DBG:3] [010.01] Aging: pri=0, wait=9006ms, boost=18, effective=9
+[DBG:3] [010.01] Aging: pri=1, wait=9006ms, boost=18, effective=9
+[DBG:3] [010.01] Aging: pri=9, wait=8007ms, boost=16, effective=9
+[DBG:3] [010.01] Aging: pri=4, wait=8006ms, boost=16, effective=9
+[DBG:3] [010.01] Aging: pri=6, wait=8006ms, boost=16, effective=9
+[DBG:3] [010.01] Aging: pri=7, wait=8006ms, boost=16, effective=9
+[DBG:3] [010.01] Aging: pri=5, wait=8006ms, boost=16, effective=9
+[DBG:3] [010.01] Aging: pri=0, wait=8006ms, boost=16, effective=9
+[DBG:3] [010.01] Aging: pri=0, wait=8005ms, boost=16, effective=9
+[DBG:3] [010.01] Aging: pri=4, wait=7006ms, boost=14, effective=9
+[DBG:3] [010.01] Aging: pri=3, wait=7005ms, boost=14, effective=9
+[DBG:3] [010.01] Aging: pri=0, wait=7005ms, boost=14, effective=9
+[DBG:3] [010.01] Aging: pri=2, wait=7004ms, boost=14, effective=9
+[DBG:3] [010.01] Aging: pri=2, wait=3001ms, boost=6, effective=8
+[DBG:3] [010.01] Aging: pri=7, wait=7004ms, boost=14, effective=9
+[DBG:3] [010.01] Aging: pri=4, wait=6005ms, boost=12, effective=9
+[DBG:3] [010.01] Aging: pri=3, wait=6002ms, boost=12, effective=9
+[DBG:3] [010.01] Aging: pri=1, wait=2001ms, boost=4, effective=5
+[DBG:3] [010.01] Aging: pri=4, wait=1000ms, boost=2, effective=6
+[DBG:3] [010.01] Aging: pri=8, wait=7004ms, boost=14, effective=9
+[DBG:3] [010.01] Dequeue: pri=0, data=1, from P4, count=19/20
+[DBG:3] [010.01] Enqueue: pri=7, slot=4, count=20/20, was_blocked=1
+[DBG:3] [010.01] Producer 4: Sleeping for 0 s
+[DBG:3] [010.01] Producer 4: Generated data=0, pri=8
+[DBG:3] [010.01] Producer 5: Generated data=4, pri=9
+[DBG:3] [010.01] Consumer 4: Read pri=0, data=1 from P4, queue=20/20
+[DBG:3] [010.01] Consumer 4: Sleeping for 4 s
+[DBG:3] [011.00] Analytics sample: occupancy=20/20 (12 samples)
+[DBG:3] [011.01] Aging: pri=1, wait=10006ms, boost=20, effective=9
+[DBG:3] [011.01] Aging: pri=1, wait=10006ms, boost=20, effective=9
+[DBG:3] [011.01] Aging: pri=9, wait=9007ms, boost=18, effective=9
+[DBG:3] [011.01] Aging: pri=4, wait=9006ms, boost=18, effective=9
+[DBG:3] [011.01] Aging: pri=6, wait=9006ms, boost=18, effective=9
+[DBG:3] [011.01] Aging: pri=7, wait=9006ms, boost=18, effective=9
+[DBG:3] [011.01] Aging: pri=5, wait=9006ms, boost=18, effective=9
+[DBG:3] [011.01] Aging: pri=0, wait=9006ms, boost=18, effective=9
+[DBG:3] [011.01] Aging: pri=0, wait=9005ms, boost=18, effective=9
+[DBG:3] [011.01] Aging: pri=4, wait=8006ms, boost=16, effective=9
+[DBG:3] [011.01] Aging: pri=3, wait=8005ms, boost=16, effective=9
+[DBG:3] [011.01] Aging: pri=0, wait=8005ms, boost=16, effective=9
+[DBG:3] [011.01] Aging: pri=2, wait=8004ms, boost=16, effective=9
+[DBG:3] [011.01] Aging: pri=2, wait=4001ms, boost=8, effective=9
+[DBG:3] [011.01] Aging: pri=7, wait=8004ms, boost=16, effective=9
+[DBG:3] [011.01] Aging: pri=4, wait=7005ms, boost=14, effective=9
+[DBG:3] [011.01] Aging: pri=3, wait=7002ms, boost=14, effective=9
+[DBG:3] [011.01] Aging: pri=1, wait=3001ms, boost=6, effective=7
+[DBG:3] [011.01] Aging: pri=4, wait=2000ms, boost=4, effective=8
+[DBG:3] [011.01] Aging: pri=8, wait=8004ms, boost=16, effective=9
+[DBG:3] [011.01] Aging: pri=7, wait=3003ms, boost=6, effective=9
+[DBG:3] [011.01] Dequeue: pri=1, data=3, from P8, count=19/20
+[DBG:3] [011.01] Enqueue: pri=6, slot=5, count=20/20, was_blocked=1
+[DBG:3] [011.01] Producer 10: Sleeping for 2 s
+[DBG:3] [011.01] Consumer 2: Read pri=1, data=3 from P8, queue=20/20
+[DBG:3] [011.01] Consumer 2: Sleeping for 0 s
+[DBG:3] [011.01] Aging: pri=9, wait=9007ms, boost=18, effective=9
+[DBG:3] [011.01] Aging: pri=9, wait=9007ms, boost=18, effective=9
+[DBG:3] [011.01] Aging: pri=4, wait=9006ms, boost=18, effective=9
+[DBG:3] [011.01] Aging: pri=6, wait=9006ms, boost=18, effective=9
+[DBG:3] [011.01] Aging: pri=7, wait=9006ms, boost=18, effective=9
+[DBG:3] [011.01] Aging: pri=5, wait=9006ms, boost=18, effective=9
+[DBG:3] [011.01] Aging: pri=0, wait=9006ms, boost=18, effective=9
+[DBG:3] [011.01] Aging: pri=0, wait=9005ms, boost=18, effective=9
+[DBG:3] [011.01] Aging: pri=4, wait=8006ms, boost=16, effective=9
+[DBG:3] [011.01] Aging: pri=3, wait=8005ms, boost=16, effective=9
+[DBG:3] [011.01] Aging: pri=0, wait=8005ms, boost=16, effective=9
+[DBG:3] [011.01] Aging: pri=2, wait=8004ms, boost=16, effective=9
+[DBG:3] [011.01] Aging: pri=2, wait=4001ms, boost=8, effective=9
+[DBG:3] [011.01] Aging: pri=7, wait=8004ms, boost=16, effective=9
+[DBG:3] [011.01] Aging: pri=4, wait=7005ms, boost=14, effective=9
+[DBG:3] [011.01] Aging: pri=3, wait=7002ms, boost=14, effective=9
+[DBG:3] [011.01] Aging: pri=1, wait=3001ms, boost=6, effective=7
+[DBG:3] [011.01] Aging: pri=4, wait=2000ms, boost=4, effective=8
+[DBG:3] [011.01] Aging: pri=8, wait=8004ms, boost=16, effective=9
+[DBG:3] [011.01] Aging: pri=7, wait=3003ms, boost=6, effective=9
+[DBG:3] [011.01] Aging: pri=6, wait=6004ms, boost=12, effective=9
+[DBG:3] [011.01] Dequeue: pri=9, data=5, from P1, count=19/20
+[DBG:3] [011.01] Consumer 2: Read pri=9, data=5 from P1, queue=19/20
+[DBG:3] [011.01] Consumer 2: Sleeping for 0 s
+[DBG:3] [011.01] Aging: pri=4, wait=9007ms, boost=18, effective=9
+[DBG:3] [011.01] Aging: pri=4, wait=9007ms, boost=18, effective=9
+[DBG:3] [011.01] Aging: pri=6, wait=9007ms, boost=18, effective=9
+[DBG:3] [011.01] Aging: pri=7, wait=9007ms, boost=18, effective=9
+[DBG:3] [011.01] Aging: pri=5, wait=9007ms, boost=18, effective=9
+[DBG:3] [011.01] Aging: pri=0, wait=9007ms, boost=18, effective=9
+[DBG:3] [011.01] Aging: pri=0, wait=9006ms, boost=18, effective=9
+[DBG:3] [011.01] Aging: pri=4, wait=8007ms, boost=16, effective=9
+[DBG:3] [011.01] Aging: pri=3, wait=8006ms, boost=16, effective=9
+[DBG:3] [011.01] Aging: pri=0, wait=8006ms, boost=16, effective=9
+[DBG:3] [011.01] Aging: pri=2, wait=8005ms, boost=16, effective=9
+[DBG:3] [011.01] Aging: pri=2, wait=4002ms, boost=8, effective=9
+[DBG:3] [011.01] Aging: pri=7, wait=8005ms, boost=16, effective=9
+[DBG:3] [011.01] Aging: pri=4, wait=7006ms, boost=14, effective=9
+[DBG:3] [011.01] Aging: pri=3, wait=7003ms, boost=14, effective=9
+[DBG:3] [011.01] Aging: pri=1, wait=3002ms, boost=6, effective=7
+[DBG:3] [011.01] Aging: pri=4, wait=2001ms, boost=4, effective=8
+[DBG:3] [011.01] Aging: pri=8, wait=8005ms, boost=16, effective=9
+[DBG:3] [011.01] Aging: pri=7, wait=3004ms, boost=6, effective=9
+[DBG:3] [011.01] Aging: pri=6, wait=6005ms, boost=12, effective=9
+[DBG:3] [011.01] Dequeue: pri=4, data=7, from P6, count=18/20
+[DBG:3] [011.01] Consumer 2: Read pri=4, data=7 from P6, queue=18/20
+[DBG:3] [011.01] Consumer 2: Sleeping for 3 s
+[DBG:3] [011.01] Enqueue: pri=1, slot=6, count=19/20, was_blocked=1
+[DBG:3] [011.01] Producer 7: Sleeping for 2 s
+[DBG:3] [011.01] Enqueue: pri=4, slot=7, count=20/20, was_blocked=1
+[DBG:3] [011.01] Producer 2: Sleeping for 2 s
+[DBG:3] [011.01] Aging: pri=6, wait=9007ms, boost=18, effective=9
+[DBG:3] [011.01] Aging: pri=6, wait=9007ms, boost=18, effective=9
+[DBG:3] [011.01] Aging: pri=7, wait=9007ms, boost=18, effective=9
+[DBG:3] [011.01] Aging: pri=5, wait=9007ms, boost=18, effective=9
+[DBG:3] [011.01] Aging: pri=0, wait=9007ms, boost=18, effective=9
+[DBG:3] [011.01] Aging: pri=0, wait=9006ms, boost=18, effective=9
+[DBG:3] [011.01] Aging: pri=4, wait=8007ms, boost=16, effective=9
+[DBG:3] [011.01] Aging: pri=3, wait=8006ms, boost=16, effective=9
+[DBG:3] [011.01] Aging: pri=0, wait=8006ms, boost=16, effective=9
+[DBG:3] [011.01] Aging: pri=2, wait=8005ms, boost=16, effective=9
+[DBG:3] [011.01] Aging: pri=2, wait=4002ms, boost=8, effective=9
+[DBG:3] [011.01] Aging: pri=7, wait=8005ms, boost=16, effective=9
+[DBG:3] [011.01] Aging: pri=4, wait=7006ms, boost=14, effective=9
+[DBG:3] [011.01] Aging: pri=3, wait=7003ms, boost=14, effective=9
+[DBG:3] [011.01] Aging: pri=1, wait=3002ms, boost=6, effective=7
+[DBG:3] [011.01] Aging: pri=4, wait=2001ms, boost=4, effective=8
+[DBG:3] [011.01] Aging: pri=8, wait=8005ms, boost=16, effective=9
+[DBG:3] [011.01] Aging: pri=7, wait=3004ms, boost=6, effective=9
+[DBG:3] [011.01] Aging: pri=6, wait=6005ms, boost=12, effective=9
+[DBG:3] [011.01] Aging: pri=1, wait=2003ms, boost=4, effective=5
+[DBG:3] [011.01] Aging: pri=4, wait=3001ms, boost=6, effective=9
+[DBG:3] [011.01] Dequeue: pri=6, data=1, from P3, count=19/20
+[DBG:3] [011.01] Consumer 3: Read pri=6, data=1 from P3, queue=19/20
+[DBG:3] [011.01] Consumer 3: Sleeping for 3 s
+[DBG:3] [011.01] Enqueue: pri=0, slot=8, count=20/20, was_blocked=1
+[DBG:3] [011.01] Producer 3: Sleeping for 2 s
+[DBG:3] [012.00] Analytics sample: occupancy=20/20 (13 samples)
+[DBG:3] [012.01] Aging: pri=7, wait=10007ms, boost=20, effective=9
+[DBG:3] [012.01] Aging: pri=7, wait=10007ms, boost=20, effective=9
+[DBG:3] [012.01] Aging: pri=5, wait=10007ms, boost=20, effective=9
+[DBG:3] [012.01] Aging: pri=0, wait=10007ms, boost=20, effective=9
+[DBG:3] [012.01] Aging: pri=0, wait=10006ms, boost=20, effective=9
+[DBG:3] [012.01] Aging: pri=4, wait=9007ms, boost=18, effective=9
+[DBG:3] [012.01] Aging: pri=3, wait=9006ms, boost=18, effective=9
+[DBG:3] [012.01] Aging: pri=0, wait=9006ms, boost=18, effective=9
+[DBG:3] [012.01] Aging: pri=2, wait=9005ms, boost=18, effective=9
+[DBG:3] [012.01] Aging: pri=2, wait=5002ms, boost=10, effective=9
+[DBG:3] [012.01] Aging: pri=7, wait=9005ms, boost=18, effective=9
+[DBG:3] [012.01] Aging: pri=4, wait=8006ms, boost=16, effective=9
+[DBG:3] [012.01] Aging: pri=3, wait=8003ms, boost=16, effective=9
+[DBG:3] [012.01] Aging: pri=1, wait=4002ms, boost=8, effective=9
+[DBG:3] [012.01] Aging: pri=4, wait=3001ms, boost=6, effective=9
+[DBG:3] [012.01] Aging: pri=8, wait=9005ms, boost=18, effective=9
+[DBG:3] [012.01] Aging: pri=7, wait=4004ms, boost=8, effective=9
+[DBG:3] [012.01] Aging: pri=6, wait=7005ms, boost=14, effective=9
+[DBG:3] [012.01] Aging: pri=1, wait=3003ms, boost=6, effective=7
+[DBG:3] [012.01] Aging: pri=4, wait=4001ms, boost=8, effective=9
+[DBG:3] [012.01] Aging: pri=0, wait=3003ms, boost=6, effective=6
+[DBG:3] [012.01] Dequeue: pri=7, data=8, from P7, count=19/20
+[DBG:3] [012.01] Consumer 5: Read pri=7, data=8 from P7, queue=19/20
+[DBG:3] [012.01] Consumer 5: Sleeping for 3 s
+[DBG:3] [012.01] Enqueue: pri=3, slot=9, count=20/20, was_blocked=1
+[DBG:3] [012.01] Producer 6: Sleeping for 0 s
+[DBG:3] [012.01] Producer 6: Generated data=0, pri=4
+[DBG:3] [012.01] Aging: pri=5, wait=10007ms, boost=20, effective=9
+[DBG:3] [012.01] Aging: pri=5, wait=10007ms, boost=20, effective=9
+[DBG:3] [012.01] Aging: pri=0, wait=10007ms, boost=20, effective=9
+[DBG:3] [012.01] Aging: pri=0, wait=10006ms, boost=20, effective=9
+[DBG:3] [012.01] Aging: pri=4, wait=9007ms, boost=18, effective=9
+[DBG:3] [012.01] Aging: pri=3, wait=9006ms, boost=18, effective=9
+[DBG:3] [012.01] Aging: pri=0, wait=9006ms, boost=18, effective=9
+[DBG:3] [012.01] Aging: pri=2, wait=9005ms, boost=18, effective=9
+[DBG:3] [012.01] Aging: pri=2, wait=5002ms, boost=10, effective=9
+[DBG:3] [012.01] Aging: pri=7, wait=9005ms, boost=18, effective=9
+[DBG:3] [012.01] Aging: pri=4, wait=8006ms, boost=16, effective=9
+[DBG:3] [012.01] Aging: pri=3, wait=8003ms, boost=16, effective=9
+[DBG:3] [012.01] Aging: pri=1, wait=4002ms, boost=8, effective=9
+[DBG:3] [012.01] Aging: pri=4, wait=3001ms, boost=6, effective=9
+[DBG:3] [012.01] Aging: pri=8, wait=9005ms, boost=18, effective=9
+[DBG:3] [012.01] Aging: pri=7, wait=4004ms, boost=8, effective=9
+[DBG:3] [012.01] Aging: pri=6, wait=7005ms, boost=14, effective=9
+[DBG:3] [012.01] Aging: pri=1, wait=3003ms, boost=6, effective=7
+[DBG:3] [012.01] Aging: pri=4, wait=4001ms, boost=8, effective=9
+[DBG:3] [012.01] Aging: pri=0, wait=3003ms, boost=6, effective=6
+[DBG:3] [012.01] Aging: pri=3, wait=3001ms, boost=6, effective=9
+[DBG:3] [012.01] Dequeue: pri=5, data=8, from P2, count=19/20
+[DBG:3] [012.01] Consumer 1: Read pri=5, data=8 from P2, queue=19/20
+[DBG:3] [012.01] Consumer 1: Sleeping for 2 s
+[DBG:3] [012.01] Enqueue: pri=5, slot=10, count=20/20, was_blocked=1
+[DBG:3] [012.01] Producer 1: Sleeping for 2 s
+[DBG:3] [013.00] Analytics sample: occupancy=20/20 (14 samples)
+[DBG:3] [013.01] Producer 2: Generated data=7, pri=5
+[DBG:3] [013.01] Producer 10: Generated data=9, pri=4
+[DBG:3] [013.01] Producer 3: Generated data=3, pri=7
+[DBG:3] [013.03] Producer 7: Generated data=1, pri=8
+[DBG:3] [014.00] Analytics sample: occupancy=20/20 (15 samples)
+[DBG:3] [014.01] Producer 1: Generated data=5, pri=1
+[DBG:3] [014.01] Aging: pri=0, wait=12008ms, boost=24, effective=9
+[DBG:3] [014.01] Aging: pri=0, wait=12008ms, boost=24, effective=9
+[DBG:3] [014.01] Aging: pri=0, wait=12007ms, boost=24, effective=9
+[DBG:3] [014.01] Aging: pri=4, wait=11008ms, boost=22, effective=9
+[DBG:3] [014.01] Aging: pri=3, wait=11007ms, boost=22, effective=9
+[DBG:3] [014.01] Aging: pri=0, wait=11007ms, boost=22, effective=9
+[DBG:3] [014.01] Aging: pri=2, wait=11006ms, boost=22, effective=9
+[DBG:3] [014.01] Aging: pri=2, wait=7003ms, boost=14, effective=9
+[DBG:3] [014.01] Aging: pri=7, wait=11006ms, boost=22, effective=9
+[DBG:3] [014.01] Aging: pri=4, wait=10007ms, boost=20, effective=9
+[DBG:3] [014.01] Aging: pri=3, wait=10004ms, boost=20, effective=9
+[DBG:3] [014.01] Aging: pri=1, wait=6003ms, boost=12, effective=9
+[DBG:3] [014.01] Aging: pri=4, wait=5002ms, boost=10, effective=9
+[DBG:3] [014.01] Aging: pri=8, wait=11006ms, boost=22, effective=9
+[DBG:3] [014.01] Aging: pri=7, wait=6005ms, boost=12, effective=9
+[DBG:3] [014.01] Aging: pri=6, wait=9006ms, boost=18, effective=9
+[DBG:3] [014.01] Aging: pri=1, wait=5004ms, boost=10, effective=9
+[DBG:3] [014.01] Aging: pri=4, wait=6002ms, boost=12, effective=9
+[DBG:3] [014.01] Aging: pri=0, wait=5004ms, boost=10, effective=9
+[DBG:3] [014.01] Aging: pri=3, wait=5002ms, boost=10, effective=9
+[DBG:3] [014.01] Aging: pri=5, wait=5002ms, boost=10, effective=9
+[DBG:3] [014.01] Dequeue: pri=0, data=9, from P10, count=19/20
+[DBG:3] [014.01] Aging: pri=0, wait=12008ms, boost=24, effective=9
+[DBG:3] [014.01] Aging: pri=0, wait=12008ms, boost=24, effective=9
+[DBG:3] [014.01] Aging: pri=4, wait=11009ms, boost=22, effective=9
+[DBG:3] [014.01] Aging: pri=3, wait=11008ms, boost=22, effective=9
+[DBG:3] [014.01] Aging: pri=0, wait=11008ms, boost=22, effective=9
+[DBG:3] [014.01] Aging: pri=2, wait=11007ms, boost=22, effective=9
+[DBG:3] [014.01] Aging: pri=2, wait=7004ms, boost=14, effective=9
+[DBG:3] [014.01] Aging: pri=7, wait=11007ms, boost=22, effective=9
+[DBG:3] [014.01] Aging: pri=4, wait=10008ms, boost=20, effective=9
+[DBG:3] [014.01] Aging: pri=3, wait=10005ms, boost=20, effective=9
+[DBG:3] [014.01] Aging: pri=1, wait=6004ms, boost=12, effective=9
+[DBG:3] [014.01] Aging: pri=4, wait=5003ms, boost=10, effective=9
+[DBG:3] [014.01] Aging: pri=8, wait=11007ms, boost=22, effective=9
+[DBG:3] [014.01] Aging: pri=7, wait=6006ms, boost=12, effective=9
+[DBG:3] [014.01] Aging: pri=6, wait=9007ms, boost=18, effective=9
+[DBG:3] [014.01] Aging: pri=1, wait=5005ms, boost=10, effective=9
+[DBG:3] [014.01] Aging: pri=4, wait=6003ms, boost=12, effective=9
+[DBG:3] [014.01] Aging: pri=0, wait=5005ms, boost=10, effective=9
+[DBG:3] [014.01] Aging: pri=3, wait=5003ms, boost=10, effective=9
+[DBG:3] [014.01] Aging: pri=5, wait=5003ms, boost=10, effective=9
+[DBG:3] [014.01] Dequeue: pri=0, data=4, from P4, count=18/20
+[DBG:3] [014.01] Consumer 3: Read pri=0, data=4 from P4, queue=18/20
+[DBG:3] [014.01] Consumer 3: Sleeping for 4 s
+[DBG:3] [014.01] Consumer 4: Read pri=0, data=9 from P10, queue=18/20
+[DBG:3] [014.01] Consumer 4: Sleeping for 1 s
+[DBG:3] [014.01] Enqueue: pri=6, slot=11, count=19/20, was_blocked=1
+[DBG:3] [014.01] Producer 9: Sleeping for 2 s
+[DBG:3] [014.01] Enqueue: pri=1, slot=12, count=20/20, was_blocked=1
+[DBG:3] [014.01] Producer 8: Sleeping for 1 s
+[DBG:3] [014.03] Aging: pri=4, wait=11025ms, boost=22, effective=9
+[DBG:3] [014.03] Aging: pri=4, wait=11025ms, boost=22, effective=9
+[DBG:3] [014.03] Aging: pri=3, wait=11024ms, boost=22, effective=9
+[DBG:3] [014.03] Aging: pri=0, wait=11024ms, boost=22, effective=9
+[DBG:3] [014.03] Aging: pri=2, wait=11023ms, boost=22, effective=9
+[DBG:3] [014.03] Aging: pri=2, wait=7020ms, boost=14, effective=9
+[DBG:3] [014.03] Aging: pri=7, wait=11023ms, boost=22, effective=9
+[DBG:3] [014.03] Aging: pri=4, wait=10024ms, boost=20, effective=9
+[DBG:3] [014.03] Aging: pri=3, wait=10021ms, boost=20, effective=9
+[DBG:3] [014.03] Aging: pri=1, wait=6020ms, boost=12, effective=9
+[DBG:3] [014.03] Aging: pri=4, wait=5019ms, boost=10, effective=9
+[DBG:3] [014.03] Aging: pri=8, wait=11023ms, boost=22, effective=9
+[DBG:3] [014.03] Aging: pri=7, wait=6022ms, boost=12, effective=9
+[DBG:3] [014.03] Aging: pri=6, wait=9023ms, boost=18, effective=9
+[DBG:3] [014.03] Aging: pri=1, wait=5021ms, boost=10, effective=9
+[DBG:3] [014.03] Aging: pri=4, wait=6019ms, boost=12, effective=9
+[DBG:3] [014.03] Aging: pri=0, wait=5021ms, boost=10, effective=9
+[DBG:3] [014.03] Aging: pri=3, wait=5019ms, boost=10, effective=9
+[DBG:3] [014.03] Aging: pri=5, wait=5019ms, boost=10, effective=9
+[DBG:3] [014.03] Aging: pri=6, wait=8022ms, boost=16, effective=9
+[DBG:3] [014.03] Aging: pri=1, wait=4019ms, boost=8, effective=9
+[DBG:3] [014.03] Dequeue: pri=4, data=2, from P9, count=19/20
+[DBG:3] [014.03] Aging: pri=3, wait=11025ms, boost=22, effective=9
+[DBG:3] [014.03] Aging: pri=3, wait=11025ms, boost=22, effective=9
+[DBG:3] [014.03] Aging: pri=0, wait=11025ms, boost=22, effective=9
+[DBG:3] [014.03] Aging: pri=2, wait=11024ms, boost=22, effective=9
+[DBG:3] [014.03] Aging: pri=2, wait=7021ms, boost=14, effective=9
+[DBG:3] [014.03] Aging: pri=7, wait=11024ms, boost=22, effective=9
+[DBG:3] [014.03] Aging: pri=4, wait=10025ms, boost=20, effective=9
+[DBG:3] [014.03] Aging: pri=3, wait=10022ms, boost=20, effective=9
+[DBG:3] [014.03] Aging: pri=1, wait=6021ms, boost=12, effective=9
+[DBG:3] [014.03] Aging: pri=4, wait=5020ms, boost=10, effective=9
+[DBG:3] [014.03] Aging: pri=8, wait=11024ms, boost=22, effective=9
+[DBG:3] [014.03] Aging: pri=7, wait=6023ms, boost=12, effective=9
+[DBG:3] [014.03] Aging: pri=6, wait=9024ms, boost=18, effective=9
+[DBG:3] [014.03] Aging: pri=1, wait=5022ms, boost=10, effective=9
+[DBG:3] [014.03] Aging: pri=4, wait=6020ms, boost=12, effective=9
+[DBG:3] [014.03] Aging: pri=0, wait=5022ms, boost=10, effective=9
+[DBG:3] [014.03] Aging: pri=3, wait=5020ms, boost=10, effective=9
+[DBG:3] [014.03] Aging: pri=5, wait=5020ms, boost=10, effective=9
+[DBG:3] [014.03] Aging: pri=6, wait=8023ms, boost=16, effective=9
+[DBG:3] [014.03] Aging: pri=1, wait=4020ms, boost=8, effective=9
+[DBG:3] [014.03] Dequeue: pri=3, data=4, from P8, count=18/20
+[DBG:3] [014.03] Enqueue: pri=8, slot=13, count=19/20, was_blocked=1
+[DBG:3] [014.03] Producer 4: Sleeping for 1 s
+[DBG:3] [014.03] Enqueue: pri=9, slot=14, count=20/20, was_blocked=1
+[DBG:3] [014.03] Producer 5: Sleeping for 1 s
+[DBG:3] [014.03] Consumer 2: Read pri=3, data=4 from P8, queue=20/20
+[DBG:3] [014.03] Consumer 2: Sleeping for 4 s
+[DBG:3] [014.03] Consumer 1: Read pri=4, data=2 from P9, queue=19/20
+[DBG:3] [014.03] Consumer 1: Sleeping for 1 s
+[DBG:3] [015.00] Analytics sample: occupancy=20/20 (16 samples)
+[DBG:3] [015.01] Aging: pri=0, wait=12010ms, boost=24, effective=9
+[DBG:3] [015.01] Aging: pri=0, wait=12010ms, boost=24, effective=9
+[DBG:3] [015.01] Aging: pri=2, wait=12009ms, boost=24, effective=9
+[DBG:3] [015.01] Aging: pri=2, wait=8006ms, boost=16, effective=9
+[DBG:3] [015.01] Aging: pri=7, wait=12009ms, boost=24, effective=9
+[DBG:3] [015.01] Aging: pri=4, wait=11010ms, boost=22, effective=9
+[DBG:3] [015.01] Aging: pri=3, wait=11007ms, boost=22, effective=9
+[DBG:3] [015.01] Aging: pri=1, wait=7006ms, boost=14, effective=9
+[DBG:3] [015.01] Aging: pri=4, wait=6005ms, boost=12, effective=9
+[DBG:3] [015.01] Aging: pri=8, wait=12009ms, boost=24, effective=9
+[DBG:3] [015.01] Aging: pri=7, wait=7008ms, boost=14, effective=9
+[DBG:3] [015.01] Aging: pri=6, wait=10009ms, boost=20, effective=9
+[DBG:3] [015.01] Aging: pri=1, wait=6007ms, boost=12, effective=9
+[DBG:3] [015.01] Aging: pri=4, wait=7005ms, boost=14, effective=9
+[DBG:3] [015.01] Aging: pri=0, wait=6007ms, boost=12, effective=9
+[DBG:3] [015.01] Aging: pri=3, wait=6005ms, boost=12, effective=9
+[DBG:3] [015.01] Aging: pri=5, wait=6005ms, boost=12, effective=9
+[DBG:3] [015.01] Aging: pri=6, wait=9008ms, boost=18, effective=9
+[DBG:3] [015.01] Aging: pri=1, wait=5005ms, boost=10, effective=9
+[DBG:3] [015.01] Aging: pri=8, wait=5005ms, boost=10, effective=9
+[DBG:3] [015.01] Aging: pri=9, wait=5004ms, boost=10, effective=9
+[DBG:3] [015.01] Dequeue: pri=0, data=1, from P3, count=19/20
+[DBG:3] [015.01] Consumer 4: Read pri=0, data=1 from P3, queue=19/20
+[DBG:3] [015.01] Consumer 4: Sleeping for 4 s
+[DBG:3] [015.01] Enqueue: pri=4, slot=15, count=20/20, was_blocked=1
+[DBG:3] [015.01] Producer 8: Generated data=9, pri=1
+[DBG:3] [015.01] Producer 6: Sleeping for 2 s
+[DBG:3] [015.03] Aging: pri=2, wait=12021ms, boost=24, effective=9
+[DBG:3] [015.03] Aging: pri=2, wait=12021ms, boost=24, effective=9
+[DBG:3] [015.03] Aging: pri=2, wait=8018ms, boost=16, effective=9
+[DBG:3] [015.03] Aging: pri=7, wait=12021ms, boost=24, effective=9
+[DBG:3] [015.03] Aging: pri=4, wait=11022ms, boost=22, effective=9
+[DBG:3] [015.03] Aging: pri=3, wait=11019ms, boost=22, effective=9
+[DBG:3] [015.03] Aging: pri=1, wait=7018ms, boost=14, effective=9
+[DBG:3] [015.03] Aging: pri=4, wait=6017ms, boost=12, effective=9
+[DBG:3] [015.03] Aging: pri=8, wait=12021ms, boost=24, effective=9
+[DBG:3] [015.03] Aging: pri=7, wait=7020ms, boost=14, effective=9
+[DBG:3] [015.03] Aging: pri=6, wait=10021ms, boost=20, effective=9
+[DBG:3] [015.03] Aging: pri=1, wait=6019ms, boost=12, effective=9
+[DBG:3] [015.03] Aging: pri=4, wait=7017ms, boost=14, effective=9
+[DBG:3] [015.03] Aging: pri=0, wait=6019ms, boost=12, effective=9
+[DBG:3] [015.03] Aging: pri=3, wait=6017ms, boost=12, effective=9
+[DBG:3] [015.03] Aging: pri=5, wait=6017ms, boost=12, effective=9
+[DBG:3] [015.03] Aging: pri=6, wait=9020ms, boost=18, effective=9
+[DBG:3] [015.03] Aging: pri=1, wait=5017ms, boost=10, effective=9
+[DBG:3] [015.03] Aging: pri=8, wait=5017ms, boost=10, effective=9
+[DBG:3] [015.03] Aging: pri=9, wait=5016ms, boost=10, effective=9
+[DBG:3] [015.03] Aging: pri=4, wait=3016ms, boost=6, effective=9
+[DBG:3] [015.03] Dequeue: pri=2, data=4, from P6, count=19/20
+[DBG:3] [015.03] Consumer 5: Read pri=2, data=4 from P6, queue=19/20
+[DBG:3] [015.03] Consumer 5: Sleeping for 0 s
+[DBG:3] [015.03] Aging: pri=2, wait=8018ms, boost=16, effective=9
+[DBG:3] [015.03] Aging: pri=2, wait=8018ms, boost=16, effective=9
+[DBG:3] [015.03] Aging: pri=7, wait=12021ms, boost=24, effective=9
+[DBG:3] [015.03] Aging: pri=4, wait=11022ms, boost=22, effective=9
+[DBG:3] [015.03] Aging: pri=3, wait=11019ms, boost=22, effective=9
+[DBG:3] [015.03] Aging: pri=1, wait=7018ms, boost=14, effective=9
+[DBG:3] [015.03] Aging: pri=4, wait=6017ms, boost=12, effective=9
+[DBG:3] [015.03] Aging: pri=8, wait=12021ms, boost=24, effective=9
+[DBG:3] [015.03] Aging: pri=7, wait=7020ms, boost=14, effective=9
+[DBG:3] [015.03] Aging: pri=6, wait=10021ms, boost=20, effective=9
+[DBG:3] [015.03] Aging: pri=1, wait=6019ms, boost=12, effective=9
+[DBG:3] [015.03] Aging: pri=4, wait=7017ms, boost=14, effective=9
+[DBG:3] [015.03] Aging: pri=0, wait=6019ms, boost=12, effective=9
+[DBG:3] [015.03] Aging: pri=3, wait=6017ms, boost=12, effective=9
+[DBG:3] [015.03] Aging: pri=5, wait=6017ms, boost=12, effective=9
+[DBG:3] [015.03] Aging: pri=6, wait=9020ms, boost=18, effective=9
+[DBG:3] [015.03] Aging: pri=1, wait=5017ms, boost=10, effective=9
+[DBG:3] [015.03] Aging: pri=8, wait=5017ms, boost=10, effective=9
+[DBG:3] [015.03] Aging: pri=9, wait=5016ms, boost=10, effective=9
+[DBG:3] [015.03] Aging: pri=4, wait=3016ms, boost=6, effective=9
+[DBG:3] [015.03] Dequeue: pri=7, data=3, from P2, count=18/20
+[DBG:3] [015.03] Consumer 5: Read pri=7, data=3 from P2, queue=18/20
+[DBG:3] [015.03] Consumer 5: Sleeping for 4 s
+[DBG:3] [015.03] Enqueue: pri=5, slot=16, count=19/20, was_blocked=1
+[DBG:3] [015.03] Producer 2: Sleeping for 2 s
+[DBG:3] [015.03] Enqueue: pri=4, slot=17, count=20/20, was_blocked=1
+[DBG:3] [015.03] Producer 10: Sleeping for 0 s
+[DBG:3] [015.03] Producer 10: Generated data=3, pri=0
+[DBG:3] [015.03] Producer 4: Generated data=9, pri=2
+[DBG:3] [015.03] Producer 5: Generated data=9, pri=8
+[DBG:3] [015.03] Aging: pri=2, wait=8022ms, boost=16, effective=9
+[DBG:3] [015.03] Aging: pri=2, wait=8022ms, boost=16, effective=9
+[DBG:3] [015.03] Aging: pri=4, wait=11026ms, boost=22, effective=9
+[DBG:3] [015.03] Aging: pri=3, wait=11023ms, boost=22, effective=9
+[DBG:3] [015.03] Aging: pri=1, wait=7022ms, boost=14, effective=9
+[DBG:3] [015.03] Aging: pri=4, wait=6021ms, boost=12, effective=9
+[DBG:3] [015.03] Aging: pri=8, wait=12025ms, boost=24, effective=9
+[DBG:3] [015.03] Aging: pri=7, wait=7024ms, boost=14, effective=9
+[DBG:3] [015.03] Aging: pri=6, wait=10025ms, boost=20, effective=9
+[DBG:3] [015.03] Aging: pri=1, wait=6023ms, boost=12, effective=9
+[DBG:3] [015.03] Aging: pri=4, wait=7021ms, boost=14, effective=9
+[DBG:3] [015.03] Aging: pri=0, wait=6023ms, boost=12, effective=9
+[DBG:3] [015.03] Aging: pri=3, wait=6021ms, boost=12, effective=9
+[DBG:3] [015.03] Aging: pri=5, wait=6021ms, boost=12, effective=9
+[DBG:3] [015.03] Aging: pri=6, wait=9024ms, boost=18, effective=9
+[DBG:3] [015.03] Aging: pri=1, wait=5021ms, boost=10, effective=9
+[DBG:3] [015.03] Aging: pri=8, wait=5021ms, boost=10, effective=9
+[DBG:3] [015.03] Aging: pri=9, wait=5020ms, boost=10, effective=9
+[DBG:3] [015.03] Aging: pri=4, wait=3020ms, boost=6, effective=9
+[DBG:3] [015.03] Aging: pri=5, wait=2019ms, boost=4, effective=9
+[DBG:3] [015.03] Aging: pri=4, wait=2019ms, boost=4, effective=8
+[DBG:3] [015.03] Dequeue: pri=8, data=5, from P5, count=19/20
+[DBG:3] [015.03] Consumer 1: Read pri=8, data=5 from P5, queue=19/20
+[DBG:3] [015.03] Consumer 1: Sleeping for 2 s
+[DBG:3] [015.03] Enqueue: pri=7, slot=18, count=20/20, was_blocked=1
+[DBG:3] [015.03] Producer 3: Sleeping for 2 s
+[DBG:3] [016.00] Analytics sample: occupancy=20/20 (17 samples)
+[DBG:3] [016.02] Producer 9: Generated data=4, pri=3
+[DBG:3] [017.00] Analytics sample: occupancy=20/20 (18 samples)
+[DBG:3] [017.02] Producer 6: Generated data=0, pri=6
+[DBG:3] [017.03] Producer 2: Generated data=1, pri=5
+[DBG:3] [017.03] Producer 3: Generated data=7, pri=2
+[DBG:3] [017.03] Aging: pri=2, wait=10023ms, boost=20, effective=9
+[DBG:3] [017.03] Aging: pri=2, wait=10023ms, boost=20, effective=9
+[DBG:3] [017.03] Aging: pri=4, wait=13027ms, boost=26, effective=9
+[DBG:3] [017.03] Aging: pri=3, wait=13024ms, boost=26, effective=9
+[DBG:3] [017.03] Aging: pri=1, wait=9023ms, boost=18, effective=9
+[DBG:3] [017.03] Aging: pri=4, wait=8022ms, boost=16, effective=9
+[DBG:3] [017.03] Aging: pri=7, wait=9025ms, boost=18, effective=9
+[DBG:3] [017.03] Aging: pri=6, wait=12026ms, boost=24, effective=9
+[DBG:3] [017.03] Aging: pri=1, wait=8024ms, boost=16, effective=9
+[DBG:3] [017.03] Aging: pri=4, wait=9022ms, boost=18, effective=9
+[DBG:3] [017.03] Aging: pri=0, wait=8024ms, boost=16, effective=9
+[DBG:3] [017.03] Aging: pri=3, wait=8022ms, boost=16, effective=9
+[DBG:3] [017.03] Aging: pri=5, wait=8022ms, boost=16, effective=9
+[DBG:3] [017.03] Aging: pri=6, wait=11025ms, boost=22, effective=9
+[DBG:3] [017.03] Aging: pri=1, wait=7022ms, boost=14, effective=9
+[DBG:3] [017.03] Aging: pri=8, wait=7022ms, boost=14, effective=9
+[DBG:3] [017.03] Aging: pri=9, wait=7021ms, boost=14, effective=9
+[DBG:3] [017.03] Aging: pri=4, wait=5021ms, boost=10, effective=9
+[DBG:3] [017.03] Aging: pri=5, wait=4020ms, boost=8, effective=9
+[DBG:3] [017.03] Aging: pri=4, wait=4020ms, boost=8, effective=9
+[DBG:3] [017.03] Aging: pri=7, wait=4018ms, boost=8, effective=9
+[DBG:3] [017.03] Dequeue: pri=4, data=4, from P1, count=19/20
+[DBG:3] [017.03] Consumer 1: Read pri=4, data=4 from P1, queue=19/20
+[DBG:3] [017.03] Consumer 1: Sleeping for 1 s
+[DBG:3] [017.03] Enqueue: pri=8, slot=19, count=20/20, was_blocked=1
+[DBG:3] [017.03] Producer 7: Sleeping for 2 s
+[DBG:3] [018.01] Analytics sample: occupancy=20/20 (19 samples)
+[DBG:3] [018.02] Aging: pri=2, wait=11007ms, boost=22, effective=9
+[DBG:3] [018.02] Aging: pri=2, wait=11007ms, boost=22, effective=9
+[DBG:3] [018.02] Aging: pri=3, wait=14008ms, boost=28, effective=9
+[DBG:3] [018.02] Aging: pri=1, wait=10007ms, boost=20, effective=9
+[DBG:3] [018.02] Aging: pri=4, wait=9006ms, boost=18, effective=9
+[DBG:3] [018.02] Aging: pri=7, wait=10009ms, boost=20, effective=9
+[DBG:3] [018.02] Aging: pri=6, wait=13010ms, boost=26, effective=9
+[DBG:3] [018.02] Aging: pri=1, wait=9008ms, boost=18, effective=9
+[DBG:3] [018.02] Aging: pri=4, wait=10006ms, boost=20, effective=9
+[DBG:3] [018.02] Aging: pri=0, wait=9008ms, boost=18, effective=9
+[DBG:3] [018.02] Aging: pri=3, wait=9006ms, boost=18, effective=9
+[DBG:3] [018.02] Aging: pri=5, wait=9006ms, boost=18, effective=9
+[DBG:3] [018.02] Aging: pri=6, wait=12009ms, boost=24, effective=9
+[DBG:3] [018.02] Aging: pri=1, wait=8006ms, boost=16, effective=9
+[DBG:3] [018.02] Aging: pri=8, wait=8006ms, boost=16, effective=9
+[DBG:3] [018.02] Aging: pri=9, wait=8005ms, boost=16, effective=9
+[DBG:3] [018.02] Aging: pri=4, wait=6005ms, boost=12, effective=9
+[DBG:3] [018.02] Aging: pri=5, wait=5004ms, boost=10, effective=9
+[DBG:3] [018.02] Aging: pri=4, wait=5004ms, boost=10, effective=9
+[DBG:3] [018.02] Aging: pri=7, wait=5002ms, boost=10, effective=9
+[DBG:3] [018.02] Aging: pri=8, wait=4990ms, boost=9, effective=9
+[DBG:3] [018.02] Dequeue: pri=3, data=6, from P7, count=19/20
+[DBG:3] [018.02] Consumer 3: Read pri=3, data=6 from P7, queue=19/20
+[DBG:3] [018.02] Consumer 3: Sleeping for 2 s
+[DBG:3] [018.02] Enqueue: pri=1, slot=0, count=20/20, was_blocked=1
+[DBG:3] [018.02] Producer 1: Sleeping for 0 s
+[DBG:3] [018.02] Producer 1: Generated data=5, pri=9
+[DBG:3] [018.03] Aging: pri=2, wait=11023ms, boost=22, effective=9
+[DBG:3] [018.03] Aging: pri=2, wait=11023ms, boost=22, effective=9
+[DBG:3] [018.03] Aging: pri=1, wait=10023ms, boost=20, effective=9
+[DBG:3] [018.03] Aging: pri=4, wait=9022ms, boost=18, effective=9
+[DBG:3] [018.03] Aging: pri=7, wait=10025ms, boost=20, effective=9
+[DBG:3] [018.03] Aging: pri=6, wait=13026ms, boost=26, effective=9
+[DBG:3] [018.03] Aging: pri=1, wait=9024ms, boost=18, effective=9
+[DBG:3] [018.03] Aging: pri=4, wait=10022ms, boost=20, effective=9
+[DBG:3] [018.03] Aging: pri=0, wait=9024ms, boost=18, effective=9
+[DBG:3] [018.03] Aging: pri=3, wait=9022ms, boost=18, effective=9
+[DBG:3] [018.03] Aging: pri=5, wait=9022ms, boost=18, effective=9
+[DBG:3] [018.03] Aging: pri=6, wait=12025ms, boost=24, effective=9
+[DBG:3] [018.03] Aging: pri=1, wait=8022ms, boost=16, effective=9
+[DBG:3] [018.03] Aging: pri=8, wait=8022ms, boost=16, effective=9
+[DBG:3] [018.03] Aging: pri=9, wait=8021ms, boost=16, effective=9
+[DBG:3] [018.03] Aging: pri=4, wait=6021ms, boost=12, effective=9
+[DBG:3] [018.03] Aging: pri=5, wait=5020ms, boost=10, effective=9
+[DBG:3] [018.03] Aging: pri=4, wait=5020ms, boost=10, effective=9
+[DBG:3] [018.03] Aging: pri=7, wait=5018ms, boost=10, effective=9
+[DBG:3] [018.03] Aging: pri=8, wait=5006ms, boost=10, effective=9
+[DBG:3] [018.03] Aging: pri=1, wait=4020ms, boost=8, effective=9
+[DBG:3] [018.03] Dequeue: pri=6, data=1, from P10, count=19/20
+[DBG:3] [018.03] Consumer 2: Read pri=6, data=1 from P10, queue=19/20
+[DBG:3] [018.03] Consumer 2: Sleeping for 2 s
+[DBG:3] [018.03] Enqueue: pri=1, slot=1, count=20/20, was_blocked=1
+[DBG:3] [018.03] Producer 8: Sleeping for 2 s
+[DBG:3] [018.03] Aging: pri=2, wait=11024ms, boost=22, effective=9
+[DBG:3] [018.03] Aging: pri=2, wait=11024ms, boost=22, effective=9
+[DBG:3] [018.03] Aging: pri=1, wait=10024ms, boost=20, effective=9
+[DBG:3] [018.03] Aging: pri=4, wait=9023ms, boost=18, effective=9
+[DBG:3] [018.03] Aging: pri=7, wait=10026ms, boost=20, effective=9
+[DBG:3] [018.03] Aging: pri=1, wait=9025ms, boost=18, effective=9
+[DBG:3] [018.03] Aging: pri=4, wait=10023ms, boost=20, effective=9
+[DBG:3] [018.03] Aging: pri=0, wait=9025ms, boost=18, effective=9
+[DBG:3] [018.03] Aging: pri=3, wait=9023ms, boost=18, effective=9
+[DBG:3] [018.03] Aging: pri=5, wait=9023ms, boost=18, effective=9
+[DBG:3] [018.03] Aging: pri=6, wait=12026ms, boost=24, effective=9
+[DBG:3] [018.03] Aging: pri=1, wait=8023ms, boost=16, effective=9
+[DBG:3] [018.03] Aging: pri=8, wait=8023ms, boost=16, effective=9
+[DBG:3] [018.03] Aging: pri=9, wait=8022ms, boost=16, effective=9
+[DBG:3] [018.03] Aging: pri=4, wait=6022ms, boost=12, effective=9
+[DBG:3] [018.03] Aging: pri=5, wait=5021ms, boost=10, effective=9
+[DBG:3] [018.03] Aging: pri=4, wait=5021ms, boost=10, effective=9
+[DBG:3] [018.03] Aging: pri=7, wait=5019ms, boost=10, effective=9
+[DBG:3] [018.03] Aging: pri=8, wait=5007ms, boost=10, effective=9
+[DBG:3] [018.03] Aging: pri=1, wait=4021ms, boost=8, effective=9
+[DBG:3] [018.03] Aging: pri=1, wait=3018ms, boost=6, effective=7
+[DBG:3] [018.03] Dequeue: pri=6, data=4, from P9, count=19/20
+[DBG:3] [018.03] Consumer 1: Read pri=6, data=4 from P9, queue=19/20
+[DBG:3] [018.03] Consumer 1: Sleeping for 0 s
+[DBG:3] [018.03] Enqueue: pri=0, slot=2, count=20/20, was_blocked=1
+[DBG:3] [018.03] Producer 10: Sleeping for 2 s
+[DBG:3] [018.03] Aging: pri=2, wait=11024ms, boost=22, effective=9
+[DBG:3] [018.03] Aging: pri=2, wait=11024ms, boost=22, effective=9
+[DBG:3] [018.03] Aging: pri=1, wait=10024ms, boost=20, effective=9
+[DBG:3] [018.03] Aging: pri=4, wait=9023ms, boost=18, effective=9
+[DBG:3] [018.03] Aging: pri=7, wait=10026ms, boost=20, effective=9
+[DBG:3] [018.03] Aging: pri=1, wait=9025ms, boost=18, effective=9
+[DBG:3] [018.03] Aging: pri=4, wait=10023ms, boost=20, effective=9
+[DBG:3] [018.03] Aging: pri=0, wait=9025ms, boost=18, effective=9
+[DBG:3] [018.03] Aging: pri=3, wait=9023ms, boost=18, effective=9
+[DBG:3] [018.03] Aging: pri=5, wait=9023ms, boost=18, effective=9
+[DBG:3] [018.03] Aging: pri=1, wait=8023ms, boost=16, effective=9
+[DBG:3] [018.03] Aging: pri=8, wait=8023ms, boost=16, effective=9
+[DBG:3] [018.03] Aging: pri=9, wait=8022ms, boost=16, effective=9
+[DBG:3] [018.03] Aging: pri=4, wait=6022ms, boost=12, effective=9
+[DBG:3] [018.03] Aging: pri=5, wait=5021ms, boost=10, effective=9
+[DBG:3] [018.03] Aging: pri=4, wait=5021ms, boost=10, effective=9
+[DBG:3] [018.03] Aging: pri=7, wait=5019ms, boost=10, effective=9
+[DBG:3] [018.03] Aging: pri=8, wait=5007ms, boost=10, effective=9
+[DBG:3] [018.03] Aging: pri=1, wait=4021ms, boost=8, effective=9
+[DBG:3] [018.03] Aging: pri=1, wait=3018ms, boost=6, effective=7
+[DBG:3] [018.03] Aging: pri=0, wait=3005ms, boost=6, effective=6
+[DBG:3] [018.03] Dequeue: pri=2, data=8, from P8, count=19/20
+[DBG:3] [018.03] Consumer 1: Read pri=2, data=8 from P8, queue=19/20
+[DBG:3] [018.03] Consumer 1: Sleeping for 1 s
+[DBG:3] [018.03] Enqueue: pri=2, slot=3, count=20/20, was_blocked=1
+[DBG:3] [018.03] Producer 4: Sleeping for 0 s
+[DBG:3] [018.03] Producer 4: Generated data=3, pri=6
+[DBG:3] [019.01] Analytics sample: occupancy=20/20 (20 samples)
+[DBG:3] [019.02] Aging: pri=1, wait=11009ms, boost=22, effective=9
+[DBG:3] [019.02] Aging: pri=1, wait=11009ms, boost=22, effective=9
+[DBG:3] [019.02] Aging: pri=4, wait=10008ms, boost=20, effective=9
+[DBG:3] [019.02] Aging: pri=7, wait=11011ms, boost=22, effective=9
+[DBG:3] [019.02] Aging: pri=1, wait=10010ms, boost=20, effective=9
+[DBG:3] [019.02] Aging: pri=4, wait=11008ms, boost=22, effective=9
+[DBG:3] [019.02] Aging: pri=0, wait=10010ms, boost=20, effective=9
+[DBG:3] [019.02] Aging: pri=3, wait=10008ms, boost=20, effective=9
+[DBG:3] [019.02] Aging: pri=5, wait=10008ms, boost=20, effective=9
+[DBG:3] [019.02] Aging: pri=1, wait=9008ms, boost=18, effective=9
+[DBG:3] [019.02] Aging: pri=8, wait=9008ms, boost=18, effective=9
+[DBG:3] [019.02] Aging: pri=9, wait=9007ms, boost=18, effective=9
+[DBG:3] [019.02] Aging: pri=4, wait=7007ms, boost=14, effective=9
+[DBG:3] [019.02] Aging: pri=5, wait=6006ms, boost=12, effective=9
+[DBG:3] [019.02] Aging: pri=4, wait=6006ms, boost=12, effective=9
+[DBG:3] [019.02] Aging: pri=7, wait=6004ms, boost=12, effective=9
+[DBG:3] [019.02] Aging: pri=8, wait=5992ms, boost=11, effective=9
+[DBG:3] [019.02] Aging: pri=1, wait=5006ms, boost=10, effective=9
+[DBG:3] [019.02] Aging: pri=1, wait=4003ms, boost=8, effective=9
+[DBG:3] [019.02] Aging: pri=0, wait=3990ms, boost=7, effective=7
+[DBG:3] [019.02] Aging: pri=2, wait=3988ms, boost=7, effective=9
+[DBG:3] [019.02] Dequeue: pri=7, data=4, from P4, count=19/20
+[DBG:3] [019.02] Consumer 4: Read pri=7, data=4 from P4, queue=19/20
+[DBG:3] [019.02] Consumer 4: Sleeping for 4 s
+[DBG:3] [019.02] Enqueue: pri=8, slot=4, count=20/20, was_blocked=1
+[DBG:3] [019.02] Producer 5: Sleeping for 2 s
+[DBG:3] [019.03] Aging: pri=1, wait=11021ms, boost=22, effective=9
+[DBG:3] [019.03] Aging: pri=1, wait=11021ms, boost=22, effective=9
+[DBG:3] [019.03] Aging: pri=4, wait=10020ms, boost=20, effective=9
+[DBG:3] [019.03] Aging: pri=1, wait=10022ms, boost=20, effective=9
+[DBG:3] [019.03] Aging: pri=4, wait=11020ms, boost=22, effective=9
+[DBG:3] [019.03] Aging: pri=0, wait=10022ms, boost=20, effective=9
+[DBG:3] [019.03] Aging: pri=3, wait=10020ms, boost=20, effective=9
+[DBG:3] [019.03] Aging: pri=5, wait=10020ms, boost=20, effective=9
+[DBG:3] [019.03] Aging: pri=1, wait=9020ms, boost=18, effective=9
+[DBG:3] [019.03] Aging: pri=8, wait=9020ms, boost=18, effective=9
+[DBG:3] [019.03] Aging: pri=9, wait=9019ms, boost=18, effective=9
+[DBG:3] [019.03] Aging: pri=4, wait=7019ms, boost=14, effective=9
+[DBG:3] [019.03] Aging: pri=5, wait=6018ms, boost=12, effective=9
+[DBG:3] [019.03] Aging: pri=4, wait=6018ms, boost=12, effective=9
+[DBG:3] [019.03] Aging: pri=7, wait=6016ms, boost=12, effective=9
+[DBG:3] [019.03] Aging: pri=8, wait=6004ms, boost=12, effective=9
+[DBG:3] [019.03] Aging: pri=1, wait=5018ms, boost=10, effective=9
+[DBG:3] [019.03] Aging: pri=1, wait=4015ms, boost=8, effective=9
+[DBG:3] [019.03] Aging: pri=0, wait=4002ms, boost=8, effective=8
+[DBG:3] [019.03] Aging: pri=2, wait=4000ms, boost=8, effective=9
+[DBG:3] [019.03] Aging: pri=8, wait=4000ms, boost=8, effective=9
+[DBG:3] [019.03] Dequeue: pri=1, data=3, from P8, count=19/20
+[DBG:3] [019.03] Consumer 5: Read pri=1, data=3 from P8, queue=19/20
+[DBG:3] [019.03] Consumer 5: Sleeping for 1 s
+[DBG:3] [019.03] Enqueue: pri=3, slot=5, count=20/20, was_blocked=1
+[DBG:3] [019.03] Producer 9: Sleeping for 2 s
+[DBG:3] [019.03] Producer 7: Generated data=8, pri=7
+[DBG:3] [019.03] Aging: pri=4, wait=10024ms, boost=20, effective=9
+[DBG:3] [019.03] Aging: pri=4, wait=10024ms, boost=20, effective=9
+[DBG:3] [019.03] Aging: pri=1, wait=10026ms, boost=20, effective=9
+[DBG:3] [019.03] Aging: pri=4, wait=11024ms, boost=22, effective=9
+[DBG:3] [019.03] Aging: pri=0, wait=10026ms, boost=20, effective=9
+[DBG:3] [019.03] Aging: pri=3, wait=10024ms, boost=20, effective=9
+[DBG:3] [019.03] Aging: pri=5, wait=10024ms, boost=20, effective=9
+[DBG:3] [019.03] Aging: pri=1, wait=9024ms, boost=18, effective=9
+[DBG:3] [019.03] Aging: pri=8, wait=9024ms, boost=18, effective=9
+[DBG:3] [019.03] Aging: pri=9, wait=9023ms, boost=18, effective=9
+[DBG:3] [019.03] Aging: pri=4, wait=7023ms, boost=14, effective=9
+[DBG:3] [019.03] Aging: pri=5, wait=6022ms, boost=12, effective=9
+[DBG:3] [019.03] Aging: pri=4, wait=6022ms, boost=12, effective=9
+[DBG:3] [019.03] Aging: pri=7, wait=6020ms, boost=12, effective=9
+[DBG:3] [019.03] Aging: pri=8, wait=6008ms, boost=12, effective=9
+[DBG:3] [019.03] Aging: pri=1, wait=5022ms, boost=10, effective=9
+[DBG:3] [019.03] Aging: pri=1, wait=4019ms, boost=8, effective=9
+[DBG:3] [019.03] Aging: pri=0, wait=4006ms, boost=8, effective=8
+[DBG:3] [019.03] Aging: pri=2, wait=4004ms, boost=8, effective=9
+[DBG:3] [019.03] Aging: pri=8, wait=4004ms, boost=8, effective=9
+[DBG:3] [019.03] Aging: pri=3, wait=3018ms, boost=6, effective=9
+[DBG:3] [019.03] Dequeue: pri=4, data=8, from P2, count=19/20
+[DBG:3] [019.03] Consumer 1: Read pri=4, data=8 from P2, queue=19/20
+[DBG:3] [019.03] Consumer 1: Sleeping for 4 s
+[DBG:3] [019.03] Enqueue: pri=6, slot=6, count=20/20, was_blocked=1
+[DBG:3] [019.03] Producer 6: Sleeping for 2 s
+[DBG:3] [020.01] Analytics sample: occupancy=20/20 (21 samples)
+[DBG:3] [020.02] Aging: pri=4, wait=11007ms, boost=22, effective=9
+[DBG:3] [020.02] Aging: pri=4, wait=11007ms, boost=22, effective=9
+[DBG:3] [020.02] Aging: pri=1, wait=11009ms, boost=22, effective=9
+[DBG:3] [020.02] Aging: pri=0, wait=11009ms, boost=22, effective=9
+[DBG:3] [020.02] Aging: pri=3, wait=11007ms, boost=22, effective=9
+[DBG:3] [020.02] Aging: pri=5, wait=11007ms, boost=22, effective=9
+[DBG:3] [020.02] Aging: pri=1, wait=10007ms, boost=20, effective=9
+[DBG:3] [020.02] Aging: pri=8, wait=10007ms, boost=20, effective=9
+[DBG:3] [020.02] Aging: pri=9, wait=10006ms, boost=20, effective=9
+[DBG:3] [020.02] Aging: pri=4, wait=8006ms, boost=16, effective=9
+[DBG:3] [020.02] Aging: pri=5, wait=7005ms, boost=14, effective=9
+[DBG:3] [020.02] Aging: pri=4, wait=7005ms, boost=14, effective=9
+[DBG:3] [020.02] Aging: pri=7, wait=7003ms, boost=14, effective=9
+[DBG:3] [020.02] Aging: pri=8, wait=6991ms, boost=13, effective=9
+[DBG:3] [020.02] Aging: pri=1, wait=6005ms, boost=12, effective=9
+[DBG:3] [020.02] Aging: pri=1, wait=5002ms, boost=10, effective=9
+[DBG:3] [020.02] Aging: pri=0, wait=4989ms, boost=9, effective=9
+[DBG:3] [020.02] Aging: pri=2, wait=4987ms, boost=9, effective=9
+[DBG:3] [020.02] Aging: pri=8, wait=4987ms, boost=9, effective=9
+[DBG:3] [020.02] Aging: pri=3, wait=4001ms, boost=8, effective=9
+[DBG:3] [020.02] Aging: pri=6, wait=2999ms, boost=5, effective=9
+[DBG:3] [020.02] Dequeue: pri=1, data=6, from P7, count=19/20
+[DBG:3] [020.02] Consumer 3: Read pri=1, data=6 from P7, queue=19/20
+[DBG:3] [020.02] Enqueue: pri=5, slot=7, count=20/20, was_blocked=1
+[DBG:3] [020.02] Producer 2: Sleeping for 0 s
+[DBG:3] [020.02] Producer 2: Generated data=1, pri=0
+[DBG:3] [020.02] Consumer 3: Sleeping for 0 s
+[DBG:3] [020.02] Aging: pri=4, wait=11007ms, boost=22, effective=9
+[DBG:3] [020.02] Aging: pri=4, wait=11007ms, boost=22, effective=9
+[DBG:3] [020.02] Aging: pri=0, wait=11009ms, boost=22, effective=9
+[DBG:3] [020.02] Aging: pri=3, wait=11007ms, boost=22, effective=9
+[DBG:3] [020.02] Aging: pri=5, wait=11007ms, boost=22, effective=9
+[DBG:3] [020.02] Aging: pri=1, wait=10007ms, boost=20, effective=9
+[DBG:3] [020.02] Aging: pri=8, wait=10007ms, boost=20, effective=9
+[DBG:3] [020.02] Aging: pri=9, wait=10006ms, boost=20, effective=9
+[DBG:3] [020.02] Aging: pri=4, wait=8006ms, boost=16, effective=9
+[DBG:3] [020.02] Aging: pri=5, wait=7005ms, boost=14, effective=9
+[DBG:3] [020.02] Aging: pri=4, wait=7005ms, boost=14, effective=9
+[DBG:3] [020.02] Aging: pri=7, wait=7003ms, boost=14, effective=9
+[DBG:3] [020.02] Aging: pri=8, wait=6991ms, boost=13, effective=9
+[DBG:3] [020.02] Aging: pri=1, wait=6005ms, boost=12, effective=9
+[DBG:3] [020.02] Aging: pri=1, wait=5002ms, boost=10, effective=9
+[DBG:3] [020.02] Aging: pri=0, wait=4989ms, boost=9, effective=9
+[DBG:3] [020.02] Aging: pri=2, wait=4987ms, boost=9, effective=9
+[DBG:3] [020.02] Aging: pri=8, wait=4987ms, boost=9, effective=9
+[DBG:3] [020.02] Aging: pri=3, wait=4001ms, boost=8, effective=9
+[DBG:3] [020.02] Aging: pri=6, wait=2999ms, boost=5, effective=9
+[DBG:3] [020.02] Aging: pri=5, wait=2989ms, boost=5, effective=9
+[DBG:3] [020.02] Dequeue: pri=0, data=9, from P3, count=19/20
+[DBG:3] [020.02] Consumer 3: Read pri=0, data=9 from P3, queue=19/20
+[DBG:3] [020.02] Consumer 3: Sleeping for 1 s
+[DBG:3] [020.02] Enqueue: pri=2, slot=8, count=20/20, was_blocked=1
+[DBG:3] [020.02] Producer 3: Sleeping for 1 s
+[DBG:3] [020.03] Aging: pri=4, wait=11020ms, boost=22, effective=9
+[DBG:3] [020.03] Aging: pri=4, wait=11020ms, boost=22, effective=9
+[DBG:3] [020.03] Aging: pri=3, wait=11020ms, boost=22, effective=9
+[DBG:3] [020.03] Aging: pri=5, wait=11020ms, boost=22, effective=9
+[DBG:3] [020.03] Aging: pri=1, wait=10020ms, boost=20, effective=9
+[DBG:3] [020.03] Aging: pri=8, wait=10020ms, boost=20, effective=9
+[DBG:3] [020.03] Aging: pri=9, wait=10019ms, boost=20, effective=9
+[DBG:3] [020.03] Aging: pri=4, wait=8019ms, boost=16, effective=9
+[DBG:3] [020.03] Aging: pri=5, wait=7018ms, boost=14, effective=9
+[DBG:3] [020.03] Aging: pri=4, wait=7018ms, boost=14, effective=9
+[DBG:3] [020.03] Aging: pri=7, wait=7016ms, boost=14, effective=9
+[DBG:3] [020.03] Aging: pri=8, wait=7004ms, boost=14, effective=9
+[DBG:3] [020.03] Aging: pri=1, wait=6018ms, boost=12, effective=9
+[DBG:3] [020.03] Aging: pri=1, wait=5015ms, boost=10, effective=9
+[DBG:3] [020.03] Aging: pri=0, wait=5002ms, boost=10, effective=9
+[DBG:3] [020.03] Aging: pri=2, wait=5000ms, boost=10, effective=9
+[DBG:3] [020.03] Aging: pri=8, wait=5000ms, boost=10, effective=9
+[DBG:3] [020.03] Aging: pri=3, wait=4014ms, boost=8, effective=9
+[DBG:3] [020.03] Aging: pri=6, wait=3012ms, boost=6, effective=9
+[DBG:3] [020.03] Aging: pri=5, wait=3002ms, boost=6, effective=9
+[DBG:3] [020.03] Aging: pri=2, wait=2998ms, boost=5, effective=7
+[DBG:3] [020.03] Dequeue: pri=4, data=0, from P1, count=19/20
+[DBG:3] [020.03] Consumer 5: Read pri=4, data=0 from P1, queue=19/20
+[DBG:3] [020.03] Consumer 5: Sleeping for 0 s
+[DBG:3] [020.03] Aging: pri=3, wait=11020ms, boost=22, effective=9
+[DBG:3] [020.03] Aging: pri=3, wait=11020ms, boost=22, effective=9
+[DBG:3] [020.03] Aging: pri=5, wait=11020ms, boost=22, effective=9
+[DBG:3] [020.03] Aging: pri=1, wait=10020ms, boost=20, effective=9
+[DBG:3] [020.03] Aging: pri=8, wait=10020ms, boost=20, effective=9
+[DBG:3] [020.03] Aging: pri=9, wait=10019ms, boost=20, effective=9
+[DBG:3] [020.03] Aging: pri=4, wait=8019ms, boost=16, effective=9
+[DBG:3] [020.03] Aging: pri=5, wait=7018ms, boost=14, effective=9
+[DBG:3] [020.03] Aging: pri=4, wait=7018ms, boost=14, effective=9
+[DBG:3] [020.03] Aging: pri=7, wait=7016ms, boost=14, effective=9
+[DBG:3] [020.03] Aging: pri=8, wait=7004ms, boost=14, effective=9
+[DBG:3] [020.03] Aging: pri=1, wait=6018ms, boost=12, effective=9
+[DBG:3] [020.03] Aging: pri=1, wait=5015ms, boost=10, effective=9
+[DBG:3] [020.03] Aging: pri=0, wait=5002ms, boost=10, effective=9
+[DBG:3] [020.03] Aging: pri=2, wait=5000ms, boost=10, effective=9
+[DBG:3] [020.03] Aging: pri=8, wait=5000ms, boost=10, effective=9
+[DBG:3] [020.03] Aging: pri=3, wait=4014ms, boost=8, effective=9
+[DBG:3] [020.03] Aging: pri=6, wait=3012ms, boost=6, effective=9
+[DBG:3] [020.03] Aging: pri=5, wait=3002ms, boost=6, effective=9
+[DBG:3] [020.03] Aging: pri=2, wait=2998ms, boost=5, effective=7
+[DBG:3] [020.03] Dequeue: pri=3, data=9, from P6, count=18/20
+[DBG:3] [020.03] Consumer 5: Read pri=3, data=9 from P6, queue=18/20
+[DBG:3] [020.03] Consumer 5: Sleeping for 1 s
+[DBG:3] [020.03] Enqueue: pri=6, slot=9, count=19/20, was_blocked=1
+[DBG:3] [020.03] Producer 4: Sleeping for 1 s
+[DBG:3] [020.03] Enqueue: pri=9, slot=10, count=20/20, was_blocked=1
+[DBG:3] [020.03] Producer 1: Sleeping for 2 s
+[DBG:3] [020.03] Producer 8: Generated data=4, pri=9
+[DBG:3] [020.03] Producer 10: Generated data=5, pri=1
+[DBG:3] [020.03] Aging: pri=5, wait=11024ms, boost=22, effective=9
+[DBG:3] [020.03] Aging: pri=5, wait=11024ms, boost=22, effective=9
+[DBG:3] [020.03] Aging: pri=1, wait=10024ms, boost=20, effective=9
+[DBG:3] [020.03] Aging: pri=8, wait=10024ms, boost=20, effective=9
+[DBG:3] [020.03] Aging: pri=9, wait=10023ms, boost=20, effective=9
+[DBG:3] [020.03] Aging: pri=4, wait=8023ms, boost=16, effective=9
+[DBG:3] [020.03] Aging: pri=5, wait=7022ms, boost=14, effective=9
+[DBG:3] [020.03] Aging: pri=4, wait=7022ms, boost=14, effective=9
+[DBG:3] [020.03] Aging: pri=7, wait=7020ms, boost=14, effective=9
+[DBG:3] [020.03] Aging: pri=8, wait=7008ms, boost=14, effective=9
+[DBG:3] [020.03] Aging: pri=1, wait=6022ms, boost=12, effective=9
+[DBG:3] [020.03] Aging: pri=1, wait=5019ms, boost=10, effective=9
+[DBG:3] [020.03] Aging: pri=0, wait=5006ms, boost=10, effective=9
+[DBG:3] [020.03] Aging: pri=2, wait=5004ms, boost=10, effective=9
+[DBG:3] [020.03] Aging: pri=8, wait=5004ms, boost=10, effective=9
+[DBG:3] [020.03] Aging: pri=3, wait=4018ms, boost=8, effective=9
+[DBG:3] [020.03] Aging: pri=6, wait=3016ms, boost=6, effective=9
+[DBG:3] [020.03] Aging: pri=5, wait=3006ms, boost=6, effective=9
+[DBG:3] [020.03] Aging: pri=2, wait=3002ms, boost=6, effective=8
+[DBG:3] [020.03] Aging: pri=6, wait=2001ms, boost=4, effective=9
+[DBG:3] [020.03] Aging: pri=9, wait=2017ms, boost=4, effective=9
+[DBG:3] [020.03] Dequeue: pri=5, data=6, from P1, count=19/20
+[DBG:3] [020.03] Consumer 2: Read pri=5, data=6 from P1, queue=19/20
+[DBG:3] [020.03] Enqueue: pri=7, slot=11, count=20/20, was_blocked=1
+[DBG:3] [020.03] Producer 7: Sleeping for 2 s
+[DBG:3] [020.03] Consumer 2: Sleeping for 0 s
+[DBG:3] [020.04] Aging: pri=1, wait=10030ms, boost=20, effective=9
+[DBG:3] [020.04] Aging: pri=1, wait=10030ms, boost=20, effective=9
+[DBG:3] [020.04] Aging: pri=8, wait=10030ms, boost=20, effective=9
+[DBG:3] [020.04] Aging: pri=9, wait=10029ms, boost=20, effective=9
+[DBG:3] [020.04] Aging: pri=4, wait=8029ms, boost=16, effective=9
+[DBG:3] [020.04] Aging: pri=5, wait=7028ms, boost=14, effective=9
+[DBG:3] [020.04] Aging: pri=4, wait=7028ms, boost=14, effective=9
+[DBG:3] [020.04] Aging: pri=7, wait=7026ms, boost=14, effective=9
+[DBG:3] [020.04] Aging: pri=8, wait=7014ms, boost=14, effective=9
+[DBG:3] [020.04] Aging: pri=1, wait=6028ms, boost=12, effective=9
+[DBG:3] [020.04] Aging: pri=1, wait=5025ms, boost=10, effective=9
+[DBG:3] [020.04] Aging: pri=0, wait=5012ms, boost=10, effective=9
+[DBG:3] [020.04] Aging: pri=2, wait=5010ms, boost=10, effective=9
+[DBG:3] [020.04] Aging: pri=8, wait=5010ms, boost=10, effective=9
+[DBG:3] [020.04] Aging: pri=3, wait=4024ms, boost=8, effective=9
+[DBG:3] [020.04] Aging: pri=6, wait=3022ms, boost=6, effective=9
+[DBG:3] [020.04] Aging: pri=5, wait=3012ms, boost=6, effective=9
+[DBG:3] [020.04] Aging: pri=2, wait=3008ms, boost=6, effective=8
+[DBG:3] [020.04] Aging: pri=6, wait=2007ms, boost=4, effective=9
+[DBG:3] [020.04] Aging: pri=9, wait=2023ms, boost=4, effective=9
+[DBG:3] [020.04] Aging: pri=7, wait=1007ms, boost=2, effective=9
+[DBG:3] [020.04] Dequeue: pri=1, data=0, from P8, count=19/20
+[DBG:3] [020.04] Consumer 2: Read pri=1, data=0 from P8, queue=19/20
+[DBG:3] [020.04] Consumer 2: Sleeping for 3 s
+[DBG:3] [020.04] Enqueue: pri=0, slot=12, count=20/20, was_blocked=1
+[DBG:3] [020.04] Producer 2: Sleeping for 1 s
+[DBG:3] [021.01] Analytics sample: occupancy=20/20 (22 samples)
+[DBG:3] [021.02] Producer 3: Generated data=6, pri=7
+[DBG:3] [021.02] Aging: pri=8, wait=11008ms, boost=22, effective=9
+[DBG:3] [021.02] Aging: pri=8, wait=11008ms, boost=22, effective=9
+[DBG:3] [021.02] Aging: pri=9, wait=11007ms, boost=22, effective=9
+[DBG:3] [021.02] Aging: pri=4, wait=9007ms, boost=18, effective=9
+[DBG:3] [021.02] Aging: pri=5, wait=8006ms, boost=16, effective=9
+[DBG:3] [021.02] Aging: pri=4, wait=8006ms, boost=16, effective=9
+[DBG:3] [021.02] Aging: pri=7, wait=8004ms, boost=16, effective=9
+[DBG:3] [021.02] Aging: pri=8, wait=7992ms, boost=15, effective=9
+[DBG:3] [021.02] Aging: pri=1, wait=7006ms, boost=14, effective=9
+[DBG:3] [021.02] Aging: pri=1, wait=6003ms, boost=12, effective=9
+[DBG:3] [021.02] Aging: pri=0, wait=5990ms, boost=11, effective=9
+[DBG:3] [021.02] Aging: pri=2, wait=5988ms, boost=11, effective=9
+[DBG:3] [021.02] Aging: pri=8, wait=5988ms, boost=11, effective=9
+[DBG:3] [021.02] Aging: pri=3, wait=5002ms, boost=10, effective=9
+[DBG:3] [021.02] Aging: pri=6, wait=4000ms, boost=8, effective=9
+[DBG:3] [021.02] Aging: pri=5, wait=3990ms, boost=7, effective=9
+[DBG:3] [021.02] Aging: pri=2, wait=3986ms, boost=7, effective=9
+[DBG:3] [021.02] Aging: pri=6, wait=2985ms, boost=5, effective=9
+[DBG:3] [021.02] Aging: pri=9, wait=3001ms, boost=6, effective=9
+[DBG:3] [021.02] Aging: pri=7, wait=1985ms, boost=3, effective=9
+[DBG:3] [021.02] Aging: pri=0, wait=1001ms, boost=2, effective=2
+[DBG:3] [021.02] Dequeue: pri=8, data=0, from P4, count=19/20
+[DBG:3] [021.02] Consumer 3: Read pri=8, data=0 from P4, queue=19/20
+[DBG:3] [021.02] Enqueue: pri=9, slot=13, count=20/20, was_blocked=1
+[DBG:3] [021.02] Producer 8: Sleeping for 0 s
+[DBG:3] [021.02] Producer 8: Generated data=5, pri=2
+[DBG:3] [021.02] Consumer 3: Sleeping for 3 s
+[DBG:3] [021.02] Producer 5: Generated data=8, pri=4
+[DBG:3] [021.03] Aging: pri=9, wait=11020ms, boost=22, effective=9
+[DBG:3] [021.03] Aging: pri=9, wait=11020ms, boost=22, effective=9
+[DBG:3] [021.03] Aging: pri=4, wait=9020ms, boost=18, effective=9
+[DBG:3] [021.03] Aging: pri=5, wait=8019ms, boost=16, effective=9
+[DBG:3] [021.03] Aging: pri=4, wait=8019ms, boost=16, effective=9
+[DBG:3] [021.03] Aging: pri=7, wait=8017ms, boost=16, effective=9
+[DBG:3] [021.03] Aging: pri=8, wait=8005ms, boost=16, effective=9
+[DBG:3] [021.03] Aging: pri=1, wait=7019ms, boost=14, effective=9
+[DBG:3] [021.03] Aging: pri=1, wait=6016ms, boost=12, effective=9
+[DBG:3] [021.03] Aging: pri=0, wait=6003ms, boost=12, effective=9
+[DBG:3] [021.03] Aging: pri=2, wait=6001ms, boost=12, effective=9
+[DBG:3] [021.03] Aging: pri=8, wait=6001ms, boost=12, effective=9
+[DBG:3] [021.03] Aging: pri=3, wait=5015ms, boost=10, effective=9
+[DBG:3] [021.03] Aging: pri=6, wait=4013ms, boost=8, effective=9
+[DBG:3] [021.03] Aging: pri=5, wait=4003ms, boost=8, effective=9
+[DBG:3] [021.03] Aging: pri=2, wait=3999ms, boost=7, effective=9
+[DBG:3] [021.03] Aging: pri=6, wait=2998ms, boost=5, effective=9
+[DBG:3] [021.03] Aging: pri=9, wait=3014ms, boost=6, effective=9
+[DBG:3] [021.03] Aging: pri=7, wait=1998ms, boost=3, effective=9
+[DBG:3] [021.03] Aging: pri=0, wait=1014ms, boost=2, effective=2
+[DBG:3] [021.03] Aging: pri=9, wait=997ms, boost=1, effective=9
+[DBG:3] [021.03] Dequeue: pri=9, data=4, from P5, count=19/20
+[DBG:3] [021.03] Consumer 5: Read pri=9, data=4 from P5, queue=19/20
+[DBG:3] [021.03] Enqueue: pri=1, slot=14, count=20/20, was_blocked=1
+[DBG:3] [021.03] Producer 4: Generated data=9, pri=1
+[DBG:3] [021.03] Producer 9: Generated data=7, pri=3
+[DBG:3] [021.03] Consumer 5: Sleeping for 3 s
+[DBG:3] [021.03] Producer 10: Sleeping for 2 s
+[DBG:3] [021.04] Producer 6: Generated data=9, pri=8
+[DBG:3] [021.05] Producer 2: Generated data=3, pri=3
+[DBG:3] [022.01] Analytics sample: occupancy=20/20 (23 samples)
+[DBG:3] [022.03] Producer 1: Generated data=2, pri=1
+[DBG:3] [022.03] Producer 7: Generated data=4, pri=8
+[DBG:3] [023.01] Analytics sample: occupancy=20/20 (24 samples)
+[DBG:3] [023.02] Aging: pri=4, wait=11010ms, boost=22, effective=9
+[DBG:3] [023.02] Aging: pri=4, wait=11010ms, boost=22, effective=9
+[DBG:3] [023.02] Aging: pri=5, wait=10009ms, boost=20, effective=9
+[DBG:3] [023.02] Aging: pri=4, wait=10009ms, boost=20, effective=9
+[DBG:3] [023.02] Aging: pri=7, wait=10007ms, boost=20, effective=9
+[DBG:3] [023.02] Aging: pri=8, wait=9995ms, boost=19, effective=9
+[DBG:3] [023.02] Aging: pri=1, wait=9009ms, boost=18, effective=9
+[DBG:3] [023.02] Aging: pri=1, wait=8006ms, boost=16, effective=9
+[DBG:3] [023.02] Aging: pri=0, wait=7993ms, boost=15, effective=9
+[DBG:3] [023.02] Aging: pri=2, wait=7991ms, boost=15, effective=9
+[DBG:3] [023.02] Aging: pri=8, wait=7991ms, boost=15, effective=9
+[DBG:3] [023.02] Aging: pri=3, wait=7005ms, boost=14, effective=9
+[DBG:3] [023.02] Aging: pri=6, wait=6003ms, boost=12, effective=9
+[DBG:3] [023.02] Aging: pri=5, wait=5993ms, boost=11, effective=9
+[DBG:3] [023.02] Aging: pri=2, wait=5989ms, boost=11, effective=9
+[DBG:3] [023.02] Aging: pri=6, wait=4988ms, boost=9, effective=9
+[DBG:3] [023.02] Aging: pri=9, wait=5004ms, boost=10, effective=9
+[DBG:3] [023.02] Aging: pri=7, wait=3988ms, boost=7, effective=9
+[DBG:3] [023.02] Aging: pri=0, wait=3004ms, boost=6, effective=6
+[DBG:3] [023.02] Aging: pri=9, wait=2987ms, boost=5, effective=9
+[DBG:3] [023.02] Aging: pri=1, wait=2987ms, boost=5, effective=6
+[DBG:3] [023.02] Dequeue: pri=4, data=0, from P6, count=19/20
+[DBG:3] [023.02] Consumer 4: Read pri=4, data=0 from P6, queue=19/20
+[DBG:3] [023.02] Consumer 4: Sleeping for 0 s
+[DBG:3] [023.02] Aging: pri=5, wait=10009ms, boost=20, effective=9
+[DBG:3] [023.02] Aging: pri=5, wait=10009ms, boost=20, effective=9
+[DBG:3] [023.02] Aging: pri=4, wait=10009ms, boost=20, effective=9
+[DBG:3] [023.02] Aging: pri=7, wait=10007ms, boost=20, effective=9
+[DBG:3] [023.02] Aging: pri=8, wait=9995ms, boost=19, effective=9
+[DBG:3] [023.02] Aging: pri=1, wait=9009ms, boost=18, effective=9
+[DBG:3] [023.02] Aging: pri=1, wait=8006ms, boost=16, effective=9
+[DBG:3] [023.02] Aging: pri=0, wait=7993ms, boost=15, effective=9
+[DBG:3] [023.02] Aging: pri=2, wait=7991ms, boost=15, effective=9
+[DBG:3] [023.02] Aging: pri=8, wait=7991ms, boost=15, effective=9
+[DBG:3] [023.02] Aging: pri=3, wait=7005ms, boost=14, effective=9
+[DBG:3] [023.02] Aging: pri=6, wait=6003ms, boost=12, effective=9
+[DBG:3] [023.02] Aging: pri=5, wait=5993ms, boost=11, effective=9
+[DBG:3] [023.02] Aging: pri=2, wait=5989ms, boost=11, effective=9
+[DBG:3] [023.02] Aging: pri=6, wait=4988ms, boost=9, effective=9
+[DBG:3] [023.02] Aging: pri=9, wait=5004ms, boost=10, effective=9
+[DBG:3] [023.02] Aging: pri=7, wait=3988ms, boost=7, effective=9
+[DBG:3] [023.02] Aging: pri=0, wait=3004ms, boost=6, effective=6
+[DBG:3] [023.02] Aging: pri=9, wait=2987ms, boost=5, effective=9
+[DBG:3] [023.02] Aging: pri=1, wait=2987ms, boost=5, effective=6
+[DBG:3] [023.02] Dequeue: pri=5, data=7, from P2, count=18/20
+[DBG:3] [023.02] Consumer 4: Read pri=5, data=7 from P2, queue=18/20
+[DBG:3] [023.02] Consumer 4: Sleeping for 0 s
+[DBG:3] [023.02] Aging: pri=4, wait=10010ms, boost=20, effective=9
+[DBG:3] [023.02] Aging: pri=4, wait=10010ms, boost=20, effective=9
+[DBG:3] [023.02] Aging: pri=7, wait=10008ms, boost=20, effective=9
+[DBG:3] [023.02] Aging: pri=8, wait=9996ms, boost=19, effective=9
+[DBG:3] [023.02] Aging: pri=1, wait=9010ms, boost=18, effective=9
+[DBG:3] [023.02] Aging: pri=1, wait=8007ms, boost=16, effective=9
+[DBG:3] [023.02] Aging: pri=0, wait=7994ms, boost=15, effective=9
+[DBG:3] [023.02] Aging: pri=2, wait=7992ms, boost=15, effective=9
+[DBG:3] [023.02] Aging: pri=8, wait=7992ms, boost=15, effective=9
+[DBG:3] [023.02] Aging: pri=3, wait=7006ms, boost=14, effective=9
+[DBG:3] [023.02] Aging: pri=6, wait=6004ms, boost=12, effective=9
+[DBG:3] [023.02] Aging: pri=5, wait=5994ms, boost=11, effective=9
+[DBG:3] [023.02] Aging: pri=2, wait=5990ms, boost=11, effective=9
+[DBG:3] [023.02] Aging: pri=6, wait=4989ms, boost=9, effective=9
+[DBG:3] [023.02] Aging: pri=9, wait=5005ms, boost=10, effective=9
+[DBG:3] [023.02] Aging: pri=7, wait=3989ms, boost=7, effective=9
+[DBG:3] [023.02] Aging: pri=0, wait=3005ms, boost=6, effective=6
+[DBG:3] [023.02] Aging: pri=9, wait=2988ms, boost=5, effective=9
+[DBG:3] [023.02] Aging: pri=1, wait=2988ms, boost=5, effective=6
+[DBG:3] [023.02] Dequeue: pri=4, data=9, from P10, count=17/20
+[DBG:3] [023.02] Consumer 4: Read pri=4, data=9 from P10, queue=17/20
+[DBG:3] [023.02] Enqueue: pri=4, slot=15, count=18/20, was_blocked=1
+[DBG:3] [023.02] Producer 5: Sleeping for 0 s
+[DBG:3] [023.02] Producer 5: Generated data=3, pri=9
+[DBG:3] [023.02] Enqueue: pri=9, slot=16, count=19/20, was_blocked=0
+[DBG:3] [023.02] Producer 5: Sleeping for 2 s
+[DBG:3] [023.02] Enqueue: pri=7, slot=17, count=20/20, was_blocked=1
+[DBG:3] [023.02] Producer 3: Sleeping for 1 s
+[DBG:3] [023.02] Consumer 4: Sleeping for 4 s
+[DBG:3] [023.03] Producer 10: Generated data=0, pri=3
+[DBG:3] [023.04] Aging: pri=7, wait=10029ms, boost=20, effective=9
+[DBG:3] [023.04] Aging: pri=7, wait=10029ms, boost=20, effective=9
+[DBG:3] [023.04] Aging: pri=8, wait=10017ms, boost=20, effective=9
+[DBG:3] [023.04] Aging: pri=1, wait=9031ms, boost=18, effective=9
+[DBG:3] [023.04] Aging: pri=1, wait=8028ms, boost=16, effective=9
+[DBG:3] [023.04] Aging: pri=0, wait=8015ms, boost=16, effective=9
+[DBG:3] [023.04] Aging: pri=2, wait=8013ms, boost=16, effective=9
+[DBG:3] [023.04] Aging: pri=8, wait=8013ms, boost=16, effective=9
+[DBG:3] [023.04] Aging: pri=3, wait=7027ms, boost=14, effective=9
+[DBG:3] [023.04] Aging: pri=6, wait=6025ms, boost=12, effective=9
+[DBG:3] [023.04] Aging: pri=5, wait=6015ms, boost=12, effective=9
+[DBG:3] [023.04] Aging: pri=2, wait=6011ms, boost=12, effective=9
+[DBG:3] [023.04] Aging: pri=6, wait=5010ms, boost=10, effective=9
+[DBG:3] [023.04] Aging: pri=9, wait=5026ms, boost=10, effective=9
+[DBG:3] [023.04] Aging: pri=7, wait=4010ms, boost=8, effective=9
+[DBG:3] [023.04] Aging: pri=0, wait=3026ms, boost=6, effective=6
+[DBG:3] [023.04] Aging: pri=9, wait=3009ms, boost=6, effective=9
+[DBG:3] [023.04] Aging: pri=1, wait=3009ms, boost=6, effective=7
+[DBG:3] [023.04] Aging: pri=4, wait=2024ms, boost=4, effective=8
+[DBG:3] [023.04] Aging: pri=9, wait=21ms, boost=0, effective=9
+[DBG:3] [023.04] Aging: pri=7, wait=2025ms, boost=4, effective=9
+[DBG:3] [023.04] Dequeue: pri=7, data=3, from P3, count=19/20
+[DBG:3] [023.04] Consumer 1: Read pri=7, data=3 from P3, queue=19/20
+[DBG:3] [023.04] Consumer 1: Sleeping for 3 s
+[DBG:3] [023.04] Enqueue: pri=1, slot=18, count=20/20, was_blocked=1
+[DBG:3] [023.04] Aging: pri=8, wait=10017ms, boost=20, effective=9
+[DBG:3] [023.04] Aging: pri=8, wait=10017ms, boost=20, effective=9
+[DBG:3] [023.04] Aging: pri=1, wait=9031ms, boost=18, effective=9
+[DBG:3] [023.04] Aging: pri=1, wait=8028ms, boost=16, effective=9
+[DBG:3] [023.04] Aging: pri=0, wait=8015ms, boost=16, effective=9
+[DBG:3] [023.04] Producer 4: Sleeping for 2 s
+[DBG:3] [023.04] Aging: pri=2, wait=8013ms, boost=16, effective=9
+[DBG:3] [023.04] Aging: pri=8, wait=8013ms, boost=16, effective=9
+[DBG:3] [023.04] Aging: pri=3, wait=7027ms, boost=14, effective=9
+[DBG:3] [023.04] Aging: pri=6, wait=6025ms, boost=12, effective=9
+[DBG:3] [023.04] Aging: pri=5, wait=6015ms, boost=12, effective=9
+[DBG:3] [023.04] Aging: pri=2, wait=6011ms, boost=12, effective=9
+[DBG:3] [023.04] Aging: pri=6, wait=5010ms, boost=10, effective=9
+[DBG:3] [023.04] Aging: pri=9, wait=5026ms, boost=10, effective=9
+[DBG:3] [023.04] Aging: pri=7, wait=4010ms, boost=8, effective=9
+[DBG:3] [023.04] Aging: pri=0, wait=3026ms, boost=6, effective=6
+[DBG:3] [023.04] Aging: pri=9, wait=3009ms, boost=6, effective=9
+[DBG:3] [023.04] Aging: pri=1, wait=3009ms, boost=6, effective=7
+[DBG:3] [023.04] Aging: pri=4, wait=2024ms, boost=4, effective=8
+[DBG:3] [023.04] Aging: pri=9, wait=21ms, boost=0, effective=9
+[DBG:3] [023.04] Aging: pri=7, wait=2025ms, boost=4, effective=9
+[DBG:3] [023.04] Aging: pri=1, wait=2012ms, boost=4, effective=5
+[DBG:3] [023.04] Dequeue: pri=8, data=1, from P7, count=19/20
+[DBG:3] [023.04] Consumer 2: Read pri=8, data=1 from P7, queue=19/20
+[DBG:3] [023.04] Consumer 2: Sleeping for 0 s
+[DBG:3] [023.04] Enqueue: pri=3, slot=19, count=20/20, was_blocked=1
+[DBG:3] [023.04] Producer 9: Sleeping for 0 s
+[DBG:3] [023.04] Producer 9: Generated data=9, pri=3
+[DBG:3] [023.04] Aging: pri=1, wait=9031ms, boost=18, effective=9
+[DBG:3] [023.04] Aging: pri=1, wait=9031ms, boost=18, effective=9
+[DBG:3] [023.04] Aging: pri=1, wait=8028ms, boost=16, effective=9
+[DBG:3] [023.04] Aging: pri=0, wait=8015ms, boost=16, effective=9
+[DBG:3] [023.04] Aging: pri=2, wait=8013ms, boost=16, effective=9
+[DBG:3] [023.04] Aging: pri=8, wait=8013ms, boost=16, effective=9
+[DBG:3] [023.04] Aging: pri=3, wait=7027ms, boost=14, effective=9
+[DBG:3] [023.04] Aging: pri=6, wait=6025ms, boost=12, effective=9
+[DBG:3] [023.04] Aging: pri=5, wait=6015ms, boost=12, effective=9
+[DBG:3] [023.04] Aging: pri=2, wait=6011ms, boost=12, effective=9
+[DBG:3] [023.04] Aging: pri=6, wait=5010ms, boost=10, effective=9
+[DBG:3] [023.04] Aging: pri=9, wait=5026ms, boost=10, effective=9
+[DBG:3] [023.04] Aging: pri=7, wait=4010ms, boost=8, effective=9
+[DBG:3] [023.04] Aging: pri=0, wait=3026ms, boost=6, effective=6
+[DBG:3] [023.04] Aging: pri=9, wait=3009ms, boost=6, effective=9
+[DBG:3] [023.04] Aging: pri=1, wait=3009ms, boost=6, effective=7
+[DBG:3] [023.04] Aging: pri=4, wait=2024ms, boost=4, effective=8
+[DBG:3] [023.04] Aging: pri=9, wait=21ms, boost=0, effective=9
+[DBG:3] [023.04] Aging: pri=7, wait=2025ms, boost=4, effective=9
+[DBG:3] [023.04] Aging: pri=1, wait=2012ms, boost=4, effective=5
+[DBG:3] [023.04] Aging: pri=3, wait=2012ms, boost=4, effective=7
+[DBG:3] [023.04] Dequeue: pri=1, data=5, from P1, count=19/20
+[DBG:3] [023.04] Consumer 2: Read pri=1, data=5 from P1, queue=19/20
+[DBG:3] [023.04] Consumer 2: Sleeping for 2 s
+[DBG:3] [023.04] Enqueue: pri=8, slot=0, count=20/20, was_blocked=1
+[DBG:3] [023.04] Producer 6: Sleeping for 2 s
+[DBG:3] [024.01] Analytics sample: occupancy=20/20 (25 samples)
+[DBG:3] [024.02] Aging: pri=1, wait=9005ms, boost=18, effective=9
+[DBG:3] [024.02] Aging: pri=1, wait=9005ms, boost=18, effective=9
+[DBG:3] [024.02] Aging: pri=0, wait=8992ms, boost=17, effective=9
+[DBG:3] [024.02] Aging: pri=2, wait=8990ms, boost=17, effective=9
+[DBG:3] [024.02] Aging: pri=8, wait=8990ms, boost=17, effective=9
+[DBG:3] [024.02] Aging: pri=3, wait=8004ms, boost=16, effective=9
+[DBG:3] [024.02] Aging: pri=6, wait=7002ms, boost=14, effective=9
+[DBG:3] [024.02] Aging: pri=5, wait=6992ms, boost=13, effective=9
+[DBG:3] [024.02] Aging: pri=2, wait=6988ms, boost=13, effective=9
+[DBG:3] [024.02] Aging: pri=6, wait=5987ms, boost=11, effective=9
+[DBG:3] [024.02] Aging: pri=9, wait=6003ms, boost=12, effective=9
+[DBG:3] [024.02] Aging: pri=7, wait=4987ms, boost=9, effective=9
+[DBG:3] [024.02] Aging: pri=0, wait=4003ms, boost=8, effective=8
+[DBG:3] [024.02] Aging: pri=9, wait=3986ms, boost=7, effective=9
+[DBG:3] [024.02] Aging: pri=1, wait=3986ms, boost=7, effective=8
+[DBG:3] [024.02] Aging: pri=4, wait=3001ms, boost=6, effective=9
+[DBG:3] [024.02] Aging: pri=9, wait=998ms, boost=1, effective=9
+[DBG:3] [024.02] Aging: pri=7, wait=3002ms, boost=6, effective=9
+[DBG:3] [024.02] Aging: pri=1, wait=2989ms, boost=5, effective=6
+[DBG:3] [024.02] Aging: pri=3, wait=2989ms, boost=5, effective=8
+[DBG:3] [024.02] Aging: pri=8, wait=2978ms, boost=5, effective=9
+[DBG:3] [024.02] Dequeue: pri=1, data=9, from P8, count=19/20
+[DBG:3] [024.02] Consumer 3: Read pri=1, data=9 from P8, queue=19/20
+[DBG:3] [024.02] Consumer 3: Sleeping for 2 s
+[DBG:3] [024.02] Enqueue: pri=3, slot=1, count=20/20, was_blocked=1
+[DBG:3] [024.02] Producer 2: Sleeping for 0 s
+[DBG:3] [024.02] Producer 2: Generated data=0, pri=1
+[DBG:3] [024.02] Producer 3: Generated data=9, pri=0
+[DBG:3] [024.03] Aging: pri=0, wait=9004ms, boost=18, effective=9
+[DBG:3] [024.03] Aging: pri=0, wait=9004ms, boost=18, effective=9
+[DBG:3] [024.03] Aging: pri=2, wait=9002ms, boost=18, effective=9
+[DBG:3] [024.03] Aging: pri=8, wait=9002ms, boost=18, effective=9
+[DBG:3] [024.03] Aging: pri=3, wait=8016ms, boost=16, effective=9
+[DBG:3] [024.03] Aging: pri=6, wait=7014ms, boost=14, effective=9
+[DBG:3] [024.03] Aging: pri=5, wait=7004ms, boost=14, effective=9
+[DBG:3] [024.03] Aging: pri=2, wait=7000ms, boost=14, effective=9
+[DBG:3] [024.03] Aging: pri=6, wait=5999ms, boost=11, effective=9
+[DBG:3] [024.03] Aging: pri=9, wait=6015ms, boost=12, effective=9
+[DBG:3] [024.03] Aging: pri=7, wait=4999ms, boost=9, effective=9
+[DBG:3] [024.03] Aging: pri=0, wait=4015ms, boost=8, effective=8
+[DBG:3] [024.03] Aging: pri=9, wait=3998ms, boost=7, effective=9
+[DBG:3] [024.03] Aging: pri=1, wait=3998ms, boost=7, effective=8
+[DBG:3] [024.03] Aging: pri=4, wait=3013ms, boost=6, effective=9
+[DBG:3] [024.03] Aging: pri=9, wait=1010ms, boost=2, effective=9
+[DBG:3] [024.03] Aging: pri=7, wait=3014ms, boost=6, effective=9
+[DBG:3] [024.03] Aging: pri=1, wait=3001ms, boost=6, effective=7
+[DBG:3] [024.03] Aging: pri=3, wait=3001ms, boost=6, effective=9
+[DBG:3] [024.03] Aging: pri=8, wait=2990ms, boost=5, effective=9
+[DBG:3] [024.03] Aging: pri=3, wait=2983ms, boost=5, effective=8
+[DBG:3] [024.03] Dequeue: pri=0, data=3, from P10, count=19/20
+[DBG:3] [024.03] Consumer 5: Read pri=0, data=3 from P10, queue=19/20
+[DBG:3] [024.03] Consumer 5: Sleeping for 4 s
+[DBG:3] [024.03] Enqueue: pri=1, slot=2, count=20/20, was_blocked=1
+[DBG:3] [024.03] Producer 1: Sleeping for 0 s
+[DBG:3] [024.03] Producer 1: Generated data=3, pri=3
+[DBG:3] [025.01] Analytics sample: occupancy=20/20 (26 samples)
+[DBG:3] [025.02] Producer 5: Generated data=4, pri=9
+[DBG:3] [025.04] Producer 4: Generated data=4, pri=6
+[DBG:3] [025.04] Aging: pri=2, wait=10014ms, boost=20, effective=9
+[DBG:3] [025.04] Aging: pri=2, wait=10014ms, boost=20, effective=9
+[DBG:3] [025.04] Aging: pri=8, wait=10014ms, boost=20, effective=9
+[DBG:3] [025.04] Aging: pri=3, wait=9028ms, boost=18, effective=9
+[DBG:3] [025.04] Aging: pri=6, wait=8026ms, boost=16, effective=9
+[DBG:3] [025.04] Aging: pri=5, wait=8016ms, boost=16, effective=9
+[DBG:3] [025.04] Aging: pri=2, wait=8012ms, boost=16, effective=9
+[DBG:3] [025.04] Aging: pri=6, wait=7011ms, boost=14, effective=9
+[DBG:3] [025.04] Aging: pri=9, wait=7027ms, boost=14, effective=9
+[DBG:3] [025.04] Aging: pri=7, wait=6011ms, boost=12, effective=9
+[DBG:3] [025.04] Aging: pri=0, wait=5027ms, boost=10, effective=9
+[DBG:3] [025.04] Aging: pri=9, wait=5010ms, boost=10, effective=9
+[DBG:3] [025.04] Aging: pri=1, wait=5010ms, boost=10, effective=9
+[DBG:3] [025.04] Aging: pri=4, wait=4025ms, boost=8, effective=9
+[DBG:3] [025.04] Aging: pri=9, wait=2022ms, boost=4, effective=9
+[DBG:3] [025.04] Aging: pri=7, wait=4026ms, boost=8, effective=9
+[DBG:3] [025.04] Aging: pri=1, wait=4013ms, boost=8, effective=9
+[DBG:3] [025.04] Aging: pri=3, wait=4013ms, boost=8, effective=9
+[DBG:3] [025.04] Aging: pri=8, wait=4002ms, boost=8, effective=9
+[DBG:3] [025.04] Aging: pri=3, wait=3995ms, boost=7, effective=9
+[DBG:3] [025.04] Aging: pri=1, wait=3013ms, boost=6, effective=7
+[DBG:3] [025.04] Dequeue: pri=2, data=9, from P4, count=19/20
+[DBG:3] [025.04] Consumer 2: Read pri=2, data=9 from P4, queue=19/20
+[DBG:3] [025.04] Consumer 2: Sleeping for 1 s
+[DBG:3] [025.04] Producer 6: Generated data=3, pri=3
+[DBG:3] [025.04] Enqueue: pri=3, slot=3, count=20/20, was_blocked=0
+[DBG:3] [025.04] Producer 6: Sleeping for 2 s
+[DBG:3] [026.01] Analytics sample: occupancy=20/20 (27 samples)
+[DBG:3] [026.02] Aging: pri=8, wait=10992ms, boost=21, effective=9
+[DBG:3] [026.02] Aging: pri=8, wait=10992ms, boost=21, effective=9
+[DBG:3] [026.02] Aging: pri=3, wait=10006ms, boost=20, effective=9
+[DBG:3] [026.02] Aging: pri=6, wait=9004ms, boost=18, effective=9
+[DBG:3] [026.02] Aging: pri=5, wait=8994ms, boost=17, effective=9
+[DBG:3] [026.02] Aging: pri=2, wait=8990ms, boost=17, effective=9
+[DBG:3] [026.02] Aging: pri=6, wait=7989ms, boost=15, effective=9
+[DBG:3] [026.02] Aging: pri=9, wait=8005ms, boost=16, effective=9
+[DBG:3] [026.02] Aging: pri=7, wait=6989ms, boost=13, effective=9
+[DBG:3] [026.02] Aging: pri=0, wait=6005ms, boost=12, effective=9
+[DBG:3] [026.02] Aging: pri=9, wait=5988ms, boost=11, effective=9
+[DBG:3] [026.02] Aging: pri=1, wait=5988ms, boost=11, effective=9
+[DBG:3] [026.02] Aging: pri=4, wait=5003ms, boost=10, effective=9
+[DBG:3] [026.02] Aging: pri=9, wait=3000ms, boost=6, effective=9
+[DBG:3] [026.02] Aging: pri=7, wait=5004ms, boost=10, effective=9
+[DBG:3] [026.02] Aging: pri=1, wait=4991ms, boost=9, effective=9
+[DBG:3] [026.02] Aging: pri=3, wait=4991ms, boost=9, effective=9
+[DBG:3] [026.02] Aging: pri=8, wait=4980ms, boost=9, effective=9
+[DBG:3] [026.02] Aging: pri=3, wait=4973ms, boost=9, effective=9
+[DBG:3] [026.02] Aging: pri=1, wait=3991ms, boost=7, effective=8
+[DBG:3] [026.02] Aging: pri=3, wait=978ms, boost=1, effective=4
+[DBG:3] [026.02] Dequeue: pri=8, data=9, from P5, count=19/20
+[DBG:3] [026.02] Enqueue: pri=2, slot=4, count=20/20, was_blocked=1
+[DBG:3] [026.02] Producer 8: Sleeping for 0 s
+[DBG:3] [026.02] Producer 8: Generated data=9, pri=0
+[DBG:3] [026.02] Consumer 3: Read pri=8, data=9 from P5, queue=20/20
+[DBG:3] [026.02] Consumer 3: Sleeping for 0 s
+[DBG:3] [026.02] Aging: pri=3, wait=10006ms, boost=20, effective=9
+[DBG:3] [026.02] Aging: pri=3, wait=10006ms, boost=20, effective=9
+[DBG:3] [026.02] Aging: pri=6, wait=9004ms, boost=18, effective=9
+[DBG:3] [026.02] Aging: pri=5, wait=8994ms, boost=17, effective=9
+[DBG:3] [026.02] Aging: pri=2, wait=8990ms, boost=17, effective=9
+[DBG:3] [026.02] Aging: pri=6, wait=7989ms, boost=15, effective=9
+[DBG:3] [026.02] Aging: pri=9, wait=8005ms, boost=16, effective=9
+[DBG:3] [026.02] Aging: pri=7, wait=6989ms, boost=13, effective=9
+[DBG:3] [026.02] Aging: pri=0, wait=6005ms, boost=12, effective=9
+[DBG:3] [026.02] Aging: pri=9, wait=5988ms, boost=11, effective=9
+[DBG:3] [026.02] Aging: pri=1, wait=5988ms, boost=11, effective=9
+[DBG:3] [026.02] Aging: pri=4, wait=5003ms, boost=10, effective=9
+[DBG:3] [026.02] Aging: pri=9, wait=3000ms, boost=6, effective=9
+[DBG:3] [026.02] Aging: pri=7, wait=5004ms, boost=10, effective=9
+[DBG:3] [026.02] Aging: pri=1, wait=4991ms, boost=9, effective=9
+[DBG:3] [026.02] Aging: pri=3, wait=4991ms, boost=9, effective=9
+[DBG:3] [026.02] Aging: pri=8, wait=4980ms, boost=9, effective=9
+[DBG:3] [026.02] Aging: pri=3, wait=4973ms, boost=9, effective=9
+[DBG:3] [026.02] Aging: pri=1, wait=3991ms, boost=7, effective=8
+[DBG:3] [026.02] Aging: pri=3, wait=978ms, boost=1, effective=4
+[DBG:3] [026.02] Aging: pri=2, wait=5004ms, boost=10, effective=9
+[DBG:3] [026.02] Dequeue: pri=3, data=4, from P9, count=19/20
+[DBG:3] [026.02] Consumer 3: Read pri=3, data=4 from P9, queue=19/20
+[DBG:3] [026.02] Consumer 3: Sleeping for 2 s
+[DBG:3] [026.02] Enqueue: pri=3, slot=5, count=20/20, was_blocked=1
+[DBG:3] [026.02] Producer 10: Sleeping for 1 s
+[DBG:3] [026.04] Aging: pri=6, wait=9027ms, boost=18, effective=9
+[DBG:3] [026.04] Aging: pri=6, wait=9027ms, boost=18, effective=9
+[DBG:3] [026.04] Aging: pri=5, wait=9017ms, boost=18, effective=9
+[DBG:3] [026.04] Aging: pri=2, wait=9013ms, boost=18, effective=9
+[DBG:3] [026.04] Aging: pri=6, wait=8012ms, boost=16, effective=9
+[DBG:3] [026.04] Aging: pri=9, wait=8028ms, boost=16, effective=9
+[DBG:3] [026.04] Aging: pri=7, wait=7012ms, boost=14, effective=9
+[DBG:3] [026.04] Aging: pri=0, wait=6028ms, boost=12, effective=9
+[DBG:3] [026.04] Aging: pri=9, wait=6011ms, boost=12, effective=9
+[DBG:3] [026.04] Aging: pri=1, wait=6011ms, boost=12, effective=9
+[DBG:3] [026.04] Aging: pri=4, wait=5026ms, boost=10, effective=9
+[DBG:3] [026.04] Aging: pri=9, wait=3023ms, boost=6, effective=9
+[DBG:3] [026.04] Aging: pri=7, wait=5027ms, boost=10, effective=9
+[DBG:3] [026.04] Aging: pri=1, wait=5014ms, boost=10, effective=9
+[DBG:3] [026.04] Aging: pri=3, wait=5014ms, boost=10, effective=9
+[DBG:3] [026.04] Aging: pri=8, wait=5003ms, boost=10, effective=9
+[DBG:3] [026.04] Aging: pri=3, wait=4996ms, boost=9, effective=9
+[DBG:3] [026.04] Aging: pri=1, wait=4014ms, boost=8, effective=9
+[DBG:3] [026.04] Aging: pri=3, wait=1001ms, boost=2, effective=5
+[DBG:3] [026.04] Aging: pri=2, wait=5027ms, boost=10, effective=9
+[DBG:3] [026.04] Aging: pri=3, wait=3013ms, boost=6, effective=9
+[DBG:3] [026.04] Dequeue: pri=6, data=0, from P6, count=19/20
+[DBG:3] [026.04] Consumer 2: Read pri=6, data=0 from P6, queue=19/20
+[DBG:3] [026.04] Consumer 2: Sleeping for 2 s
+[DBG:3] [026.04] Enqueue: pri=3, slot=6, count=20/20, was_blocked=1
+[DBG:3] [026.04] Producer 9: Sleeping for 1 s
+[DBG:3] [026.04] Aging: pri=5, wait=9017ms, boost=18, effective=9
+[DBG:3] [026.04] Aging: pri=5, wait=9017ms, boost=18, effective=9
+[DBG:3] [026.04] Aging: pri=2, wait=9013ms, boost=18, effective=9
+[DBG:3] [026.04] Aging: pri=6, wait=8012ms, boost=16, effective=9
+[DBG:3] [026.04] Aging: pri=9, wait=8028ms, boost=16, effective=9
+[DBG:3] [026.04] Aging: pri=7, wait=7012ms, boost=14, effective=9
+[DBG:3] [026.04] Aging: pri=0, wait=6028ms, boost=12, effective=9
+[DBG:3] [026.04] Aging: pri=9, wait=6011ms, boost=12, effective=9
+[DBG:3] [026.04] Aging: pri=1, wait=6011ms, boost=12, effective=9
+[DBG:3] [026.04] Aging: pri=4, wait=5026ms, boost=10, effective=9
+[DBG:3] [026.04] Aging: pri=9, wait=3023ms, boost=6, effective=9
+[DBG:3] [026.04] Aging: pri=7, wait=5027ms, boost=10, effective=9
+[DBG:3] [026.04] Aging: pri=1, wait=5014ms, boost=10, effective=9
+[DBG:3] [026.04] Aging: pri=3, wait=5014ms, boost=10, effective=9
+[DBG:3] [026.04] Aging: pri=8, wait=5003ms, boost=10, effective=9
+[DBG:3] [026.04] Aging: pri=3, wait=4996ms, boost=9, effective=9
+[DBG:3] [026.04] Aging: pri=1, wait=4014ms, boost=8, effective=9
+[DBG:3] [026.04] Aging: pri=3, wait=1001ms, boost=2, effective=5
+[DBG:3] [026.04] Aging: pri=2, wait=5027ms, boost=10, effective=9
+[DBG:3] [026.04] Aging: pri=3, wait=3013ms, boost=6, effective=9
+[DBG:3] [026.04] Aging: pri=3, wait=3002ms, boost=6, effective=9
+[DBG:3] [026.04] Dequeue: pri=5, data=1, from P2, count=19/20
+[DBG:3] [026.04] Consumer 1: Read pri=5, data=1 from P2, queue=19/20
+[DBG:3] [026.04] Consumer 1: Sleeping for 2 s
+[DBG:3] [026.04] Enqueue: pri=1, slot=7, count=20/20, was_blocked=1
+[DBG:3] [026.04] Producer 2: Sleeping for 1 s
+[DBG:3] [027.01] Analytics sample: occupancy=20/20 (28 samples)
+[DBG:3] [027.02] Producer 10: Generated data=3, pri=4
+[DBG:3] [027.02] Aging: pri=2, wait=9993ms, boost=19, effective=9
+[DBG:3] [027.02] Aging: pri=2, wait=9993ms, boost=19, effective=9
+[DBG:3] [027.02] Aging: pri=6, wait=8992ms, boost=17, effective=9
+[DBG:3] [027.02] Aging: pri=9, wait=9008ms, boost=18, effective=9
+[DBG:3] [027.02] Aging: pri=7, wait=7992ms, boost=15, effective=9
+[DBG:3] [027.02] Aging: pri=0, wait=7008ms, boost=14, effective=9
+[DBG:3] [027.02] Aging: pri=9, wait=6991ms, boost=13, effective=9
+[DBG:3] [027.02] Aging: pri=1, wait=6991ms, boost=13, effective=9
+[DBG:3] [027.02] Aging: pri=4, wait=6006ms, boost=12, effective=9
+[DBG:3] [027.02] Aging: pri=9, wait=4003ms, boost=8, effective=9
+[DBG:3] [027.02] Aging: pri=7, wait=6007ms, boost=12, effective=9
+[DBG:3] [027.02] Aging: pri=1, wait=5994ms, boost=11, effective=9
+[DBG:3] [027.02] Aging: pri=3, wait=5994ms, boost=11, effective=9
+[DBG:3] [027.02] Aging: pri=8, wait=5983ms, boost=11, effective=9
+[DBG:3] [027.02] Aging: pri=3, wait=5976ms, boost=11, effective=9
+[DBG:3] [027.02] Aging: pri=1, wait=4994ms, boost=9, effective=9
+[DBG:3] [027.02] Aging: pri=3, wait=1981ms, boost=3, effective=6
+[DBG:3] [027.02] Aging: pri=2, wait=6007ms, boost=12, effective=9
+[DBG:3] [027.02] Aging: pri=3, wait=3993ms, boost=7, effective=9
+[DBG:3] [027.02] Aging: pri=3, wait=3982ms, boost=7, effective=9
+[DBG:3] [027.02] Aging: pri=1, wait=3004ms, boost=6, effective=7
+[DBG:3] [027.02] Dequeue: pri=2, data=7, from P3, count=19/20
+[DBG:3] [027.02] Consumer 4: Read pri=2, data=7 from P3, queue=19/20
+[DBG:3] [027.02] Consumer 4: Sleeping for 0 s
+[DBG:3] [027.02] Aging: pri=6, wait=8992ms, boost=17, effective=9
+[DBG:3] [027.02] Aging: pri=6, wait=8992ms, boost=17, effective=9
+[DBG:3] [027.02] Aging: pri=9, wait=9008ms, boost=18, effective=9
+[DBG:3] [027.02] Aging: pri=7, wait=7992ms, boost=15, effective=9
+[DBG:3] [027.02] Aging: pri=0, wait=7008ms, boost=14, effective=9
+[DBG:3] [027.02] Aging: pri=9, wait=6991ms, boost=13, effective=9
+[DBG:3] [027.02] Aging: pri=1, wait=6991ms, boost=13, effective=9
+[DBG:3] [027.02] Aging: pri=4, wait=6006ms, boost=12, effective=9
+[DBG:3] [027.02] Aging: pri=9, wait=4003ms, boost=8, effective=9
+[DBG:3] [027.02] Aging: pri=7, wait=6007ms, boost=12, effective=9
+[DBG:3] [027.02] Aging: pri=1, wait=5994ms, boost=11, effective=9
+[DBG:3] [027.02] Aging: pri=3, wait=5994ms, boost=11, effective=9
+[DBG:3] [027.02] Aging: pri=8, wait=5983ms, boost=11, effective=9
+[DBG:3] [027.02] Aging: pri=3, wait=5976ms, boost=11, effective=9
+[DBG:3] [027.02] Aging: pri=1, wait=4994ms, boost=9, effective=9
+[DBG:3] [027.02] Aging: pri=3, wait=1981ms, boost=3, effective=6
+[DBG:3] [027.02] Aging: pri=2, wait=6007ms, boost=12, effective=9
+[DBG:3] [027.02] Aging: pri=3, wait=3993ms, boost=7, effective=9
+[DBG:3] [027.02] Aging: pri=3, wait=3982ms, boost=7, effective=9
+[DBG:3] [027.02] Aging: pri=1, wait=3004ms, boost=6, effective=7
+[DBG:3] [027.02] Dequeue: pri=9, data=5, from P1, count=18/20
+[DBG:3] [027.02] Consumer 4: Read pri=9, data=5 from P1, queue=18/20
+[DBG:3] [027.02] Consumer 4: Sleeping for 2 s
+[DBG:3] [027.02] Enqueue: pri=0, slot=8, count=19/20, was_blocked=1
+[DBG:3] [027.02] Producer 3: Sleeping for 0 s
+[DBG:3] [027.02] Producer 3: Generated data=0, pri=9
+[DBG:3] [027.02] Enqueue: pri=9, slot=9, count=20/20, was_blocked=0
+[DBG:3] [027.02] Producer 3: Sleeping for 2 s
+[DBG:3] [027.04] Producer 6: Generated data=0, pri=0
+[DBG:3] [027.04] Producer 9: Generated data=5, pri=5
+[DBG:3] [027.05] Producer 2: Generated data=4, pri=1
+[DBG:3] [028.01] Analytics sample: occupancy=20/20 (29 samples)
+[DBG:3] [028.02] Aging: pri=6, wait=9990ms, boost=19, effective=9
+[DBG:3] [028.02] Aging: pri=6, wait=9990ms, boost=19, effective=9
+[DBG:3] [028.02] Aging: pri=7, wait=8990ms, boost=17, effective=9
+[DBG:3] [028.02] Aging: pri=0, wait=8006ms, boost=16, effective=9
+[DBG:3] [028.02] Aging: pri=9, wait=7989ms, boost=15, effective=9
+[DBG:3] [028.02] Aging: pri=1, wait=7989ms, boost=15, effective=9
+[DBG:3] [028.02] Aging: pri=4, wait=7004ms, boost=14, effective=9
+[DBG:3] [028.02] Aging: pri=9, wait=5001ms, boost=10, effective=9
+[DBG:3] [028.02] Aging: pri=7, wait=7005ms, boost=14, effective=9
+[DBG:3] [028.02] Aging: pri=1, wait=6992ms, boost=13, effective=9
+[DBG:3] [028.02] Aging: pri=3, wait=6992ms, boost=13, effective=9
+[DBG:3] [028.02] Aging: pri=8, wait=6981ms, boost=13, effective=9
+[DBG:3] [028.02] Aging: pri=3, wait=6974ms, boost=13, effective=9
+[DBG:3] [028.02] Aging: pri=1, wait=5992ms, boost=11, effective=9
+[DBG:3] [028.02] Aging: pri=3, wait=2979ms, boost=5, effective=8
+[DBG:3] [028.02] Aging: pri=2, wait=7005ms, boost=14, effective=9
+[DBG:3] [028.02] Aging: pri=3, wait=4991ms, boost=9, effective=9
+[DBG:3] [028.02] Aging: pri=3, wait=4980ms, boost=9, effective=9
+[DBG:3] [028.02] Aging: pri=1, wait=4002ms, boost=8, effective=9
+[DBG:3] [028.02] Aging: pri=0, wait=4000ms, boost=8, effective=8
+[DBG:3] [028.02] Aging: pri=9, wait=997ms, boost=1, effective=9
+[DBG:3] [028.02] Dequeue: pri=6, data=3, from P4, count=19/20
+[DBG:3] [028.02] Consumer 3: Read pri=6, data=3 from P4, queue=19/20
+[DBG:3] [028.02] Consumer 3: Sleeping for 1 s
+[DBG:3] [028.02] Enqueue: pri=9, slot=10, count=20/20, was_blocked=1
+[DBG:3] [028.02] Producer 5: Sleeping for 1 s
+[DBG:3] [028.04] Aging: pri=7, wait=9003ms, boost=18, effective=9
+[DBG:3] [028.04] Aging: pri=7, wait=9003ms, boost=18, effective=9
+[DBG:3] [028.04] Aging: pri=0, wait=8019ms, boost=16, effective=9
+[DBG:3] [028.04] Aging: pri=9, wait=8002ms, boost=16, effective=9
+[DBG:3] [028.04] Aging: pri=1, wait=8002ms, boost=16, effective=9
+[DBG:3] [028.04] Aging: pri=4, wait=7017ms, boost=14, effective=9
+[DBG:3] [028.04] Aging: pri=9, wait=5014ms, boost=10, effective=9
+[DBG:3] [028.04] Aging: pri=7, wait=7018ms, boost=14, effective=9
+[DBG:3] [028.04] Aging: pri=1, wait=7005ms, boost=14, effective=9
+[DBG:3] [028.04] Aging: pri=3, wait=7005ms, boost=14, effective=9
+[DBG:3] [028.04] Aging: pri=8, wait=6994ms, boost=13, effective=9
+[DBG:3] [028.04] Aging: pri=3, wait=6987ms, boost=13, effective=9
+[DBG:3] [028.04] Aging: pri=1, wait=6005ms, boost=12, effective=9
+[DBG:3] [028.04] Aging: pri=3, wait=2992ms, boost=5, effective=8
+[DBG:3] [028.04] Aging: pri=2, wait=7018ms, boost=14, effective=9
+[DBG:3] [028.04] Aging: pri=3, wait=5004ms, boost=10, effective=9
+[DBG:3] [028.04] Aging: pri=3, wait=4993ms, boost=9, effective=9
+[DBG:3] [028.04] Aging: pri=1, wait=4015ms, boost=8, effective=9
+[DBG:3] [028.04] Aging: pri=0, wait=4013ms, boost=8, effective=8
+[DBG:3] [028.04] Aging: pri=9, wait=1010ms, boost=2, effective=9
+[DBG:3] [028.04] Aging: pri=9, wait=3012ms, boost=6, effective=9
+[DBG:3] [028.04] Dequeue: pri=7, data=8, from P7, count=19/20
+[DBG:3] [028.04] Enqueue: pri=6, slot=11, count=20/20, was_blocked=1
+[DBG:3] [028.04] Producer 4: Sleeping for 0 s
+[DBG:3] [028.04] Producer 4: Generated data=9, pri=3
+[DBG:3] [028.04] Consumer 5: Read pri=7, data=8 from P7, queue=20/20
+[DBG:3] [028.04] Consumer 5: Sleeping for 2 s
+[DBG:3] [028.05] Aging: pri=0, wait=8030ms, boost=16, effective=9
+[DBG:3] [028.05] Aging: pri=0, wait=8030ms, boost=16, effective=9
+[DBG:3] [028.05] Aging: pri=9, wait=8013ms, boost=16, effective=9
+[DBG:3] [028.05] Aging: pri=1, wait=8013ms, boost=16, effective=9
+[DBG:3] [028.05] Aging: pri=4, wait=7028ms, boost=14, effective=9
+[DBG:3] [028.05] Aging: pri=9, wait=5025ms, boost=10, effective=9
+[DBG:3] [028.05] Aging: pri=7, wait=7029ms, boost=14, effective=9
+[DBG:3] [028.05] Aging: pri=1, wait=7016ms, boost=14, effective=9
+[DBG:3] [028.05] Aging: pri=3, wait=7016ms, boost=14, effective=9
+[DBG:3] [028.05] Aging: pri=8, wait=7005ms, boost=14, effective=9
+[DBG:3] [028.05] Aging: pri=3, wait=6998ms, boost=13, effective=9
+[DBG:3] [028.05] Aging: pri=1, wait=6016ms, boost=12, effective=9
+[DBG:3] [028.05] Aging: pri=3, wait=3003ms, boost=6, effective=9
+[DBG:3] [028.05] Aging: pri=2, wait=7029ms, boost=14, effective=9
+[DBG:3] [028.05] Aging: pri=3, wait=5015ms, boost=10, effective=9
+[DBG:3] [028.05] Aging: pri=3, wait=5004ms, boost=10, effective=9
+[DBG:3] [028.05] Aging: pri=1, wait=4026ms, boost=8, effective=9
+[DBG:3] [028.05] Aging: pri=0, wait=4024ms, boost=8, effective=8
+[DBG:3] [028.05] Aging: pri=9, wait=1021ms, boost=2, effective=9
+[DBG:3] [028.05] Aging: pri=9, wait=3023ms, boost=6, effective=9
+[DBG:3] [028.05] Aging: pri=6, wait=3003ms, boost=6, effective=9
+[DBG:3] [028.05] Dequeue: pri=0, data=1, from P2, count=19/20
+[DBG:3] [028.05] Enqueue: pri=8, slot=12, count=20/20, was_blocked=1
+[DBG:3] [028.05] Producer 7: Sleeping for 2 s
+[DBG:3] [028.05] Aging: pri=9, wait=8014ms, boost=16, effective=9
+[DBG:3] [028.05] Aging: pri=9, wait=8014ms, boost=16, effective=9
+[DBG:3] [028.05] Aging: pri=1, wait=8014ms, boost=16, effective=9
+[DBG:3] [028.05] Aging: pri=4, wait=7029ms, boost=14, effective=9
+[DBG:3] [028.05] Aging: pri=9, wait=5026ms, boost=10, effective=9
+[DBG:3] [028.05] Aging: pri=7, wait=7030ms, boost=14, effective=9
+[DBG:3] [028.05] Aging: pri=1, wait=7017ms, boost=14, effective=9
+[DBG:3] [028.05] Aging: pri=3, wait=7017ms, boost=14, effective=9
+[DBG:3] [028.05] Aging: pri=8, wait=7006ms, boost=14, effective=9
+[DBG:3] [028.05] Aging: pri=3, wait=6999ms, boost=13, effective=9
+[DBG:3] [028.05] Aging: pri=1, wait=6017ms, boost=12, effective=9
+[DBG:3] [028.05] Aging: pri=3, wait=3004ms, boost=6, effective=9
+[DBG:3] [028.05] Aging: pri=2, wait=7030ms, boost=14, effective=9
+[DBG:3] [028.05] Aging: pri=3, wait=5016ms, boost=10, effective=9
+[DBG:3] [028.05] Aging: pri=3, wait=5005ms, boost=10, effective=9
+[DBG:3] [028.05] Aging: pri=1, wait=4027ms, boost=8, effective=9
+[DBG:3] [028.05] Aging: pri=0, wait=4025ms, boost=8, effective=8
+[DBG:3] [028.05] Aging: pri=9, wait=1022ms, boost=2, effective=9
+[DBG:3] [028.05] Aging: pri=9, wait=3024ms, boost=6, effective=9
+[DBG:3] [028.05] Aging: pri=6, wait=3004ms, boost=6, effective=9
+[DBG:3] [028.05] Aging: pri=8, wait=6012ms, boost=12, effective=9
+[DBG:3] [028.05] Dequeue: pri=9, data=4, from P8, count=19/20
+[DBG:3] [028.05] Consumer 2: Read pri=9, data=4 from P8, queue=19/20
+[DBG:3] [028.05] Consumer 2: Sleeping for 3 s
+[DBG:3] [028.05] Enqueue: pri=0, slot=13, count=20/20, was_blocked=1
+[DBG:3] [028.05] Producer 8: Sleeping for 1 s
+[DBG:3] [028.05] Consumer 1: Read pri=0, data=1 from P2, queue=20/20
+[DBG:3] [028.05] Consumer 1: Sleeping for 1 s
+[DBG:3] [029.01] Analytics sample: occupancy=20/20 (30 samples)
+[DBG:3] [029.02] Producer 5: Generated data=5, pri=4
+[DBG:3] [029.02] Aging: pri=1, wait=8990ms, boost=17, effective=9
+[DBG:3] [029.02] Aging: pri=1, wait=8990ms, boost=17, effective=9
+[DBG:3] [029.02] Aging: pri=4, wait=8005ms, boost=16, effective=9
+[DBG:3] [029.02] Aging: pri=9, wait=6002ms, boost=12, effective=9
+[DBG:3] [029.02] Aging: pri=7, wait=8006ms, boost=16, effective=9
+[DBG:3] [029.02] Aging: pri=1, wait=7993ms, boost=15, effective=9
+[DBG:3] [029.02] Aging: pri=3, wait=7993ms, boost=15, effective=9
+[DBG:3] [029.02] Aging: pri=8, wait=7982ms, boost=15, effective=9
+[DBG:3] [029.02] Aging: pri=3, wait=7975ms, boost=15, effective=9
+[DBG:3] [029.02] Aging: pri=1, wait=6993ms, boost=13, effective=9
+[DBG:3] [029.02] Aging: pri=3, wait=3980ms, boost=7, effective=9
+[DBG:3] [029.02] Aging: pri=2, wait=8006ms, boost=16, effective=9
+[DBG:3] [029.02] Aging: pri=3, wait=5992ms, boost=11, effective=9
+[DBG:3] [029.02] Aging: pri=3, wait=5981ms, boost=11, effective=9
+[DBG:3] [029.02] Aging: pri=1, wait=5003ms, boost=10, effective=9
+[DBG:3] [029.02] Aging: pri=0, wait=5001ms, boost=10, effective=9
+[DBG:3] [029.02] Aging: pri=9, wait=1998ms, boost=3, effective=9
+[DBG:3] [029.02] Aging: pri=9, wait=4000ms, boost=8, effective=9
+[DBG:3] [029.02] Aging: pri=6, wait=3980ms, boost=7, effective=9
+[DBG:3] [029.02] Aging: pri=8, wait=6988ms, boost=13, effective=9
+[DBG:3] [029.02] Aging: pri=0, wait=3002ms, boost=6, effective=6
+[DBG:3] [029.02] Dequeue: pri=1, data=5, from P10, count=19/20
+[DBG:3] [029.02] Consumer 3: Read pri=1, data=5 from P10, queue=19/20
+[DBG:3] [029.02] Consumer 3: Sleeping for 0 s
+[DBG:3] [029.02] Aging: pri=4, wait=8005ms, boost=16, effective=9
+[DBG:3] [029.02] Aging: pri=4, wait=8005ms, boost=16, effective=9
+[DBG:3] [029.02] Aging: pri=9, wait=6002ms, boost=12, effective=9
+[DBG:3] [029.02] Aging: pri=7, wait=8006ms, boost=16, effective=9
+[DBG:3] [029.02] Aging: pri=1, wait=7993ms, boost=15, effective=9
+[DBG:3] [029.02] Aging: pri=3, wait=7993ms, boost=15, effective=9
+[DBG:3] [029.02] Aging: pri=8, wait=7982ms, boost=15, effective=9
+[DBG:3] [029.02] Aging: pri=3, wait=7975ms, boost=15, effective=9
+[DBG:3] [029.02] Aging: pri=1, wait=6993ms, boost=13, effective=9
+[DBG:3] [029.02] Aging: pri=3, wait=3980ms, boost=7, effective=9
+[DBG:3] [029.02] Aging: pri=2, wait=8006ms, boost=16, effective=9
+[DBG:3] [029.02] Aging: pri=3, wait=5992ms, boost=11, effective=9
+[DBG:3] [029.02] Aging: pri=3, wait=5981ms, boost=11, effective=9
+[DBG:3] [029.02] Aging: pri=1, wait=5003ms, boost=10, effective=9
+[DBG:3] [029.02] Aging: pri=0, wait=5001ms, boost=10, effective=9
+[DBG:3] [029.02] Aging: pri=9, wait=1998ms, boost=3, effective=9
+[DBG:3] [029.02] Aging: pri=9, wait=4000ms, boost=8, effective=9
+[DBG:3] [029.02] Aging: pri=6, wait=3980ms, boost=7, effective=9
+[DBG:3] [029.02] Aging: pri=8, wait=6988ms, boost=13, effective=9
+[DBG:3] [029.02] Aging: pri=0, wait=3002ms, boost=6, effective=6
+[DBG:3] [029.02] Dequeue: pri=7, data=6, from P3, count=18/20
+[DBG:3] [029.02] Enqueue: pri=4, slot=14, count=19/20, was_blocked=1
+[DBG:3] [029.02] Consumer 3: Read pri=7, data=6 from P3, queue=19/20
+[DBG:3] [029.02] Enqueue: pri=3, slot=15, count=20/20, was_blocked=1
+[DBG:3] [029.02] Producer 10: Sleeping for 0 s
+[DBG:3] [029.02] Producer 10: Generated data=3, pri=4
+[DBG:3] [029.02] Consumer 3: Sleeping for 0 s
+[DBG:3] [029.02] Aging: pri=4, wait=8005ms, boost=16, effective=9
+[DBG:3] [029.02] Aging: pri=4, wait=8005ms, boost=16, effective=9
+[DBG:3] [029.02] Aging: pri=9, wait=6002ms, boost=12, effective=9
+[DBG:3] [029.02] Aging: pri=1, wait=7993ms, boost=15, effective=9
+[DBG:3] [029.02] Aging: pri=3, wait=7993ms, boost=15, effective=9
+[DBG:3] [029.02] Aging: pri=8, wait=7982ms, boost=15, effective=9
+[DBG:3] [029.02] Aging: pri=3, wait=7975ms, boost=15, effective=9
+[DBG:3] [029.02] Aging: pri=1, wait=6993ms, boost=13, effective=9
+[DBG:3] [029.02] Aging: pri=3, wait=3980ms, boost=7, effective=9
+[DBG:3] [029.02] Aging: pri=2, wait=8006ms, boost=16, effective=9
+[DBG:3] [029.02] Aging: pri=3, wait=5992ms, boost=11, effective=9
+[DBG:3] [029.02] Aging: pri=3, wait=5981ms, boost=11, effective=9
+[DBG:3] [029.02] Aging: pri=1, wait=5003ms, boost=10, effective=9
+[DBG:3] [029.02] Aging: pri=0, wait=5001ms, boost=10, effective=9
+[DBG:3] [029.02] Aging: pri=9, wait=1998ms, boost=3, effective=9
+[DBG:3] [029.02] Aging: pri=9, wait=4000ms, boost=8, effective=9
+[DBG:3] [029.02] Aging: pri=6, wait=3980ms, boost=7, effective=9
+[DBG:3] [029.02] Aging: pri=8, wait=6988ms, boost=13, effective=9
+[DBG:3] [029.02] Aging: pri=0, wait=3002ms, boost=6, effective=6
+[DBG:3] [029.02] Aging: pri=4, wait=2000ms, boost=4, effective=8
+[DBG:3] [029.02] Producer 1: Sleeping for 2 s
+[DBG:3] [029.02] Aging: pri=3, wait=4991ms, boost=9, effective=9
+[DBG:3] [029.02] Dequeue: pri=2, data=5, from P8, count=19/20
+[DBG:3] [029.02] Consumer 3: Read pri=2, data=5 from P8, queue=19/20
+[DBG:3] [029.02] Consumer 3: Sleeping for 0 s
+[DBG:3] [029.02] Aging: pri=4, wait=8006ms, boost=16, effective=9
+[DBG:3] [029.02] Aging: pri=4, wait=8006ms, boost=16, effective=9
+[DBG:3] [029.02] Aging: pri=9, wait=6003ms, boost=12, effective=9
+[DBG:3] [029.02] Aging: pri=1, wait=7994ms, boost=15, effective=9
+[DBG:3] [029.02] Aging: pri=3, wait=7994ms, boost=15, effective=9
+[DBG:3] [029.02] Aging: pri=8, wait=7983ms, boost=15, effective=9
+[DBG:3] [029.02] Aging: pri=3, wait=7976ms, boost=15, effective=9
+[DBG:3] [029.02] Aging: pri=1, wait=6994ms, boost=13, effective=9
+[DBG:3] [029.02] Aging: pri=3, wait=3981ms, boost=7, effective=9
+[DBG:3] [029.02] Aging: pri=3, wait=5993ms, boost=11, effective=9
+[DBG:3] [029.02] Aging: pri=3, wait=5982ms, boost=11, effective=9
+[DBG:3] [029.02] Aging: pri=1, wait=5004ms, boost=10, effective=9
+[DBG:3] [029.02] Aging: pri=0, wait=5002ms, boost=10, effective=9
+[DBG:3] [029.02] Aging: pri=9, wait=1999ms, boost=3, effective=9
+[DBG:3] [029.02] Aging: pri=9, wait=4001ms, boost=8, effective=9
+[DBG:3] [029.02] Aging: pri=6, wait=3981ms, boost=7, effective=9
+[DBG:3] [029.02] Aging: pri=8, wait=6989ms, boost=13, effective=9
+[DBG:3] [029.02] Aging: pri=0, wait=3003ms, boost=6, effective=6
+[DBG:3] [029.02] Aging: pri=4, wait=2001ms, boost=4, effective=8
+[DBG:3] [029.02] Aging: pri=3, wait=4992ms, boost=9, effective=9
+[DBG:3] [029.02] Dequeue: pri=4, data=8, from P5, count=18/20
+[DBG:3] [029.02] Consumer 3: Read pri=4, data=8 from P5, queue=18/20
+[DBG:3] [029.02] Consumer 3: Sleeping for 0 s
+[DBG:3] [029.02] Enqueue: pri=5, slot=16, count=19/20, was_blocked=1
+[DBG:3] [029.02] Producer 9: Sleeping for 1 s
+[DBG:3] [029.02] Aging: pri=9, wait=6003ms, boost=12, effective=9
+[DBG:3] [029.02] Aging: pri=9, wait=6003ms, boost=12, effective=9
+[DBG:3] [029.02] Aging: pri=1, wait=7994ms, boost=15, effective=9
+[DBG:3] [029.02] Aging: pri=3, wait=7994ms, boost=15, effective=9
+[DBG:3] [029.02] Aging: pri=8, wait=7983ms, boost=15, effective=9
+[DBG:3] [029.02] Aging: pri=3, wait=7976ms, boost=15, effective=9
+[DBG:3] [029.02] Aging: pri=1, wait=6994ms, boost=13, effective=9
+[DBG:3] [029.02] Aging: pri=3, wait=3981ms, boost=7, effective=9
+[DBG:3] [029.02] Aging: pri=3, wait=5993ms, boost=11, effective=9
+[DBG:3] [029.02] Aging: pri=3, wait=5982ms, boost=11, effective=9
+[DBG:3] [029.02] Aging: pri=1, wait=5004ms, boost=10, effective=9
+[DBG:3] [029.02] Aging: pri=0, wait=5002ms, boost=10, effective=9
+[DBG:3] [029.02] Aging: pri=9, wait=1999ms, boost=3, effective=9
+[DBG:3] [029.02] Aging: pri=9, wait=4001ms, boost=8, effective=9
+[DBG:3] [029.02] Aging: pri=6, wait=3981ms, boost=7, effective=9
+[DBG:3] [029.02] Aging: pri=8, wait=6989ms, boost=13, effective=9
+[DBG:3] [029.02] Aging: pri=0, wait=3003ms, boost=6, effective=6
+[DBG:3] [029.02] Aging: pri=4, wait=2001ms, boost=4, effective=8
+[DBG:3] [029.02] Aging: pri=3, wait=4992ms, boost=9, effective=9
+[DBG:3] [029.02] Aging: pri=5, wait=1979ms, boost=3, effective=8
+[DBG:3] [029.02] Dequeue: pri=1, data=9, from P4, count=18/20
+[DBG:3] [029.02] Enqueue: pri=0, slot=17, count=19/20, was_blocked=1
+[DBG:3] [029.02] Producer 6: Sleeping for 1 s
+[DBG:3] [029.02] Consumer 3: Read pri=1, data=9 from P4, queue=19/20
+[DBG:3] [029.02] Consumer 3: Sleeping for 0 s
+[DBG:3] [029.02] Enqueue: pri=1, slot=18, count=20/20, was_blocked=1
+[DBG:3] [029.02] Producer 2: Sleeping for 1 s
+[DBG:3] [029.02] Aging: pri=9, wait=6003ms, boost=12, effective=9
+[DBG:3] [029.02] Aging: pri=9, wait=6003ms, boost=12, effective=9
+[DBG:3] [029.02] Aging: pri=3, wait=7994ms, boost=15, effective=9
+[DBG:3] [029.02] Aging: pri=8, wait=7983ms, boost=15, effective=9
+[DBG:3] [029.02] Aging: pri=3, wait=7976ms, boost=15, effective=9
+[DBG:3] [029.02] Aging: pri=1, wait=6994ms, boost=13, effective=9
+[DBG:3] [029.02] Aging: pri=3, wait=3981ms, boost=7, effective=9
+[DBG:3] [029.02] Aging: pri=3, wait=5993ms, boost=11, effective=9
+[DBG:3] [029.02] Aging: pri=3, wait=5982ms, boost=11, effective=9
+[DBG:3] [029.02] Aging: pri=1, wait=5004ms, boost=10, effective=9
+[DBG:3] [029.02] Aging: pri=0, wait=5002ms, boost=10, effective=9
+[DBG:3] [029.02] Aging: pri=9, wait=1999ms, boost=3, effective=9
+[DBG:3] [029.02] Aging: pri=9, wait=4001ms, boost=8, effective=9
+[DBG:3] [029.02] Aging: pri=6, wait=3981ms, boost=7, effective=9
+[DBG:3] [029.02] Aging: pri=8, wait=6989ms, boost=13, effective=9
+[DBG:3] [029.02] Aging: pri=0, wait=3003ms, boost=6, effective=6
+[DBG:3] [029.02] Aging: pri=4, wait=2001ms, boost=4, effective=8
+[DBG:3] [029.02] Aging: pri=3, wait=4992ms, boost=9, effective=9
+[DBG:3] [029.02] Aging: pri=5, wait=1979ms, boost=3, effective=8
+[DBG:3] [029.02] Aging: pri=0, wait=1980ms, boost=3, effective=3
+[DBG:3] [029.02] Aging: pri=1, wait=1979ms, boost=3, effective=4
+[DBG:3] [029.02] Dequeue: pri=3, data=7, from P9, count=19/20
+[DBG:3] [029.02] Consumer 3: Read pri=3, data=7 from P9, queue=19/20
+[DBG:3] [029.02] Consumer 3: Sleeping for 0 s
+[DBG:3] [029.02] Enqueue: pri=3, slot=19, count=20/20, was_blocked=1
+[DBG:3] [029.02] Producer 4: Sleeping for 2 s
+[DBG:3] [029.02] Aging: pri=9, wait=6003ms, boost=12, effective=9
+[DBG:3] [029.02] Aging: pri=9, wait=6003ms, boost=12, effective=9
+[DBG:3] [029.02] Aging: pri=8, wait=7983ms, boost=15, effective=9
+[DBG:3] [029.02] Aging: pri=3, wait=7976ms, boost=15, effective=9
+[DBG:3] [029.02] Aging: pri=1, wait=6994ms, boost=13, effective=9
+[DBG:3] [029.02] Aging: pri=3, wait=3981ms, boost=7, effective=9
+[DBG:3] [029.02] Aging: pri=3, wait=5993ms, boost=11, effective=9
+[DBG:3] [029.02] Aging: pri=3, wait=5982ms, boost=11, effective=9
+[DBG:3] [029.02] Aging: pri=1, wait=5004ms, boost=10, effective=9
+[DBG:3] [029.02] Aging: pri=0, wait=5002ms, boost=10, effective=9
+[DBG:3] [029.02] Aging: pri=9, wait=1999ms, boost=3, effective=9
+[DBG:3] [029.02] Aging: pri=9, wait=4001ms, boost=8, effective=9
+[DBG:3] [029.02] Aging: pri=6, wait=3981ms, boost=7, effective=9
+[DBG:3] [029.02] Aging: pri=8, wait=6989ms, boost=13, effective=9
+[DBG:3] [029.02] Aging: pri=0, wait=3003ms, boost=6, effective=6
+[DBG:3] [029.02] Aging: pri=4, wait=2001ms, boost=4, effective=8
+[DBG:3] [029.02] Aging: pri=3, wait=4992ms, boost=9, effective=9
+[DBG:3] [029.02] Aging: pri=5, wait=1979ms, boost=3, effective=8
+[DBG:3] [029.02] Aging: pri=0, wait=1980ms, boost=3, effective=3
+[DBG:3] [029.02] Aging: pri=1, wait=1979ms, boost=3, effective=4
+[DBG:3] [029.02] Aging: pri=3, wait=989ms, boost=1, effective=4
+[DBG:3] [029.02] Dequeue: pri=8, data=9, from P6, count=19/20
+[DBG:3] [029.02] Consumer 3: Read pri=8, data=9 from P6, queue=19/20
+[DBG:3] [029.02] Enqueue: pri=4, slot=0, count=20/20, was_blocked=1
+[DBG:3] [029.02] Producer 5: Sleeping for 0 s
+[DBG:3] [029.02] Producer 5: Generated data=5, pri=1
+[DBG:3] [029.02] Consumer 3: Sleeping for 0 s
+[DBG:3] [029.02] Aging: pri=9, wait=6003ms, boost=12, effective=9
+[DBG:3] [029.02] Aging: pri=9, wait=6003ms, boost=12, effective=9
+[DBG:3] [029.02] Aging: pri=3, wait=7976ms, boost=15, effective=9
+[DBG:3] [029.02] Aging: pri=1, wait=6994ms, boost=13, effective=9
+[DBG:3] [029.02] Aging: pri=3, wait=3981ms, boost=7, effective=9
+[DBG:3] [029.02] Aging: pri=3, wait=5993ms, boost=11, effective=9
+[DBG:3] [029.02] Aging: pri=3, wait=5982ms, boost=11, effective=9
+[DBG:3] [029.02] Aging: pri=1, wait=5004ms, boost=10, effective=9
+[DBG:3] [029.02] Aging: pri=0, wait=5002ms, boost=10, effective=9
+[DBG:3] [029.02] Aging: pri=9, wait=1999ms, boost=3, effective=9
+[DBG:3] [029.02] Aging: pri=9, wait=4001ms, boost=8, effective=9
+[DBG:3] [029.02] Aging: pri=6, wait=3981ms, boost=7, effective=9
+[DBG:3] [029.02] Aging: pri=8, wait=6989ms, boost=13, effective=9
+[DBG:3] [029.02] Aging: pri=0, wait=3003ms, boost=6, effective=6
+[DBG:3] [029.02] Aging: pri=4, wait=2001ms, boost=4, effective=8
+[DBG:3] [029.02] Aging: pri=3, wait=4992ms, boost=9, effective=9
+[DBG:3] [029.02] Aging: pri=5, wait=1979ms, boost=3, effective=8
+[DBG:3] [029.02] Aging: pri=0, wait=1980ms, boost=3, effective=3
+[DBG:3] [029.02] Aging: pri=1, wait=1979ms, boost=3, effective=4
+[DBG:3] [029.02] Aging: pri=3, wait=989ms, boost=1, effective=4
+[DBG:3] [029.02] Aging: pri=4, wait=1ms, boost=0, effective=4
+[DBG:3] [029.02] Dequeue: pri=3, data=3, from P2, count=19/20
+[DBG:3] [029.02] Consumer 3: Read pri=3, data=3 from P2, queue=19/20
+[DBG:3] [029.02] Consumer 3: Sleeping for 3 s
+[DBG:3] [029.02] Enqueue: pri=4, slot=1, count=20/20, was_blocked=1
+[DBG:3] [029.02] Producer 10: Sleeping for 1 s
+[DBG:3] [029.03] Aging: pri=9, wait=6006ms, boost=12, effective=9
+[DBG:3] [029.03] Aging: pri=9, wait=6006ms, boost=12, effective=9
+[DBG:3] [029.03] Aging: pri=1, wait=6997ms, boost=13, effective=9
+[DBG:3] [029.03] Aging: pri=3, wait=3984ms, boost=7, effective=9
+[DBG:3] [029.03] Aging: pri=3, wait=5996ms, boost=11, effective=9
+[DBG:3] [029.03] Aging: pri=3, wait=5985ms, boost=11, effective=9
+[DBG:3] [029.03] Aging: pri=1, wait=5007ms, boost=10, effective=9
+[DBG:3] [029.03] Aging: pri=0, wait=5005ms, boost=10, effective=9
+[DBG:3] [029.03] Aging: pri=9, wait=2002ms, boost=4, effective=9
+[DBG:3] [029.03] Aging: pri=9, wait=4004ms, boost=8, effective=9
+[DBG:3] [029.03] Aging: pri=6, wait=3984ms, boost=7, effective=9
+[DBG:3] [029.03] Aging: pri=8, wait=6992ms, boost=13, effective=9
+[DBG:3] [029.03] Aging: pri=0, wait=3006ms, boost=6, effective=6
+[DBG:3] [029.03] Aging: pri=4, wait=2004ms, boost=4, effective=8
+[DBG:3] [029.03] Aging: pri=3, wait=4995ms, boost=9, effective=9
+[DBG:3] [029.03] Aging: pri=5, wait=1982ms, boost=3, effective=8
+[DBG:3] [029.03] Aging: pri=0, wait=1983ms, boost=3, effective=3
+[DBG:3] [029.03] Aging: pri=1, wait=1982ms, boost=3, effective=4
+[DBG:3] [029.03] Aging: pri=3, wait=992ms, boost=1, effective=4
+[DBG:3] [029.03] Aging: pri=4, wait=4ms, boost=0, effective=4
+[DBG:3] [029.03] Aging: pri=4, wait=4ms, boost=0, effective=4
+[DBG:3] [029.03] Dequeue: pri=1, data=2, from P1, count=19/20
+[DBG:3] [029.03] Consumer 4: Read pri=1, data=2 from P1, queue=19/20
+[DBG:3] [029.03] Consumer 4: Sleeping for 1 s
+[DBG:3] [029.03] Enqueue: pri=1, slot=2, count=20/20, was_blocked=1
+[DBG:3] [029.03] Producer 5: Sleeping for 1 s
+[DBG:3] [029.03] Producer 3: Generated data=1, pri=7
+[DBG:3] [029.05] Aging: pri=9, wait=6027ms, boost=12, effective=9
+[DBG:3] [029.05] Aging: pri=9, wait=6027ms, boost=12, effective=9
+[DBG:3] [029.05] Aging: pri=3, wait=4005ms, boost=8, effective=9
+[DBG:3] [029.05] Aging: pri=3, wait=6017ms, boost=12, effective=9
+[DBG:3] [029.05] Aging: pri=3, wait=6006ms, boost=12, effective=9
+[DBG:3] [029.05] Aging: pri=1, wait=5028ms, boost=10, effective=9
+[DBG:3] [029.05] Aging: pri=0, wait=5026ms, boost=10, effective=9
+[DBG:3] [029.05] Aging: pri=9, wait=2023ms, boost=4, effective=9
+[DBG:3] [029.05] Aging: pri=9, wait=4025ms, boost=8, effective=9
+[DBG:3] [029.05] Aging: pri=6, wait=4005ms, boost=8, effective=9
+[DBG:3] [029.05] Aging: pri=8, wait=7013ms, boost=14, effective=9
+[DBG:3] [029.05] Aging: pri=0, wait=3027ms, boost=6, effective=6
+[DBG:3] [029.05] Aging: pri=4, wait=2025ms, boost=4, effective=8
+[DBG:3] [029.05] Aging: pri=3, wait=5016ms, boost=10, effective=9
+[DBG:3] [029.05] Aging: pri=5, wait=2003ms, boost=4, effective=9
+[DBG:3] [029.05] Aging: pri=0, wait=2004ms, boost=4, effective=4
+[DBG:3] [029.05] Aging: pri=1, wait=2003ms, boost=4, effective=5
+[DBG:3] [029.05] Aging: pri=3, wait=1013ms, boost=2, effective=5
+[DBG:3] [029.05] Aging: pri=4, wait=25ms, boost=0, effective=4
+[DBG:3] [029.05] Aging: pri=4, wait=25ms, boost=0, effective=4
+[DBG:3] [029.05] Aging: pri=1, wait=24ms, boost=0, effective=1
+[DBG:3] [029.05] Dequeue: pri=8, data=4, from P7, count=19/20
+[DBG:3] [029.05] Consumer 1: Read pri=8, data=4 from P7, queue=19/20
+[DBG:3] [029.05] Consumer 1: Sleeping for 4 s
+[DBG:3] [029.05] Producer 8: Generated data=7, pri=5
+[DBG:3] [029.05] Enqueue: pri=7, slot=3, count=20/20, was_blocked=1
+[DBG:3] [029.05] Producer 3: Sleeping for 0 s
+[DBG:3] [029.05] Producer 3: Generated data=6, pri=3
+[DBG:2] [030.01] Shutdown initiated: Timeout
+[DBG:2] [030.01] Producer 8: Exiting thread
+[DBG:2] [030.01] Producer 3: Exiting thread
+[DBG:2] [030.01] Analytics sampler stopped
+[DBG:2] [030.02] Producer 1: Exiting thread
+[DBG:2] [030.02] Producer 9: Exiting thread
+[DBG:2] [030.02] Producer 2: Exiting thread
+[DBG:2] [030.02] Producer 6: Exiting thread
+[DBG:2] [030.02] Producer 4: Exiting thread
+[DBG:2] [030.03] Producer 10: Exiting thread
+[DBG:2] [030.03] Consumer 3: Exiting thread
+[DBG:2] [030.03] Consumer 4: Exiting thread
+[DBG:2] [030.03] Producer 5: Exiting thread
+[DBG:2] [030.04] Consumer 5: Exiting thread
+[DBG:2] [030.05] Producer 7: Exiting thread
+[DBG:2] [030.05] Consumer 1: Exiting thread
+[DBG:2] [030.05] Consumer 2: Exiting thread
