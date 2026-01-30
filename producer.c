@@ -123,14 +123,18 @@ void *producer_thread(void *arg)
          * was_blocked is set by queue_enqueue_safe using sem_trywait.
          * This gives us accurate block detection without race conditions. */
         was_blocked = 0;
-        result = queue_enqueue_safe(args->queue, msg, &was_blocked);
+        long wait_time_ms = 0;
+        result = queue_enqueue_safe(args->queue, msg, &was_blocked, &wait_time_ms);
 
         /* Step 3: Record blocking if it occurred */
         if (was_blocked) {
             args->stats.times_blocked++;
             /* Error handling: analytics pointer may be NULL if analytics
              * was not initialised. Check before calling. */
-            if (args->analytics) analytics_record_producer_block(args->analytics);
+            if (args->analytics) {
+                analytics_record_producer_block(args->analytics);
+                analytics_record_producer_wait(args->analytics, wait_time_ms);
+            }
             if (!args->quiet_mode) {
                 printf("[%06.2f] Producer %d: BLOCKED (queue was full)\n",
                        time_elapsed(), args->id);

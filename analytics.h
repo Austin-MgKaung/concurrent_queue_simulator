@@ -61,6 +61,12 @@ typedef struct {
     int total_producer_blocks;
     int total_consumer_blocks;
 
+    /* Wait Time Stats (ms) */
+    long long total_producer_wait_ms;
+    long long total_consumer_wait_ms;
+    long max_producer_wait_ms;
+    long max_consumer_wait_ms;
+
     /* Throughput Sampling (for per-second deltas) */
     int prev_produced;              // Snapshot for delta calculation
     int prev_consumed;              // Snapshot for delta calculation
@@ -124,10 +130,12 @@ void analytics_stop_sampling(Analytics *analytics);
 // Called by Producer threads
 void analytics_record_produce(Analytics *analytics);
 void analytics_record_producer_block(Analytics *analytics);
+void analytics_record_producer_wait(Analytics *analytics, long wait_ms);
 
 // Called by Consumer threads
 void analytics_record_consume(Analytics *analytics);
 void analytics_record_consumer_block(Analytics *analytics);
+void analytics_record_consumer_wait(Analytics *analytics, long wait_ms);
 void analytics_record_latency(Analytics *analytics, long latency_ms);
 
 /* --- Reporting & Export --- */

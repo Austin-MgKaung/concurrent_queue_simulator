@@ -96,7 +96,7 @@ void queue_display(const Queue *q);
  * 5. Increment 'items_available' (Signals a consumer).
  * Returns: 0 on success, -1 if shutdown.
  */
-int queue_enqueue_safe(Queue *q, Message msg, int *was_blocked);
+int queue_enqueue_safe(Queue *q, Message msg, int *was_blocked, long *wait_time_ms);
 
 /*
  * Blocking Dequeue (Priority Aware).
@@ -108,7 +108,7 @@ int queue_enqueue_safe(Queue *q, Message msg, int *was_blocked);
  * 5. Increment 'slots_available' (Signals a producer).
  * Returns: 0 on success, -1 if shutdown.
  */
-int queue_dequeue_safe(Queue *q, Message *msg, int *was_blocked);
+int queue_dequeue_safe(Queue *q, Message *msg, int *was_blocked, long *wait_time_ms);
 
 /*
  * Signal for Shutdown.

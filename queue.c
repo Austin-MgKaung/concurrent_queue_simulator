@@ -347,10 +347,11 @@ void queue_display(const Queue *q)
  *   - mutex lock fail:    Fatal for data integrity — log and return error
  *   - sem_post fail:      Semaphore overflow — log (should never happen)
  */
-int queue_enqueue_safe(Queue *q, Message msg, int *was_blocked)
+int queue_enqueue_safe(Queue *q, Message msg, int *was_blocked, long *wait_time_ms)
 {
     int result;
     int blocked = 0;
+    long wait_start = 0;
 
     if (q == NULL) return -1;
     if (q->shutdown) return -1;
@@ -361,6 +362,7 @@ int queue_enqueue_safe(Queue *q, Message msg, int *was_blocked)
         if (errno == EAGAIN) {
             /* Normal: semaphore is 0, queue is full, we will block */
             blocked = 1;
+            wait_start = get_current_time_ms();
         } else {
             /* Error handling: Unexpected sem_trywait failure.
              * Could be EINVAL (invalid semaphore) or other system error. */
@@ -399,6 +401,9 @@ int queue_enqueue_safe(Queue *q, Message msg, int *was_blocked)
     }
 
     if (was_blocked) *was_blocked = blocked;
+    if (wait_time_ms) {
+        *wait_time_ms = blocked ? (get_current_time_ms() - wait_start) : 0;
+    }
 
     /* 2. Critical Section — mutex protects buffer/indices */
     if (pthread_mutex_lock(&q->mutex) != 0) {
@@ -451,10 +456,11 @@ int queue_enqueue_safe(Queue *q, Message msg, int *was_blocked)
  *
  * ERROR HANDLING: Same strategy as queue_enqueue_safe (see above).
  */
-int queue_dequeue_safe(Queue *q, Message *msg, int *was_blocked)
+int queue_dequeue_safe(Queue *q, Message *msg, int *was_blocked, long *wait_time_ms)
 {
     int result;
     int blocked = 0;
+    long wait_start = 0;
 
     if (q == NULL || msg == NULL) return -1;
     if (q->shutdown) return -1;
@@ -465,6 +471,7 @@ int queue_dequeue_safe(Queue *q, Message *msg, int *was_blocked)
         if (errno == EAGAIN) {
             /* Normal: semaphore is 0, queue is empty, we will block */
             blocked = 1;
+            wait_start = get_current_time_ms();
         } else {
             /* Error handling: Unexpected sem_trywait failure */
             fprintf(stderr, "[ERROR] queue_dequeue: sem_trywait failed "
@@ -498,6 +505,9 @@ int queue_dequeue_safe(Queue *q, Message *msg, int *was_blocked)
     }
 
     if (was_blocked) *was_blocked = blocked;
+    if (wait_time_ms) {
+        *wait_time_ms = blocked ? (get_current_time_ms() - wait_start) : 0;
+    }
 
     /* 2. Critical Section — mutex protects buffer/indices */
     if (pthread_mutex_lock(&q->mutex) != 0) {

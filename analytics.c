@@ -314,6 +314,28 @@ void analytics_record_consumer_block(Analytics *analytics) {
     }
 }
 
+void analytics_record_producer_wait(Analytics *analytics, long wait_ms) {
+    if (!analytics) return;
+    if (pthread_mutex_lock(&analytics->mutex) != 0) return;
+    analytics->total_producer_wait_ms += wait_ms;
+    if (wait_ms > analytics->max_producer_wait_ms)
+        analytics->max_producer_wait_ms = wait_ms;
+    if (pthread_mutex_unlock(&analytics->mutex) != 0) {
+        fprintf(stderr, "[ERROR] analytics_record_producer_wait: mutex unlock failed\n");
+    }
+}
+
+void analytics_record_consumer_wait(Analytics *analytics, long wait_ms) {
+    if (!analytics) return;
+    if (pthread_mutex_lock(&analytics->mutex) != 0) return;
+    analytics->total_consumer_wait_ms += wait_ms;
+    if (wait_ms > analytics->max_consumer_wait_ms)
+        analytics->max_consumer_wait_ms = wait_ms;
+    if (pthread_mutex_unlock(&analytics->mutex) != 0) {
+        fprintf(stderr, "[ERROR] analytics_record_consumer_wait: mutex unlock failed\n");
+    }
+}
+
 void analytics_record_latency(Analytics *analytics, long latency_ms) {
     if (!analytics) return;
     if (pthread_mutex_lock(&analytics->mutex) != 0) {
@@ -415,6 +437,22 @@ void analytics_print_summary(const Analytics *analytics)
     printf("\nBLOCKING EVENTS\n");
     printf("  Producer Blocks:  %d (Queue Full)\n", analytics->total_producer_blocks);
     printf("  Consumer Blocks:  %d (Queue Empty)\n", analytics->total_consumer_blocks);
+
+    printf("\nWAIT TIME (semaphore blocking duration)\n");
+    if (analytics->total_producer_blocks > 0) {
+        printf("  Producer Avg Wait: %.1f ms\n",
+               (double)analytics->total_producer_wait_ms / analytics->total_producer_blocks);
+        printf("  Producer Max Wait: %ld ms\n", analytics->max_producer_wait_ms);
+    } else {
+        printf("  Producer Wait:     0 ms (no blocking)\n");
+    }
+    if (analytics->total_consumer_blocks > 0) {
+        printf("  Consumer Avg Wait: %.1f ms\n",
+               (double)analytics->total_consumer_wait_ms / analytics->total_consumer_blocks);
+        printf("  Consumer Max Wait: %ld ms\n", analytics->max_consumer_wait_ms);
+    } else {
+        printf("  Consumer Wait:     0 ms (no blocking)\n");
+    }
 
     printf("\nMESSAGE LATENCY (time in queue)\n");
     if (analytics->latency_count > 0) {
