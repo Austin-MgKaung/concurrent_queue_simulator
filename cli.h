@@ -32,6 +32,8 @@ typedef struct {
     unsigned int seed;    // RNG seed for reproducible runs
     int help_requested;   // -h/--help flag
     int aging_interval;   // -a flag: aging interval in ms (0 = disabled)
+    int max_producer_wait; // -p flag: max producer sleep (seconds)
+    int max_consumer_wait; // -c flag: max consumer sleep (seconds)
 } RuntimeParams;
 
 /* --- UI / Display Functions --- */

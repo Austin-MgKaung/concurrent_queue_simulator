@@ -18,6 +18,7 @@
 #  13. Help flag (-h / --help)
 #  14. Input validation (strtol rejects non-numeric)
 #  15. Aging interval flag (-a)
+#  16. Producer/consumer wait flags (-p / -c)
 #
 # Usage:  ./test_bench.sh
 # Exit:   0 if all tests pass, 1 if any fail
@@ -740,6 +741,73 @@ if [ "$EXIT_CODE" -ne 0 ]; then
     pass "-a abc (non-numeric) → rejected"
 else
     fail "-a abc → should be rejected"
+fi
+
+# =============================================================================
+# 17. PRODUCER/CONSUMER WAIT FLAGS (-p / -c)
+# =============================================================================
+section "17. Producer/Consumer Wait Flags (-p / -c)"
+
+# 17a. -p 1 runs successfully
+run 10 -s 42 -p 1 1 1 5 2
+if [ "$EXIT_CODE" -eq 0 ]; then
+    pass "-p 1 (fast producers) → runs successfully"
+else
+    fail "-p 1 → should succeed" "exit=$EXIT_CODE"
+fi
+
+# 17b. -p shows in startup info
+if echo "$OUTPUT" | grep -q "Producer Wait: 0-1 s"; then
+    pass "-p 1 → shows 'Producer Wait: 0-1 s' in startup info"
+else
+    fail "-p 1 → should show producer wait in startup info"
+fi
+
+# 17c. -c 1 runs successfully
+run 10 -s 42 -c 1 1 1 5 2
+if [ "$EXIT_CODE" -eq 0 ]; then
+    pass "-c 1 (fast consumers) → runs successfully"
+else
+    fail "-c 1 → should succeed" "exit=$EXIT_CODE"
+fi
+
+# 17d. -c shows in startup info
+if echo "$OUTPUT" | grep -q "Consumer Wait: 0-1 s"; then
+    pass "-c 1 → shows 'Consumer Wait: 0-1 s' in startup info"
+else
+    fail "-c 1 → should show consumer wait in startup info"
+fi
+
+# 17e. -p 0 (zero wait = no sleep) balance check
+run 10 -s 42 -p 0 -c 0 2 2 5 2
+if echo "$OUTPUT" | grep -q "Result: PASS"; then
+    pass "-p 0 -c 0 → balance check PASS"
+else
+    fail "-p 0 -c 0 → balance check should PASS"
+fi
+
+# 17f. -p without argument
+run 5 -p
+if [ "$EXIT_CODE" -ne 0 ]; then
+    pass "-p without argument → non-zero exit"
+else
+    fail "-p without argument → should exit with error"
+fi
+
+# 17g. -c without argument
+run 5 -c
+if [ "$EXIT_CODE" -ne 0 ]; then
+    pass "-c without argument → non-zero exit"
+else
+    fail "-c without argument → should exit with error"
+fi
+
+# 17h. -p with non-numeric value
+run 5 -p abc 1 1 5 10
+if [ "$EXIT_CODE" -ne 0 ]; then
+    pass "-p abc (non-numeric) → rejected"
+else
+    fail "-p abc → should be rejected"
 fi
 
 # =============================================================================

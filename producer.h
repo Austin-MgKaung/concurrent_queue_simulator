@@ -37,6 +37,7 @@ typedef struct {
     volatile sig_atomic_t *running; // Pointer to the global stop flag
     ProducerStats stats;        // Local performance counters
     int quiet_mode;            // Flag for quiet mode (TUI integration)
+    int max_wait;              // Max sleep between writes (seconds)
     Analytics *analytics;      // Pointer to shared analytics (may be NULL)
 } ProducerArgs;
 

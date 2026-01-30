@@ -23,11 +23,13 @@ thread synchronization, graceful shutdown, and performance analysis.
 | Live TUI dashboard | ncurses visual mode with color-coded queue, throughput bars, sparkline |
 | Debug logging | 4 levels (OFF, ERROR, INFO, TRACE) controlled at runtime |
 | Analytics | Background sampling, final report, optimization recommendations |
+| Message latency | Tracks avg/min/max time messages spend waiting in the queue |
+| Configurable rates | `-p <sec>` and `-c <sec>` flags to tune producer/consumer speed |
 | CSV export | Queue occupancy over time, importable into Excel/Python |
 | Reproducible runs | `-s <seed>` flag for deterministic testing |
 | Input validation | All CLI arguments validated with `strtol` (rejects non-numeric input) |
 | Help flag | `-h` / `--help` displays usage and exits cleanly |
-| Test bench | 72 automated tests covering all corner cases |
+| Test bench | 80 automated tests covering all corner cases |
 | CI pipeline | GitHub Actions runs the full test suite and valgrind memory check on every push |
 | Memory safety | Valgrind leak check integrated into CI (`make valgrind`) |
 
@@ -85,12 +87,13 @@ You should see `Build complete.` with zero warnings.
 make bench
 ```
 
-Runs 72 automated tests. You should see `All tests passed.`
+Runs 80 automated tests. You should see `All tests passed.`
 
 ## Usage
 
 ```
-./model [-h] [-v] [-d <level>] [-s <seed>] [-a <ms>] <producers> <consumers> <queue_size> <timeout>
+./model [-h] [-v] [-d <level>] [-s <seed>] [-a <ms>] [-p <sec>] [-c <sec>]
+       <producers> <consumers> <queue_size> <timeout>
 ```
 
 ### Parameters
@@ -111,6 +114,8 @@ Runs 72 automated tests. You should see `All tests passed.`
 | `-d <level>` | Debug verbosity: 0=OFF, 1=ERROR, 2=INFO, 3=TRACE |
 | `-s <seed>` | Set RNG seed for reproducible/deterministic runs |
 | `-a <ms>` | Priority aging interval in milliseconds (default: 500, 0=disabled) |
+| `-p <sec>` | Max producer sleep between writes (default: 2) |
+| `-c <sec>` | Max consumer sleep between reads (default: 4) |
 
 Flags can appear in any order before the positional arguments.
 
@@ -157,6 +162,18 @@ Items are dequeued strictly by their original priority (no aging boost).
 ```
 Low-priority items get boosted twice as fast as the default (500ms).
 
+### Fast producers, slow consumers (stress the queue)
+```bash
+./model -p 0 -c 4 5 3 10 30
+```
+Producers write as fast as possible; consumers take up to 4 seconds each.
+
+### Balanced rates
+```bash
+./model -p 2 -c 2 3 3 10 30
+```
+Equal producer and consumer rates — observe minimal blocking.
+
 ### Show help
 ```bash
 ./model --help
@@ -184,7 +201,7 @@ Start any run, then press Ctrl+C. The program will:
 | `make deps` | Install required system packages (Ubuntu/Debian) |
 | `make test` | Quick test run (5P, 3C, Q10, 30s) |
 | `make visual` | Quick test in TUI mode (5P, 3C, Q20, 60s) |
-| `make bench` | Run the full 72-test suite |
+| `make bench` | Run the full 80-test suite |
 | `make valgrind` | Run valgrind memory leak check |
 | `make sanitize` | Build and run with AddressSanitizer (catches buffer overflows) |
 
@@ -256,7 +273,7 @@ Set `DEBUG_MAX_LEVEL` to 0 in `config.h` and rebuild for zero-overhead productio
 
 ## Test Suite
 
-The test bench (`test_bench.sh`) covers 72 tests across 16 categories:
+The test bench (`test_bench.sh`) covers 80 tests across 17 categories:
 
 | Category | Tests | What it verifies |
 |---|---|---|
@@ -276,12 +293,15 @@ The test bench (`test_bench.sh`) covers 72 tests across 16 categories:
 | Help Flag | 3 | `-h` and `--help` exit with success, display usage |
 | Input Validation | 4 | Non-numeric arguments rejected (`abc`, `3x`, bad `-d`, bad `-s`) |
 | Aging Interval | 8 | `-a 0` disables aging, `-a 250` custom interval, bad values rejected |
+| Wait Flags | 8 | `-p`/`-c` custom waits, zero wait, missing/bad values rejected |
 
-## Notes for Reviewers
+## Notes
 
 - Every system call return value is checked with a meaningful error message.
 - The signal handler only uses async-signal-safe functions (`write`, `sem_post`, flag writes).
 - `volatile sig_atomic_t` is used for flags shared with the signal handler (POSIX-correct).
+- Message latency (time spent in queue) is tracked per-message and reported as avg/min/max.
+- Producer and consumer sleep rates are configurable at runtime via `-p` and `-c` flags.
 - Lock ordering is consistent (semaphore first, then mutex) to prevent deadlocks.
 - The balance check (`produced == consumed + remaining`) verifies no data is lost or duplicated.
 - All CLI input is validated with `strtol` (not `atoi`) to reject non-numeric arguments.

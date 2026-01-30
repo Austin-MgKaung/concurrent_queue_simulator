@@ -276,6 +276,7 @@ static int create_producers(int num_producers)
             return -1;
         }
         producer_args[i].quiet_mode = runtime_params.tui_enabled;
+        producer_args[i].max_wait = runtime_params.max_producer_wait;
         producer_args[i].analytics = &analytics;
 
         if (pthread_create(&producer_threads[i], NULL, producer_thread, &producer_args[i]) != 0) {
@@ -301,6 +302,7 @@ static int create_consumers(int num_consumers)
             return -1;
         }
         consumer_args[i].quiet_mode = runtime_params.tui_enabled;
+        consumer_args[i].max_wait = runtime_params.max_consumer_wait;
         consumer_args[i].analytics = &analytics;
 
         if (pthread_create(&consumer_threads[i], NULL, consumer_thread, &consumer_args[i]) != 0) {

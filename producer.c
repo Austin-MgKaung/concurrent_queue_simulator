@@ -61,6 +61,7 @@ int producer_init_args(ProducerArgs *args, int id, Queue *queue, volatile sig_at
     args->queue = queue;
     args->running = running;
     args->quiet_mode = 0;
+    args->max_wait = MAX_PRODUCER_WAIT;
     args->analytics = NULL;
 
     args->stats.messages_produced = 0;
@@ -166,7 +167,7 @@ void *producer_thread(void *arg)
          * Responsive sleep: wake every second to check shutdown flag.
          * This ensures threads exit promptly (within 1s) when stopped. */
         if (*(args->running)) {
-            sleep_time = random_range(0, MAX_PRODUCER_WAIT);
+            sleep_time = random_range(0, args->max_wait);
 
             DBG(DBG_TRACE, "Producer %d: Sleeping for %d s", args->id, sleep_time);
 

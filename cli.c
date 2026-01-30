@@ -28,13 +28,16 @@ void print_usage(const char *program_name)
 {
     printf("\nELE430 Producer-Consumer Model - Usage\n");
     print_separator();
-    printf("Usage: %s [-h] [-v] [-d <level>] [-s <seed>] [-a <ms>] <producers> <consumers> <queue_size> <timeout>\n", program_name);
+    printf("Usage: %s [-h] [-v] [-d <level>] [-s <seed>] [-a <ms>] [-p <sec>] [-c <sec>]\n", program_name);
+    printf("       %*s <producers> <consumers> <queue_size> <timeout>\n", (int)strlen(program_name) + 7, "");
     printf("\nArguments:\n");
     printf("  -h, --help  - Show this help message and exit\n");
     printf("  -v          - Enable Visual Dashboard (Optional)\n");
     printf("  -d <level>  - Debug level 0-3: OFF, ERROR, INFO, TRACE (Optional)\n");
     printf("  -s <seed>   - RNG seed for reproducible runs (Optional)\n");
     printf("  -a <ms>     - Priority aging interval in ms (default: %d, 0=disabled)\n", AGING_INTERVAL_MS);
+    printf("  -p <sec>    - Max producer sleep between writes (default: %d)\n", MAX_PRODUCER_WAIT);
+    printf("  -c <sec>    - Max consumer sleep between reads (default: %d)\n", MAX_CONSUMER_WAIT);
     printf("  producers   - Number of producer threads  [%d to %d]\n", MIN_PRODUCERS, MAX_PRODUCERS);
     printf("  consumers   - Number of consumer threads  [%d to %d]\n", MIN_CONSUMERS, MAX_RUNTIME_CONSUMERS);
     printf("  queue_size  - Maximum queue capacity      [%d to %d]\n", MIN_QUEUE_SIZE, MAX_QUEUE_SIZE);
@@ -73,6 +76,8 @@ void print_startup_info(const RuntimeParams *params)
     printf("  Consumers:    %d\n", params->num_consumers);
     printf("  Queue Size:   %d\n", params->queue_size);
     printf("  Timeout:      %d seconds\n", params->timeout_seconds);
+    printf("  Producer Wait: 0-%d s\n", params->max_producer_wait);
+    printf("  Consumer Wait: 0-%d s\n", params->max_consumer_wait);
     if (params->aging_interval == 0)
         printf("  Aging:        Disabled\n");
     else
@@ -127,6 +132,8 @@ int parse_arguments(int argc, char *argv[], RuntimeParams *params)
     params->seed = 0;
     params->help_requested = 0;
     params->aging_interval = AGING_INTERVAL_MS;
+    params->max_producer_wait = MAX_PRODUCER_WAIT;
+    params->max_consumer_wait = MAX_CONSUMER_WAIT;
 
     /* Check for not enough arguments first */
     if (argc < 2) return -1;
@@ -176,6 +183,28 @@ int parse_arguments(int argc, char *argv[], RuntimeParams *params)
                 return -1;
             }
             params->aging_interval = tmp;
+            arg_idx += 2;
+        } else if (strcmp(argv[arg_idx], "-p") == 0) {
+            if (arg_idx + 1 >= argc) {
+                fprintf(stderr, "Error: -p requires a max wait in seconds\n");
+                return -1;
+            }
+            if (safe_strtoi(argv[arg_idx + 1], &tmp) != 0 || tmp < 0) {
+                fprintf(stderr, "Error: -p requires a non-negative numeric argument\n");
+                return -1;
+            }
+            params->max_producer_wait = tmp;
+            arg_idx += 2;
+        } else if (strcmp(argv[arg_idx], "-c") == 0) {
+            if (arg_idx + 1 >= argc) {
+                fprintf(stderr, "Error: -c requires a max wait in seconds\n");
+                return -1;
+            }
+            if (safe_strtoi(argv[arg_idx + 1], &tmp) != 0 || tmp < 0) {
+                fprintf(stderr, "Error: -c requires a non-negative numeric argument\n");
+                return -1;
+            }
+            params->max_consumer_wait = tmp;
             arg_idx += 2;
         } else {
             fprintf(stderr, "Error: Unknown option '%s'\n", argv[arg_idx]);

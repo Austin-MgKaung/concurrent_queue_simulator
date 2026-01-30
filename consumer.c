@@ -61,6 +61,7 @@ int consumer_init_args(ConsumerArgs *args, int id, Queue *queue, volatile sig_at
     args->queue = queue;
     args->running = running;
     args->quiet_mode = 0;
+    args->max_wait = MAX_CONSUMER_WAIT;
     args->analytics = NULL;
 
     args->stats.messages_consumed = 0;
@@ -167,7 +168,7 @@ void *consumer_thread(void *arg)
          * Responsive sleep: wake every second to check shutdown flag.
          * This ensures threads exit promptly (within 1s) when stopped. */
         if (*(args->running)) {
-            sleep_time = random_range(0, MAX_CONSUMER_WAIT);
+            sleep_time = random_range(0, args->max_wait);
 
             DBG(DBG_TRACE, "Consumer %d: Sleeping for %d s", args->id, sleep_time);
 
