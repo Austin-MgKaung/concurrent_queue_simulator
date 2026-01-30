@@ -450,6 +450,7 @@ void analytics_print_summary(const Analytics *analytics)
 void analytics_print_recommendations(const Analytics *analytics)
 {
     double avg_occupancy, utilisation;
+    double p_rate, c_rate, rate_ratio;
     const char *action;
     const char *reason;
     int recommended_size;
@@ -463,27 +464,51 @@ void analytics_print_recommendations(const Analytics *analytics)
         utilisation = 0.0;
     }
 
-    /* Recommendation Logic — driven by blocking frequency and utilisation */
+    /* Compute produce/consume rates (msg/sec) */
+    if (analytics->total_runtime > 0.0) {
+        p_rate = analytics->total_produced / analytics->total_runtime;
+        c_rate = analytics->total_consumed / analytics->total_runtime;
+    } else {
+        p_rate = 0.0;
+        c_rate = 0.0;
+    }
+    rate_ratio = (c_rate > 0.0) ? (p_rate / c_rate) : 0.0;
+
+    /* Recommendation Logic — rate-aware */
 
     if (analytics->num_samples > 0 &&
         analytics->total_producer_blocks > 0 &&
         (double)analytics->queue_full_count / analytics->num_samples > 0.1) {
 
-        /* Scenario: Bottleneck at Queue (Too Small) */
-        recommended_size = analytics->queue_capacity * 2;
-        if (recommended_size > MAX_QUEUE_SIZE) recommended_size = MAX_QUEUE_SIZE;
-
-        action = "INCREASE Queue Size";
-        reason = "High producer blocking frequency (Queue Full)";
+        if (rate_ratio > 1.5) {
+            /* Rate imbalance is the root cause, not queue size */
+            recommended_size = analytics->queue_capacity;
+            action = "SLOW DOWN Producers or ADD Consumers";
+            reason = "Rate imbalance — producers outpace consumers";
+        } else {
+            /* Rates are close; queue genuinely too small for bursts */
+            recommended_size = analytics->queue_capacity * 2;
+            if (recommended_size > MAX_QUEUE_SIZE) recommended_size = MAX_QUEUE_SIZE;
+            action = "INCREASE Queue Size";
+            reason = "Queue too small for burst traffic";
+        }
 
     } else if (analytics->num_samples > 0 &&
                analytics->total_consumer_blocks > 0 &&
                (double)analytics->queue_empty_count / analytics->num_samples > 0.3) {
 
-        /* Scenario: Bottleneck at Production (Queue Empty) */
-        recommended_size = analytics->queue_capacity;
-        action = "ADD Producers (or Maintain Size)";
-        reason = "High consumer starvation (Queue Empty)";
+        if (rate_ratio < 0.7) {
+            /* Producers can't keep up */
+            recommended_size = analytics->queue_capacity;
+            action = "SPEED UP Producers or ADD Producers";
+            reason = "Producers too slow to keep consumers busy";
+        } else {
+            /* Rates balanced but queue oversized */
+            recommended_size = (int)(analytics->queue_capacity * 0.7);
+            if (recommended_size < MIN_QUEUE_SIZE) recommended_size = MIN_QUEUE_SIZE;
+            action = "DECREASE Queue Size";
+            reason = "Queue oversized for current workload";
+        }
 
     } else if (utilisation < 30.0) {
 
@@ -498,11 +523,19 @@ void analytics_print_recommendations(const Analytics *analytics)
         /* Scenario: Optimal */
         recommended_size = analytics->queue_capacity;
         action = "MAINTAIN Current Size";
-        reason = "Balanced utilisation (30-70%)";
+        reason = "Balanced utilisation";
     }
 
     printf("\nOPTIMIZATION RECOMMENDATION\n");
     printf("------------------------------------------------------------\n");
+    printf("  Produce Rate:     %.2f msg/sec\n", p_rate);
+    printf("  Consume Rate:     %.2f msg/sec\n", c_rate);
+    if (c_rate > 0.0 && p_rate > c_rate)
+        printf("  Rate Balance:     Producers %.1fx faster\n", rate_ratio);
+    else if (p_rate > 0.0 && c_rate > p_rate)
+        printf("  Rate Balance:     Consumers %.1fx faster\n", 1.0 / rate_ratio);
+    else
+        printf("  Rate Balance:     Balanced\n");
     printf("  Current Size:     %d\n", analytics->queue_capacity);
     printf("  Suggested Size:   %d\n", recommended_size);
     printf("  Action:           %s\n", action);

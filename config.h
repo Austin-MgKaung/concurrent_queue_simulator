@@ -46,7 +46,7 @@
  */
 #define MIN_PRODUCERS           1   
 #define MIN_CONSUMERS           1   
-#define MAX_RUNTIME_CONSUMERS   3   // Spec limits runtime consumers to 3 (even if system supports 5)
+#define MAX_RUNTIME_CONSUMERS   5   // Runtime consumer limit matches system max
 #define MIN_QUEUE_SIZE          1   
 #define MIN_TIMEOUT             1   // Simulation minimum duration
 

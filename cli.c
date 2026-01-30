@@ -134,7 +134,6 @@ int parse_arguments(int argc, char *argv[], RuntimeParams *params)
     params->aging_interval = AGING_INTERVAL_MS;
     params->max_producer_wait = MAX_PRODUCER_WAIT;
     params->max_consumer_wait = MAX_CONSUMER_WAIT;
-
     /* Check for not enough arguments first */
     if (argc < 2) return -1;
 
@@ -232,12 +231,28 @@ int parse_arguments(int argc, char *argv[], RuntimeParams *params)
 int validate_parameters(const RuntimeParams *params)
 {
     int is_valid = 1;
-    if (params->num_producers < MIN_PRODUCERS || params->num_producers > MAX_PRODUCERS) is_valid = 0;
-    if (params->num_consumers < MIN_CONSUMERS || params->num_consumers > MAX_RUNTIME_CONSUMERS) is_valid = 0;
-    if (params->queue_size < MIN_QUEUE_SIZE || params->queue_size > MAX_QUEUE_SIZE) is_valid = 0;
-    if (params->timeout_seconds < MIN_TIMEOUT) is_valid = 0;
-    
-    if (!is_valid) fprintf(stderr, "Error: Invalid parameters provided.\n");
+
+    if (params->num_producers < MIN_PRODUCERS || params->num_producers > MAX_PRODUCERS) {
+        fprintf(stderr, "Error: producers = %d is out of bounds [%d to %d]\n",
+                params->num_producers, MIN_PRODUCERS, MAX_PRODUCERS);
+        is_valid = 0;
+    }
+    if (params->num_consumers < MIN_CONSUMERS || params->num_consumers > MAX_RUNTIME_CONSUMERS) {
+        fprintf(stderr, "Error: consumers = %d is out of bounds [%d to %d]\n",
+                params->num_consumers, MIN_CONSUMERS, MAX_RUNTIME_CONSUMERS);
+        is_valid = 0;
+    }
+    if (params->queue_size < MIN_QUEUE_SIZE || params->queue_size > MAX_QUEUE_SIZE) {
+        fprintf(stderr, "Error: queue_size = %d is out of bounds [%d to %d]\n",
+                params->queue_size, MIN_QUEUE_SIZE, MAX_QUEUE_SIZE);
+        is_valid = 0;
+    }
+    if (params->timeout_seconds < MIN_TIMEOUT) {
+        fprintf(stderr, "Error: timeout = %d is out of bounds [minimum %d]\n",
+                params->timeout_seconds, MIN_TIMEOUT);
+        is_valid = 0;
+    }
+
     return is_valid ? 0 : -1;
 }
 
