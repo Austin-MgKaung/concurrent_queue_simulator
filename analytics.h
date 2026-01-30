@@ -58,6 +58,12 @@ typedef struct {
     /* Bottleneck Stats */
     int total_producer_blocks;
     int total_consumer_blocks;
+
+    /* Message Latency Stats (time spent in queue) */
+    long long total_latency_ms;     // Sum of all message latencies
+    long max_latency_ms;            // Worst-case latency
+    long min_latency_ms;            // Best-case latency
+    int latency_count;              // Number of latency samples
     
     /* Timing Context */
     double start_time;
@@ -116,6 +122,7 @@ void analytics_record_producer_block(Analytics *analytics);
 // Called by Consumer threads
 void analytics_record_consume(Analytics *analytics);
 void analytics_record_consumer_block(Analytics *analytics);
+void analytics_record_latency(Analytics *analytics, long latency_ms);
 
 /* --- Reporting & Export --- */
 

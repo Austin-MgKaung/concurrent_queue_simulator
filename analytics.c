@@ -153,6 +153,8 @@ int analytics_init(Analytics *analytics, Queue *queue,
 
     /* Start min_occupancy at capacity so any real value becomes the new min */
     analytics->queue_min_occupancy = analytics->queue_capacity;
+    /* Start min_latency high so any real value becomes the new min */
+    analytics->min_latency_ms = __LONG_MAX__;
     analytics->start_time = time_elapsed();
 
     if (pthread_mutex_init(&analytics->mutex, NULL) != 0) {
@@ -305,6 +307,23 @@ void analytics_record_consumer_block(Analytics *analytics) {
     }
 }
 
+void analytics_record_latency(Analytics *analytics, long latency_ms) {
+    if (!analytics) return;
+    if (pthread_mutex_lock(&analytics->mutex) != 0) {
+        fprintf(stderr, "[WARN] analytics_record_latency: mutex lock failed\n");
+        return;
+    }
+    analytics->total_latency_ms += latency_ms;
+    analytics->latency_count++;
+    if (latency_ms > analytics->max_latency_ms)
+        analytics->max_latency_ms = latency_ms;
+    if (latency_ms < analytics->min_latency_ms)
+        analytics->min_latency_ms = latency_ms;
+    if (pthread_mutex_unlock(&analytics->mutex) != 0) {
+        fprintf(stderr, "[ERROR] analytics_record_latency: mutex unlock failed\n");
+    }
+}
+
 /* --- Public API: Reporting --- */
 
 /*
@@ -389,6 +408,17 @@ void analytics_print_summary(const Analytics *analytics)
     printf("\nBLOCKING EVENTS\n");
     printf("  Producer Blocks:  %d (Queue Full)\n", analytics->total_producer_blocks);
     printf("  Consumer Blocks:  %d (Queue Empty)\n", analytics->total_consumer_blocks);
+
+    printf("\nMESSAGE LATENCY (time in queue)\n");
+    if (analytics->latency_count > 0) {
+        printf("  Avg Latency:      %.1f ms\n",
+               (double)analytics->total_latency_ms / analytics->latency_count);
+        printf("  Min Latency:      %ld ms\n", analytics->min_latency_ms);
+        printf("  Max Latency:      %ld ms\n", analytics->max_latency_ms);
+        printf("  Messages:         %d\n", analytics->latency_count);
+    } else {
+        printf("  No messages consumed.\n");
+    }
     printf("------------------------------------------------------------\n");
 }
 

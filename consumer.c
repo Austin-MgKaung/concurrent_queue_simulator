@@ -144,7 +144,13 @@ void *consumer_thread(void *arg)
 
         /* Step 3: Success Logging */
         args->stats.messages_consumed++;
-        if (args->analytics) analytics_record_consume(args->analytics);
+        if (args->analytics) {
+            analytics_record_consume(args->analytics);
+            /* Record how long this message waited in the queue */
+            long latency = queue_get_time_ms() - msg.timestamp;
+            if (latency >= 0)
+                analytics_record_latency(args->analytics, latency);
+        }
 
         DBG(DBG_TRACE, "Consumer %d: Read pri=%d, data=%d from P%d, queue=%d/%d",
             args->id, msg.priority, msg.data, msg.producer_id,

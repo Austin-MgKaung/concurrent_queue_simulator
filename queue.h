@@ -123,4 +123,10 @@ void queue_shutdown(Queue *q);
  */
 Message message_create(int data, int priority, int producer_id);
 
+/*
+ * Returns current system time in milliseconds.
+ * Used by consumers to calculate message latency.
+ */
+long queue_get_time_ms(void);
+
 #endif /* QUEUE_H */

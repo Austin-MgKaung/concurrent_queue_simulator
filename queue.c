@@ -574,6 +574,11 @@ void queue_shutdown(Queue *q)
  * Error handling: If get_current_time_ms returns 0 (clock failure),
  * the message still works — aging just won't apply to this message.
  */
+long queue_get_time_ms(void)
+{
+    return get_current_time_ms();
+}
+
 Message message_create(int data, int priority, int producer_id)
 {
     Message msg;
